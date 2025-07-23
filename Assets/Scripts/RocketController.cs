@@ -8,9 +8,12 @@ public class RocketController : MonoBehaviour
     private bool ringInOkZone;
     public GameObject perfectGO;
     public GameObject okGO;
-    private TextMeshPro perfectText;
-    private TextMeshPro okText;
+    private TextMeshProUGUI perfectText;
+    private TextMeshProUGUI okText;
     public RingController currentRing;
+    public GameObject fireworks;
+    private Vector3 ringCenter;
+
     void Start()
     {
         inputActions = new InputSystem_Actions();
@@ -19,8 +22,9 @@ public class RocketController : MonoBehaviour
         {
             Launch();
         };
-        okText = okGO.GetComponent<TextMeshPro>();
-        perfectText = perfectGO.GetComponent<TextMeshPro>();
+        okText = okGO.GetComponent<TextMeshProUGUI>();
+        perfectText = perfectGO.GetComponent<TextMeshProUGUI>();
+        ringCenter = new Vector3(0.515f, 0.27f, -1);
     }
 
     void Update()
@@ -30,18 +34,16 @@ public class RocketController : MonoBehaviour
 
     void Launch()
     {
-        Debug.Log("Launching!");
-        Debug.Log(ringInOkZone);
-        Debug.Log(ringInPerfectZone);   
         if (ringInPerfectZone)
         {
-            Debug.Log("perfeft?");
             perfectText.color = new Color(255, 255, 255, 1);
             // create dazzling particle effect
+            SpawnFireworks();
         }
         else if (ringInOkZone) {
-            // create nice particle effect
             okText.color = new Color(255, 255, 255, 1);
+            // create nice particle effect
+            SpawnFireworks();
         } else
         {
             // create mediocre particle effect
@@ -54,7 +56,12 @@ public class RocketController : MonoBehaviour
 
     void SpawnNewShrinkingRing()
     {
+        // set new center of ring to instantiate the fireworks location
+    }
 
+    void SpawnFireworks()
+    {
+        GameObject fireworksClone = Instantiate(fireworks, ringCenter, Quaternion.identity);
     }
 
     public void SetPerfectZone(bool inPerfectZone)
