@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86173850eb5828047a3029c7bf3325e9, type: 3}
-  m_Name: Basic
+  m_Name: Blue
   m_EditorClassIdentifier: 
   overrideSprite: {fileID: 0}
-  color: {r: 0, g: 0, b: 0, a: 1}
+  color: {r: 0, g: 0, b: 1, a: 1}
