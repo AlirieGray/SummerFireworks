@@ -1,18 +1,26 @@
-using TMPro;
 using UnityEngine;
 
 public class RocketController : MonoBehaviour
 {
+    public enum Direction
+    {
+        Center, Left, Right 
+    };
     private InputSystem_Actions inputActions;
     private bool ringInPerfectZone;
     private bool ringInOkZone;
     public GameObject perfectGO;
     public GameObject okGO;
-    private TextMeshProUGUI perfectText;
-    private TextMeshProUGUI okText;
+    public GameObject missGO;
+    private DisplayText perfectText;
+    private DisplayText okText;
+    private DisplayText missText;
     public RingController currentRing;
+    public GameObject currentTarget;
     public GameObject fireworks;
     private Vector3 ringCenter;
+    public Direction rocketDirection;
+    private Direction targetDirection;
 
     void Start()
     {
@@ -22,41 +30,89 @@ public class RocketController : MonoBehaviour
         {
             Launch();
         };
-        okText = okGO.GetComponent<TextMeshProUGUI>();
-        perfectText = perfectGO.GetComponent<TextMeshProUGUI>();
-        ringCenter = new Vector3(0.515f, 0.27f, -1);
-    }
+        inputActions.Rocket.RotateRight.performed += context =>
+        {
+            HandleRotateRight();
+        };
+        inputActions.Rocket.RotateLeft.performed += context =>
+        {
+            HandleRotateLeft();
+        };
 
-    void Update()
-    {
-        
+        ringCenter = new Vector3(0.515f, 0.27f, -1);
+        rocketDirection = Direction.Center;
+        perfectText = perfectGO.GetComponent<DisplayText>();
+        okText = okGO.GetComponent<DisplayText>();
+        missText = missGO.GetComponent<DisplayText>();
     }
 
     void Launch()
     {
         if (ringInPerfectZone)
         {
-            perfectText.color = new Color(255, 255, 255, 1);
+            perfectText.DisplayWithShrink();
             // create dazzling particle effect
             SpawnFireworks();
         }
         else if (ringInOkZone) {
-            okText.color = new Color(255, 255, 255, 1);
+            okText.DisplayWithShrink();
             // create nice particle effect
             SpawnFireworks();
         } else
         {
+            missText.DisplayWithShake();
             // create mediocre particle effect
         }
 
         // delete old shrinking ring
-        Destroy(currentRing.gameObject);
+        
+        DestroyRingAndTarget();
         SpawnNewShrinkingRing();
+    }
+
+    void HandleRotateRight()
+    {
+        switch (rocketDirection)
+        {
+            case Direction.Left:
+                gameObject.transform.rotation = Quaternion.Euler(0, 0, gameObject.transform.rotation.eulerAngles.z - 30);
+                rocketDirection = Direction.Center;
+                break;
+            case Direction.Center:
+                gameObject.transform.rotation = Quaternion.Euler(0, 0, gameObject.transform.rotation.eulerAngles.z - 30);
+                rocketDirection = Direction.Right;
+                break;
+            case Direction.Right:
+                break;
+        }
+    }
+
+    void HandleRotateLeft()
+    {
+        switch (rocketDirection)
+        {
+            case Direction.Center:
+                gameObject.transform.rotation = Quaternion.Euler(0, 0, gameObject.transform.rotation.eulerAngles.z + 30);
+                rocketDirection = Direction.Left;
+                break;
+            case Direction.Right:
+                gameObject.transform.rotation = Quaternion.Euler(0, 0, gameObject.transform.rotation.eulerAngles.z + 30);
+                rocketDirection = Direction.Center;
+                break;
+            case Direction.Left:
+                break;
+        }
     }
 
     void SpawnNewShrinkingRing()
     {
         // set new center of ring to instantiate the fireworks location
+    }
+
+    void DestroyRingAndTarget()
+    {
+        Destroy(currentRing.gameObject);
+        Destroy(currentTarget.gameObject);
     }
 
     void SpawnFireworks()
