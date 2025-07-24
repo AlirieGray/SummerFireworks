@@ -7,16 +7,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager manager;
 
-    public List<Resource> inventory = new List<Resource> ();
-
     public List<ResourceScriptableObject> resources = new List<ResourceScriptableObject>();
     public Dictionary<ResourceScriptableObject, int> resDict = new Dictionary<ResourceScriptableObject, int>();
 
-    public class Resource
-    {
-        public ResourceScriptableObject resource;
-        public int count = 0;
-    }
+    public List<RecipeScriptableObject> craftedRecipe = new List<RecipeScriptableObject> ();
+    public int score;
 
     public void RegisterResource(ResourceScriptableObject res)
     {
