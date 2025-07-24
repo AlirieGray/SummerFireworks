@@ -50,6 +50,8 @@ public class RingController : MonoBehaviour
             scale = gameObject.transform.localScale;
             yield return new WaitForSeconds(0.1f);
         }
+        rocket.SetPerfectZone(false);
+        rocket.SetOkZone(false);
         Destroy(gameObject);
     }
 }

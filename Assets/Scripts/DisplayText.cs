@@ -1,0 +1,67 @@
+using UnityEngine;
+using TMPro;
+using System.Collections;
+
+public class DisplayText : MonoBehaviour
+{
+    private TextMeshProUGUI textMP;
+    void Start()
+    {
+        textMP = GetComponent<TextMeshProUGUI>();
+    }
+
+    public void DisplayWithShrink()
+    {
+        textMP.color = new Color(1, 1, 1, 1);
+        StartCoroutine(Shrink());
+    }
+
+    public void DisplayWithShake()
+    {
+        textMP.color = new Color(1, 1, 1, 1);
+        StartCoroutine(Shake());
+    }
+
+    IEnumerator FadeOut()
+    {
+        float color = 1f;
+        yield return new WaitForSeconds(0.3f);
+
+        while (color > 0f) {
+            textMP.color = new Color(1,1,1,color);
+            color -= .1f;
+            yield return new WaitForSeconds(0.1f);
+        }
+        textMP.color = new Color(1, 1, 1, 0);
+    }
+
+    IEnumerator Shrink()
+    {
+        float font = 36;
+        while (font > 26)
+        {
+            textMP.fontSize = font;
+            font -= 1;
+            yield return new WaitForSeconds(0.05f);
+        }
+        StartCoroutine(FadeOut());
+    }
+
+    IEnumerator Shake()
+    {
+        RectTransform rt = GetComponent<RectTransform>();
+        float time = .1f;
+        int multiplier = -1;
+        while (time > 0f) {
+            multiplier *= -1;
+            time -= .01f;
+            rt.position = new Vector3(
+                rt.position.x,
+                rt.position.y + 5 * multiplier,
+                rt.position.z);
+            yield return new WaitForSeconds(time);
+        }
+        StartCoroutine(FadeOut());
+    }
+
+}
