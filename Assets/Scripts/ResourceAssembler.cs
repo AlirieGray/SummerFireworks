@@ -42,6 +42,17 @@ public class ResourceAssembler : MonoBehaviour
         }
         //check recipe here
 
+        List<ResourceScriptableObject> usedIngredients = new List<ResourceScriptableObject>();
+
+        foreach(ResourceScriptableObject res in resDict.Keys)
+        {
+            for(int i = 0; i < resDict[res]; i++)
+            {
+                usedIngredients.Add(res);
+            }
+        }
+        Debug.Log("finished a firework with " + usedIngredients.Count + " resources in it");
+        DisplayCompletedFireworks.instance.AddNewFirework(usedIngredients);
 
         //clear
         resDict.Clear();
@@ -141,6 +152,7 @@ public class ResourceAssembler : MonoBehaviour
 
     public void AddResource(ResourceScriptableObject res)
     {
+        Debug.Log("added " + res.name + " to mortar");
         if (resDict.ContainsKey(res))
         {
             resDict[res] += 1;
@@ -160,7 +172,7 @@ public class ResourceAssembler : MonoBehaviour
         Destroy(n.GetComponent<DraggableResource>());
         Destroy(n.GetComponent<BoxCollider2D>());
         var img = n.GetComponent<SpriteRenderer>();
-        img.color = res.color;
+        
 
         n.transform.position = transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f),0);
         n.transform.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(-180, 180)));
@@ -170,7 +182,10 @@ public class ResourceAssembler : MonoBehaviour
         if (res.overrideSprite != null)
         {
             img.sprite = res.overrideSprite;
+            img.color = Color.white;
         }
+        else
+            img.color = res.color;
 
         pile.Add(n);
 

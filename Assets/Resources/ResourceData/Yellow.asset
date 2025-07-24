@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86173850eb5828047a3029c7bf3325e9, type: 3}
   m_Name: Yellow
   m_EditorClassIdentifier: 
-  overrideSprite: {fileID: 0}
+  overrideSprite: {fileID: -3698917706961264141, guid: fd3198b31aaf7fc47bd6321eda804bcb, type: 3}
   color: {r: 0.9963192, g: 1, b: 0, a: 1}
+  shape: 0

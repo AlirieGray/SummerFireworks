@@ -29,8 +29,10 @@ public class SpawnAllResourceButtons : MonoBehaviour
             if(res.overrideSprite!= null)
             {
                 img.sprite = res.overrideSprite;
+                img.color = Color.white;
             }
-            img.color = res.color;
+            else
+                img.color = res.color;
         }
     }
 

@@ -4,4 +4,14 @@ public class ResourceScriptableObject : ScriptableObject
 {
     public Sprite overrideSprite;
     public Color color;
+
+    public Shape shape;
+
+    public enum Shape
+    {
+        Circle,
+        Square,
+        Star,
+        Triangle
+    }
 }
