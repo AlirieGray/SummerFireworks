@@ -476,7 +476,7 @@ MonoBehaviour:
   okGO: {fileID: 763796331}
   missGO: {fileID: 121943297}
   currentRing: {fileID: 226616518}
-  currentTarget: {fileID: 0}
+  currentTarget: {fileID: 1461044349}
   fireworks: {fileID: 6609454299231581325, guid: ed1ef8c7f2f88e446ae00f96b32818f8, type: 3}
   rocketDirection: 0
 --- !u!1 &226616514 stripped
@@ -1162,6 +1162,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a899eb5adc3e1e54eb3132affb0ac161, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1461044349 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1514927276392290007, guid: 81f237cced3b671498d9033e61440205, type: 3}
+  m_PrefabInstance: {fileID: 5797322822319933188}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1656101216
 GameObject:
   m_ObjectHideFlags: 0

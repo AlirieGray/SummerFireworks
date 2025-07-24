@@ -44,17 +44,18 @@ public class RocketController : MonoBehaviour
         perfectText = perfectGO.GetComponent<DisplayText>();
         okText = okGO.GetComponent<DisplayText>();
         missText = missGO.GetComponent<DisplayText>();
+        targetDirection = Direction.Right;
     }
 
     void Launch()
     {
-        if (ringInPerfectZone)
+        if (ringInPerfectZone && rocketDirection == targetDirection)
         {
             perfectText.DisplayWithShrink();
             // create dazzling particle effect
             SpawnFireworks();
         }
-        else if (ringInOkZone) {
+        else if (ringInOkZone && rocketDirection == targetDirection) {
             okText.DisplayWithShrink();
             // create nice particle effect
             SpawnFireworks();
@@ -64,10 +65,7 @@ public class RocketController : MonoBehaviour
             // create mediocre particle effect
         }
 
-        // delete old shrinking ring
-        
-        DestroyRingAndTarget();
-        SpawnNewShrinkingRing();
+        SpawnNewRingAndTarget();
     }
 
     void HandleRotateRight()
@@ -104,9 +102,10 @@ public class RocketController : MonoBehaviour
         }
     }
 
-    void SpawnNewShrinkingRing()
+    void SpawnNewRingAndTarget()
     {
         // set new center of ring to instantiate the fireworks location
+        DestroyRingAndTarget();
     }
 
     void DestroyRingAndTarget()
