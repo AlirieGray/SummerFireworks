@@ -5,21 +5,37 @@ using System.Collections;
 public class DisplayText : MonoBehaviour
 {
     private TextMeshProUGUI textMP;
+    RectTransform rt;
+    float originalY;
     void Start()
     {
         textMP = GetComponent<TextMeshProUGUI>();
+        rt = GetComponent<RectTransform>();
+        originalY = rt.transform.position.y;
     }
 
     public void DisplayWithShrink()
     {
+        Reset();
         textMP.color = new Color(1, 1, 1, 1);
         StartCoroutine(Shrink());
     }
 
     public void DisplayWithShake()
     {
+        Reset();
         textMP.color = new Color(1, 1, 1, 1);
         StartCoroutine(Shake());
+    }
+
+    private void Reset()
+    {
+        StopCoroutine(FadeOut());
+        StopCoroutine(Shrink());
+        StopCoroutine(Shake());
+        textMP.color = new Color(1, 1, 1, 1);
+        rt.transform.position = new Vector3 (
+            rt.transform.position.x, originalY, rt.transform.position.z);
     }
 
     IEnumerator FadeOut()
@@ -49,7 +65,7 @@ public class DisplayText : MonoBehaviour
 
     IEnumerator Shake()
     {
-        RectTransform rt = GetComponent<RectTransform>();
+        
         float time = .1f;
         int multiplier = -1;
         while (time > 0f) {

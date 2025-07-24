@@ -17,10 +17,15 @@ public class RocketController : MonoBehaviour
     private DisplayText missText;
     public RingController currentRing;
     public GameObject currentTarget;
+    public GameObject targetPrefab;
+    public GameObject ringPrefab;
     public GameObject fireworks;
     private Vector3 ringCenter;
     public Direction rocketDirection;
     private Direction targetDirection;
+    private Vector3 leftLocation;
+    private Vector3 rightLocation;
+    private Vector3 centerLocation;
 
     void Start()
     {
@@ -39,12 +44,15 @@ public class RocketController : MonoBehaviour
             HandleRotateLeft();
         };
 
-        ringCenter = new Vector3(0.515f, 0.27f, -1);
         rocketDirection = Direction.Center;
         perfectText = perfectGO.GetComponent<DisplayText>();
         okText = okGO.GetComponent<DisplayText>();
         missText = missGO.GetComponent<DisplayText>();
         targetDirection = Direction.Right;
+        leftLocation = new Vector3(-0.84f, 0.27f, 0);
+        centerLocation = new Vector3(0, 0.27f, 0f);
+        rightLocation = new Vector3(0.84f, 0.27f, 0f);
+        ringCenter = rightLocation;
     }
 
     void Launch()
@@ -64,7 +72,8 @@ public class RocketController : MonoBehaviour
             missText.DisplayWithShake();
             // create mediocre particle effect
         }
-
+        ringInOkZone = false;
+        ringInPerfectZone = false;
         SpawnNewRingAndTarget();
     }
 
@@ -106,6 +115,32 @@ public class RocketController : MonoBehaviour
     {
         // set new center of ring to instantiate the fireworks location
         DestroyRingAndTarget();
+        int r = Random.Range(0, 2);
+        GameObject ringGO;
+        switch (r)
+        {
+            case 0:
+                targetDirection = Direction.Left;
+                currentTarget = Instantiate(targetPrefab, leftLocation, Quaternion.identity);
+                ringGO = Instantiate(ringPrefab, leftLocation, Quaternion.identity);
+                ringCenter = leftLocation;
+                currentRing = ringGO.GetComponent<RingController>();
+                break;
+            case 1:
+                targetDirection = Direction.Center;
+                currentTarget = Instantiate(targetPrefab, centerLocation, Quaternion.identity);
+                ringGO = Instantiate(ringPrefab, centerLocation, Quaternion.identity);
+                ringCenter = centerLocation;
+                currentRing = ringGO.GetComponent<RingController>();
+                break;
+            case 2:
+                targetDirection = Direction.Right;
+                currentTarget = Instantiate(targetPrefab, rightLocation, Quaternion.identity);
+                ringGO = Instantiate(ringPrefab, rightLocation, Quaternion.identity);
+                ringCenter = rightLocation;
+                currentRing = ringGO.GetComponent<RingController>();
+                break;
+        }
     }
 
     void DestroyRingAndTarget()
