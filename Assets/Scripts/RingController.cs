@@ -52,6 +52,6 @@ public class RingController : MonoBehaviour
         }
         rocket.SetPerfectZone(false);
         rocket.SetOkZone(false);
-        Destroy(gameObject);
+        rocket.SpawnNewRingAndTarget();
     }
 }
