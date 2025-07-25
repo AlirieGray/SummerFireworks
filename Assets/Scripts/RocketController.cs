@@ -83,6 +83,7 @@ public class RocketController : MonoBehaviour
             Debug.Log("tutorial!");
             inTutorial = true;
         }
+        textHandler.Countdown();
         StartCoroutine(Countdown());   
     }
 
@@ -168,21 +169,25 @@ public class RocketController : MonoBehaviour
             case 0:
                 targetDirection = Direction.Left;
                 currentTarget = Instantiate(targetPrefab, leftLocation, Quaternion.identity);
-                ringGO = Instantiate(ringPrefab, leftLocation, Quaternion.identity);
+                ringGO = Instantiate(ringPrefab, 
+                    new Vector3(leftLocation.x, leftLocation.y, -1f), Quaternion.identity);
+                
                 ringCenter = leftLocation;
                 currentRing = ringGO.GetComponent<RingController>();
                 break;
             case 1:
                 targetDirection = Direction.Center;
                 currentTarget = Instantiate(targetPrefab, centerLocation, Quaternion.identity);
-                ringGO = Instantiate(ringPrefab, centerLocation, Quaternion.identity);
+                ringGO = Instantiate(ringPrefab,
+                    new Vector3(centerLocation.x, centerLocation.y, -1f), Quaternion.identity);
                 ringCenter = centerLocation;
                 currentRing = ringGO.GetComponent<RingController>();
                 break;
             case 2:
                 targetDirection = Direction.Right;
                 currentTarget = Instantiate(targetPrefab, rightLocation, Quaternion.identity);
-                ringGO = Instantiate(ringPrefab, rightLocation, Quaternion.identity);
+                ringGO = Instantiate(ringPrefab, 
+                    new Vector3(rightLocation.x, rightLocation.y, -1f), Quaternion.identity);
                 ringCenter = rightLocation;
                 currentRing = ringGO.GetComponent<RingController>();
                 break;
