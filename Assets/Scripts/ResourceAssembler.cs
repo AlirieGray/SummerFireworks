@@ -20,16 +20,62 @@ public class ResourceAssembler : MonoBehaviour
 
     Vector2 prevMouseClickPosition;
 
+    public Material fullscreenFadeMat;
+    public GameObject completedLinePrefab;
+
+    List<LineRenderer> lrs = new List<LineRenderer>();
+
+    public ParticleSystem ps;
+    List<ParticleSystem> grindStonePS = new List<ParticleSystem>();
+    Dictionary<ResourceScriptableObject, ParticleSystem> grindFXDict = new Dictionary<ResourceScriptableObject, ParticleSystem>();
+
     void Awake()
     {
         instance = this;
         //do not have more than one per scene!!!!!
         linePrefab.SetActive(false);
+
+
+        for(int i = 0; i < 5; i++)
+        {
+            var n = Instantiate(completedLinePrefab);
+            n.SetActive(true);
+            n.transform.position += Vector3.left * 10;
+            lrs.Add(n.GetComponent<LineRenderer>());
+        }
+    }
+
+    private void Start()
+    {
+        grindStonePS.Add(ps);
+        while (grindStonePS.Count < GameManager.manager.resources.Count)
+        {
+            var n = Instantiate(ps);
+            n.transform.parent = ps.transform.parent;
+            grindStonePS.Add(n);
+        }
+
+        for (int i = 0; i < GameManager.manager.resources.Count; i++)
+        {
+            ResourceScriptableObject res = GameManager.manager.resources[i];
+            var xoff = res.overrideSprite.textureRectOffset.x;
+            grindFXDict.Add(res, grindStonePS[i]);
+            var mat = grindStonePS[i].GetComponent<ParticleSystemRenderer>().material;
+            mat.SetFloat("_offset", xoff);
+            //add this to the shader of each material grindstone.
+        }
     }
 
     void Update()
     {
-        
+        fullscreenFadeMat.SetFloat("_alpha", Mathf.MoveTowards(fullscreenFadeMat.GetFloat("_alpha"), 0, Time.deltaTime));
+    }
+
+    private void OnGUI()
+    {
+        var aspectRatio = Screen.width / Screen.height;
+        var world = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x / (aspectRatio), Input.mousePosition.y / 1));
+        GUI.Box(new Rect(10, 10, 200, 24), "cursor @ :" + world.x + ", " + world.y);
     }
 
     public void CheckCompletion()
@@ -62,13 +108,33 @@ public class ResourceAssembler : MonoBehaviour
             Destroy(go);
         }
         pile.Clear();
-        foreach (DraggableLine line in linePuzzles)
+
+        fullscreenFadeMat.SetFloat("_alpha", 1);
+
+        for(int i = 0; i < linePuzzles.Count; i++)
         {
+            DraggableLine line = linePuzzles[i];
+            lrs[i].gameObject.SetActive(true);
+            lrs[i].transform.position = line.line.transform.position;
+            lrs[i].positionCount = line.line.positionCount;
+            for (int x = 0; x < line.line.positionCount; x++)
+            {
+                lrs[i].SetPosition(x, line.line.GetPosition(x));
+            }
+
             Destroy(line.gameObject);
         }
         linePuzzles.Clear();
+        Invoke("HideLines", 1);
     }
 
+    void HideLines()
+    {
+        for (int i = 0; i < lrs.Count; i++)
+        {
+            lrs[i].gameObject.SetActive(false);
+        }
+    }
 
     private void OnMouseOver()
     {
@@ -137,12 +203,17 @@ public class ResourceAssembler : MonoBehaviour
             grindAmount[i] = Mathf.MoveTowards(f, 1, Time.fixedDeltaTime * 0.1f);
             pile[i].transform.localPosition = Vector3.Lerp(pile[i].transform.localPosition, Vector3.zero, grindAmount[i]);
             pile[i].transform.localScale = Vector3.Lerp(pile[i].transform.localScale, Vector3.one * 1.5f, grindAmount[i]);
+
+        }
+        foreach(ResourceScriptableObject res in resDict.Keys)
+        {
+            grindFXDict[res].Emit(1);
         }
     }
 
     public void TryAddResource(ResourceScriptableObject res)
     {
-        var screen = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var screen = GameManager.manager.CursorWorldPosition();
         var mousePos2D = new Vector2(screen.x, screen.y);
         if(Vector2.Distance(mousePos2D, new Vector2(transform.position.x, transform.position.y) )<= range)
         {

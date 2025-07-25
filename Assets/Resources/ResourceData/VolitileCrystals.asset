@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86173850eb5828047a3029c7bf3325e9, type: 3}
-  m_Name: Blue
+  m_Name: VolitileCrystals
   m_EditorClassIdentifier: 
-  overrideSprite: {fileID: -9184849575763380954, guid: f00fded0e587ce847adcbe512843d793, type: 3}
-  color: {r: 0, g: 0, b: 1, a: 1}
+  overrideSprite: {fileID: -7248506988745690217, guid: f00fded0e587ce847adcbe512843d793, type: 3}
+  color: {r: 0.9963192, g: 1, b: 0, a: 1}
   shape: 0

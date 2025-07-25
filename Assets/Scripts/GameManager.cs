@@ -73,4 +73,12 @@ public class GameManager : MonoBehaviour
         return mixedColor;
     }
 
+    public Vector3 CursorWorldPosition()
+    {
+        var aspectRatio = Screen.width / Screen.height;
+        var world = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
+        world.z = 0;
+        return world;
+    }
+
 }

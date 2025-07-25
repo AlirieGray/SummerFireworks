@@ -27,7 +27,8 @@ public class DraggableLine : MonoBehaviour
         origin.transform.position = originPosition;
 
         line.SetPosition(0, origin.transform.localPosition);
-        line.SetPosition(1, Vector3.zero);
+        line.SetPosition(1, origin.transform.localPosition/2);
+        line.SetPosition(2, Vector3.zero);
         foreach(SpriteRenderer sr in transform.GetComponentsInChildren<SpriteRenderer>())
         {
             sr.sprite = icons[resourceIconID];
@@ -46,7 +47,8 @@ public class DraggableLine : MonoBehaviour
             origin.transform.position = originPosition;
 
             line.SetPosition(0, origin.transform.localPosition);
-            line.SetPosition(1, Vector3.zero);
+            line.SetPosition(1, origin.transform.localPosition / 2);
+            line.SetPosition(2, Vector3.zero);
 
             if(Vector3.Distance(transform.position, socketPosition) < 0.6f)
             {
@@ -56,7 +58,8 @@ public class DraggableLine : MonoBehaviour
                 origin.transform.position = originPosition;
 
                 line.SetPosition(0, origin.transform.localPosition);
-                line.SetPosition(1, Vector3.zero);
+                line.SetPosition(1, origin.transform.localPosition / 2);
+                line.SetPosition(2, Vector3.zero);
 
                 solved = true;
                 ResourceAssembler.instance.CheckCompletion();

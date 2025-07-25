@@ -30,8 +30,7 @@ public class DraggableResource : MonoBehaviour
     {
         if (held)
         {
-            ghost.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            ghost.transform.position = new Vector3(ghost.transform.position.x, ghost.transform.position.y, 0);
+            ghost.transform.position = GameManager.manager.CursorWorldPosition();
         }
     }
 
@@ -41,8 +40,8 @@ public class DraggableResource : MonoBehaviour
         {
             held = true;
             ghost.gameObject.SetActive(true);
-            ghost.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            ghost.transform.position = new Vector3(ghost.transform.position.x, ghost.transform.position.y, 0);
+            
+            ghost.transform.position = GameManager.manager.CursorWorldPosition();
             //for specifics get an offset from center based on where you clicked
             //but thats for later
         }
