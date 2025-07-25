@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Threading;
+using TMPro;
 using UnityEngine;
 
 public class RocketController : MonoBehaviour
@@ -37,6 +38,10 @@ public class RocketController : MonoBehaviour
     // TODO this should come from mixing level via gameManager
     private int fireworksCreated;
     private int targetsPlayed;
+
+    // score values
+    public int perfectScoreValue;
+    public int okScoreValue;
 
     void Start()
     {
@@ -94,11 +99,17 @@ public class RocketController : MonoBehaviour
         if (ringInPerfectZone && rocketDirection == targetDirection)
         {
             perfectText.DisplayWithShrink();
+            gameManager.IncreaseScore(perfectScoreValue);
+            textHandler.UpdateScore(gameManager.GetScore());
+
             // create dazzling particle effect
             SpawnFireworks();
         }
         else if (ringInOkZone && rocketDirection == targetDirection) {
             okText.DisplayWithShrink();
+            gameManager.IncreaseScore(okScoreValue);
+            textHandler.UpdateScore(gameManager.GetScore());
+
             // create nice particle effect
             SpawnFireworks();
         } else
@@ -146,7 +157,7 @@ public class RocketController : MonoBehaviour
         }
     }
 
-    void SpawnNewRingAndTarget()
+    public void SpawnNewRingAndTarget()
     {
         // set new center of ring to instantiate the fireworks location
         DestroyRingAndTarget();
