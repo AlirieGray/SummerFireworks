@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public Dictionary<ResourceScriptableObject, int> resDict = new Dictionary<ResourceScriptableObject, int>();
 
     public List<RecipeScriptableObject> craftedRecipe = new List<RecipeScriptableObject> ();
-    public int score;
+    private int score;
 
     // fireworks mini-game numbers
     public float fireworksTargetSpeed;
@@ -42,10 +42,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void IncrementScore()
     {
-        
+        score++;
+    }
+
+    public int GetScore()
+    {
+        return score;
     }
 
     public Color MixColor(Color color1, Color color2)
