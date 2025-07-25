@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Threading;
 using UnityEngine;
 
 public class RocketController : MonoBehaviour
@@ -6,6 +8,7 @@ public class RocketController : MonoBehaviour
     {
         Center, Left, Right 
     };
+    public TextHandler textHandler;
     private InputSystem_Actions inputActions;
     private bool ringInPerfectZone;
     private bool ringInOkZone;
@@ -26,9 +29,20 @@ public class RocketController : MonoBehaviour
     private Vector3 leftLocation;
     private Vector3 rightLocation;
     private Vector3 centerLocation;
+    private AudioManager audioManager;
+    private GameManager gameManager;
+    private LevelManager levelManager;
+    private bool inTutorial;
+
+    // TODO this should come from mixing level via gameManager
+    private int fireworksCreated;
+    private int targetsPlayed;
 
     void Start()
     {
+        audioManager = FindFirstObjectByType<AudioManager>();
+        gameManager = FindFirstObjectByType<GameManager>();
+        levelManager = FindFirstObjectByType<LevelManager>();
         inputActions = new InputSystem_Actions();
         inputActions.Rocket.Enable();
         inputActions.Rocket.Launch.performed += context =>
@@ -49,14 +63,34 @@ public class RocketController : MonoBehaviour
         okText = okGO.GetComponent<DisplayText>();
         missText = missGO.GetComponent<DisplayText>();
         targetDirection = Direction.Right;
-        leftLocation = new Vector3(-0.84f, 0.27f, 0);
-        centerLocation = new Vector3(0, 0.27f, 0f);
-        rightLocation = new Vector3(0.84f, 0.27f, 0f);
+        leftLocation = new Vector3(-0.84f, 0.27f, -.3f);
+        centerLocation = new Vector3(0, 0.27f, -.3f);
+        rightLocation = new Vector3(0.84f, 0.27f, -.3f);
         ringCenter = rightLocation;
+        inTutorial = false;
+        StartLevel();
+    }
+
+    void StartLevel()
+    {
+        if (levelManager.GetCurrentCycle() == 0)
+        {
+            Debug.Log("tutorial!");
+            inTutorial = true;
+        }
+        StartCoroutine(Countdown());   
+    }
+
+    IEnumerator Countdown()
+    {
+        yield return new WaitForSeconds(1.5f);
+        currentTarget.SetActive(true);
+        currentRing.gameObject.SetActive(true);
     }
 
     void Launch()
     {
+        textHandler.ResetAll();
         if (ringInPerfectZone && rocketDirection == targetDirection)
         {
             perfectText.DisplayWithShrink();
@@ -74,6 +108,7 @@ public class RocketController : MonoBehaviour
         }
         ringInOkZone = false;
         ringInPerfectZone = false;
+        
         SpawnNewRingAndTarget();
     }
 
@@ -151,6 +186,7 @@ public class RocketController : MonoBehaviour
 
     void SpawnFireworks()
     {
+        audioManager.PlayFireworks();
         GameObject fireworksClone = Instantiate(fireworks, ringCenter, Quaternion.identity);
     }
 

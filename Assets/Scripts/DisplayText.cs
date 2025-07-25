@@ -16,24 +16,20 @@ public class DisplayText : MonoBehaviour
 
     public void DisplayWithShrink()
     {
-        Reset();
         textMP.color = new Color(1, 1, 1, 1);
         StartCoroutine(Shrink());
     }
 
     public void DisplayWithShake()
     {
-        Reset();
         textMP.color = new Color(1, 1, 1, 1);
         StartCoroutine(Shake());
     }
 
-    private void Reset()
+    public void Reset()
     {
-        StopCoroutine(FadeOut());
-        StopCoroutine(Shrink());
-        StopCoroutine(Shake());
-        textMP.color = new Color(1, 1, 1, 1);
+        StopAllCoroutines();
+        textMP.color = new Color(1, 1, 1, 0f);
         rt.transform.position = new Vector3 (
             rt.transform.position.x, originalY, rt.transform.position.z);
     }
