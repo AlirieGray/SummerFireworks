@@ -7,6 +7,7 @@ public class RingController : MonoBehaviour
     private RocketController rocket;
     private Vector3 scale;
     private List<Collider2D> overlapping;
+    private bool missedPerfectZone;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -19,24 +20,33 @@ public class RingController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        CheckCollision();
     }
     private void CheckCollision()
     {
-        for (int i = 0; i < overlapping.Count; i++) {
-            if (overlapping[i].gameObject.CompareTag("OuterTarget"))
-            {
-                rocket.SetOkZone(true);
+        if (!missedPerfectZone)
+        {
+            for (int i = 0; i < overlapping.Count; i++) {
+                if (overlapping[i].gameObject.CompareTag("OuterTarget"))
+                {
+                    rocket.SetOkZone(true);
+                    break;
             
-            } else if (overlapping[i].gameObject.CompareTag("InnerTarget"))
-            {
-                rocket.SetPerfectZone(true);
-                rocket.SetOkZone(false);
-            } else if (overlapping[i].gameObject.CompareTag("InnerInnerTarget"))
-            {
-                rocket.SetPerfectZone(false);
-                rocket.SetOkZone(true);
-            } 
+                } else if (overlapping[i].gameObject.CompareTag("InnerTarget"))
+                {
+                    Debug.Log("in perfect zone");
+                    rocket.SetPerfectZone(true);
+                    rocket.SetOkZone(false);
+                    break;
+                } else if (overlapping[i].gameObject.CompareTag("InnerInnerTarget"))
+                {
+                    Debug.Log("MISSED perfect zone");
+                    rocket.SetPerfectZone(false);
+                    rocket.SetOkZone(false);
+                    missedPerfectZone = true;
+                    break;
+                } 
+            }
         }
     }
 
@@ -45,7 +55,6 @@ public class RingController : MonoBehaviour
         while (scale.x > 0)
         {
             Physics2D.OverlapCollider(gameObject.GetComponent<Collider2D>(), overlapping);
-            CheckCollision();
             gameObject.transform.localScale = new Vector3 (scale.x - 0.01f, scale.y - 0.01f, scale.z - 0.01f);
             scale = gameObject.transform.localScale;
             yield return new WaitForSeconds(0.1f);
