@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 60675d132d34ec049baaa26bbaab2c9f
   - enabled: 1
-    path: Assets/Scenes/Loading.unity
+    path: Assets/Scenes/Placeholder.unity
     guid: 3470e8617491fdb44a5e3e634e038e65
   - enabled: 1
     path: Assets/Scenes/GatherResources.unity
@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Launch.unity
     guid: b1fdb98fbd436cf4cbe5c3090320120b
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 5c5675921c38a044ea9c52b50f25f4a0
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
