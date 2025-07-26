@@ -29,6 +29,12 @@ public class ResourceAssembler : MonoBehaviour
     List<ParticleSystem> grindStonePS = new List<ParticleSystem>();
     Dictionary<ResourceScriptableObject, ParticleSystem> grindFXDict = new Dictionary<ResourceScriptableObject, ParticleSystem>();
 
+    public Material timerMaterial;
+    public float timerMax = 5;
+    float timer;
+
+    bool isCrafting;
+
     void Awake()
     {
         instance = this;
@@ -71,6 +77,28 @@ public class ResourceAssembler : MonoBehaviour
         fullscreenFadeMat.SetFloat("_alpha", Mathf.MoveTowards(fullscreenFadeMat.GetFloat("_alpha"), 0, Time.deltaTime));
     }
 
+    private void FixedUpdate()
+    {
+        if (isCrafting)
+        {
+            if(timer > 0)
+            {
+                timer = Mathf.MoveTowards(timer, 0, Time.fixedDeltaTime);
+                timerMaterial.SetFloat("_progress", (timer / timerMax));
+            }
+            else if(timer == 0)
+            {
+                timerMaterial.SetFloat("_progress", -0.1f);
+                YourTakingTooLong();
+            }
+        }
+    }
+
+    private void OnDestroy()
+    {
+        timerMaterial.SetFloat("_progress", -0.1f);
+    }
+
     private void OnGUI()
     {
         var aspectRatio = Screen.width / Screen.height;
@@ -88,22 +116,32 @@ public class ResourceAssembler : MonoBehaviour
         }
         //check recipe here
 
+        CraftedFirework();
+    }
+
+    void CraftedFirework()
+    {
+        isCrafting = false;
+        timerMaterial.SetFloat("_progress", 0);
         List<ResourceScriptableObject> usedIngredients = new List<ResourceScriptableObject>();
 
-        foreach(ResourceScriptableObject res in resDict.Keys)
+        foreach (ResourceScriptableObject res in resDict.Keys)
         {
-            for(int i = 0; i < resDict[res]; i++)
+            for (int i = 0; i < resDict[res]; i++)
             {
                 usedIngredients.Add(res);
             }
         }
+
+        AddResourcePestel.pestel.GetComponent<BoxCollider2D>().enabled = true;
+
         Debug.Log("finished a firework with " + usedIngredients.Count + " resources in it");
         DisplayCompletedFireworks.instance.AddNewFirework(usedIngredients);
 
         //clear
         resDict.Clear();
         grindAmount.Clear();
-        foreach(GameObject go in pile)
+        foreach (GameObject go in pile)
         {
             Destroy(go);
         }
@@ -111,7 +149,7 @@ public class ResourceAssembler : MonoBehaviour
 
         fullscreenFadeMat.SetFloat("_alpha", 1);
 
-        for(int i = 0; i < linePuzzles.Count; i++)
+        for (int i = 0; i < linePuzzles.Count; i++)
         {
             DraggableLine line = linePuzzles[i];
             lrs[i].gameObject.SetActive(true);
@@ -128,6 +166,20 @@ public class ResourceAssembler : MonoBehaviour
         Invoke("HideLines", 1);
     }
 
+    //??
+    void YourTakingTooLong()
+    {
+        //make the lines freak out. maybe turn red?
+        //add a Blunder resource
+        foreach (DraggableLine line in linePuzzles)
+        {
+            if (!line.solved)
+                TryAddResource(Resources.Load<ResourceScriptableObject>("ResourceData/Blunder"));
+        }
+        
+        CraftedFirework();
+    }
+
     void HideLines()
     {
         for (int i = 0; i < lrs.Count; i++)
@@ -136,18 +188,18 @@ public class ResourceAssembler : MonoBehaviour
         }
     }
 
-    private void OnMouseOver()
+    public void FinishGrind()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            //craft
-            if(pile.Count > 0)
-                SpawnWires(Mathf.Min(Mathf.Max(3, pile.Count), 5));
-        }
+        if (pile.Count > 0)
+            SpawnWires(Mathf.Min(Mathf.Max(3, pile.Count), 5));
+        else
+            AddResourcePestel.pestel.GetComponent<BoxCollider2D>().enabled = true;
     }
 
     void SpawnWires(int lines = 3)
     {
+        isCrafting = true;
+        timer = timerMax;
         float incrimentPerStep = 180.0f / lines;
 
         for(int i = 0; i < lines; i++)
@@ -200,10 +252,12 @@ public class ResourceAssembler : MonoBehaviour
         for(int i = 0; i < grindAmount.Count; i++)
         {
             var f = grindAmount[i];
-            grindAmount[i] = Mathf.MoveTowards(f, 1, Time.fixedDeltaTime * 0.1f);
-            pile[i].transform.localPosition = Vector3.Lerp(pile[i].transform.localPosition, Vector3.zero, grindAmount[i]);
-            pile[i].transform.localScale = Vector3.Lerp(pile[i].transform.localScale, Vector3.one * 1.5f, grindAmount[i]);
-
+            grindAmount[i] = Mathf.MoveTowards(f, 1, Time.fixedDeltaTime * Random.Range(1f, 2f));
+            //pile[i].transform.localPosition = Vector3.Lerp(pile[i].transform.localPosition, Vector3.zero, grindAmount[i]);
+            //pile[i].transform.localScale = Vector3.Lerp(pile[i].transform.localScale, Vector3.one * 1.5f, grindAmount[i]);
+            var keys = new List<ResourceScriptableObject>(resDict.Keys);
+            if (grindAmount[i] >= 1)
+                pile[i].GetComponent<SpriteRenderer>().sprite = keys[i].groundUpSprite;
         }
         foreach(ResourceScriptableObject res in resDict.Keys)
         {

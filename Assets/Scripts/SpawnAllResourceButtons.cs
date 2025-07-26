@@ -18,6 +18,8 @@ public class SpawnAllResourceButtons : MonoBehaviour
         for(int i =0; i < GameManager.manager.resources.Count; i++)
         {
             ResourceScriptableObject res = GameManager.manager.resources[i];
+            if (res.name == "Blunder")
+                continue;
             var n = Instantiate(drawerPrefab);
             n.name = res.name;
             n.transform.position = startPosition + (new Vector3(cellSize.x * (Mathf.Repeat(i, width)), -cellSize.y * (Mathf.FloorToInt(i / 2))));
