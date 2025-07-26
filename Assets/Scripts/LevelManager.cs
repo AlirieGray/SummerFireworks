@@ -30,13 +30,20 @@ public class LevelManager : MonoBehaviour
             } else
             {
                 currentLevel = 1;
+                AdjustDifficulty();
                 SceneManager.LoadScene("GatherResources");
             }
         } else 
         {
             currentLevel++;
+            
             SceneManager.LoadScene(levelOrder[currentLevel]);
         }
+    }
+
+    private void AdjustDifficulty()
+    {
+        // adjust ring shrinking rate in game manager
     }
 
     public void LoadMainMenu()

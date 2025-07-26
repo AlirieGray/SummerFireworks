@@ -58,9 +58,9 @@ public class TextHandler : MonoBehaviour
     {
         while (scoreDisplay < newValue)
         {
-            scoreDisplay++;
+            scoreDisplay += 10;
             scoreText.text = scoreDisplay.ToString();
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 }

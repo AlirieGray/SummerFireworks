@@ -40,7 +40,8 @@ public class GameManager : MonoBehaviour
         {
             RegisterResource(res);
         }
-    }
+
+}
 
     public void IncreaseScore(int value)
     {
