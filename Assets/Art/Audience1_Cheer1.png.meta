@@ -58,7 +58,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -72,7 +72,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -96,7 +96,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -139,7 +139,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 91
+        width: 90
         height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -159,9 +159,9 @@ TextureImporter:
       name: Audience1_Cheer1_1
       rect:
         serializedVersion: 2
-        x: 97
+        x: 98
         y: 0
-        width: 92
+        width: 90
         height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -181,9 +181,9 @@ TextureImporter:
       name: Audience1_Cheer1_2
       rect:
         serializedVersion: 2
-        x: 195
+        x: 196
         y: 0
-        width: 92
+        width: 90
         height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -203,9 +203,9 @@ TextureImporter:
       name: Audience1_Cheer1_3
       rect:
         serializedVersion: 2
-        x: 293
+        x: 294
         y: 0
-        width: 92
+        width: 90
         height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -225,9 +225,9 @@ TextureImporter:
       name: Audience1_Cheer1_4
       rect:
         serializedVersion: 2
-        x: 391
+        x: 392
         y: 0
-        width: 92
+        width: 90
         height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -247,9 +247,9 @@ TextureImporter:
       name: Audience1_Cheer1_5
       rect:
         serializedVersion: 2
-        x: 489
+        x: 490
         y: 0
-        width: 92
+        width: 90
         height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -269,9 +269,9 @@ TextureImporter:
       name: Audience1_Cheer1_6
       rect:
         serializedVersion: 2
-        x: 587
+        x: 588
         y: 0
-        width: 92
+        width: 90
         height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -291,9 +291,9 @@ TextureImporter:
       name: Audience1_Cheer1_7
       rect:
         serializedVersion: 2
-        x: 685
+        x: 686
         y: 0
-        width: 91
+        width: 90
         height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -313,7 +313,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 1615edd25b4697a498b555a1dcbfbe0d
     internalID: 0
     vertices: []
     indices: 
