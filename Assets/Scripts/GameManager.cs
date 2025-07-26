@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public Dictionary<ResourceScriptableObject, int> resDict = new Dictionary<ResourceScriptableObject, int>();
 
     public List<RecipeScriptableObject> craftedRecipe = new List<RecipeScriptableObject> ();
+    public List<List<ResourceScriptableObject>> finishedFireworks = new List<List<ResourceScriptableObject>>();
     private int score;
 
     // fireworks mini-game numbers
@@ -52,6 +53,11 @@ public class GameManager : MonoBehaviour
         return score;
     }
 
+    public void AddFirework(List<ResourceScriptableObject> firework)
+    {
+        finishedFireworks.Add(firework);
+    }
+
     public Color MixColor(Color color1, Color color2)
     {
         var key = 1f - Mathf.Max(color1.r, color1.g, color1.b);
@@ -80,5 +86,7 @@ public class GameManager : MonoBehaviour
         world.z = 0;
         return world;
     }
+
+
 
 }
