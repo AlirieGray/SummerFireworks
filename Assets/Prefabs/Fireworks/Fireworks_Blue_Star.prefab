@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2464659298860083370}
   - component: {fileID: 4255194695753705432}
   m_Layer: 7
-  m_Name: Fireworks_Base
+  m_Name: Fireworks_Blue_Star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

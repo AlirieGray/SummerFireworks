@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
@@ -15,6 +16,12 @@ public class AudioManager : MonoBehaviour
     public void PlayFireworks()
     {
         FXSource.clip = fireworks1;
+        StartCoroutine(CountdownFireworks());
+    }
+
+    IEnumerator CountdownFireworks()
+    {
+        yield return new WaitForSeconds(0.7f);
         FXSource.Play();
     }
 }

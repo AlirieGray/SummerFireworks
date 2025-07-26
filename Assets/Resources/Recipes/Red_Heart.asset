@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d15aede03db01a40955c184c089245e, type: 3}
-  m_Name: Basic
+  m_Name: Red_Heart
   m_EditorClassIdentifier: 
   ingredients:
-  - {fileID: 11400000, guid: 76a3bfee2a63ab64ab53b0daf7fb8fbe, type: 2}
+  - {fileID: 11400000, guid: a2d80ecfaffc4e14584f2b2adab57f58, type: 2}
+  - {fileID: 11400000, guid: 08ced20c08660454993e0b9f299a6681, type: 2}
   fireworkToSpawn: {fileID: 1348310628113462117, guid: e98b7896abf24eb438a61cce12617e36, type: 3}

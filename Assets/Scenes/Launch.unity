@@ -629,8 +629,8 @@ MonoBehaviour:
   ringPrefab: {fileID: 4756917815805635111, guid: 04e01a6cbe3a9a24480592c60ab02239, type: 3}
   fireworks: {fileID: 1348310628113462117, guid: e98b7896abf24eb438a61cce12617e36, type: 3}
   rocketDirection: 0
-  perfectScoreValue: 3
-  okScoreValue: 1
+  perfectScoreValue: 1000
+  okScoreValue: 500
 --- !u!114 &226616518 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4334202038288557869, guid: 04e01a6cbe3a9a24480592c60ab02239, type: 3}
@@ -1342,7 +1342,7 @@ Transform:
   m_GameObject: {fileID: 1081513963}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.09, y: 2.04, z: -0.3}
+  m_LocalPosition: {x: -0.09, y: 2.04, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
