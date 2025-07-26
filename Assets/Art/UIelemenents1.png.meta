@@ -1,25 +1,34 @@
 fileFormatVersion: 2
-guid: 55aa49bcb810fc548868c97320f71022
+guid: 61c01317b9799594a8dabaf7f9029693
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8287873616420496286
-    second: clouds_0
+      213: 6453966773445478184
+    second: UIelemenents1_0
   - first:
-      213: 7911139459876737251
-    second: clouds_1
+      213: -5739686290640610719
+    second: UIelemenents1_1
   - first:
-      213: -1115256706364395465
-    second: clouds_2
+      213: 893096514270858251
+    second: UIelemenents1_2
   - first:
-      213: -477254976604553037
-    second: clouds_3
+      213: 4880403531092310180
+    second: UIelemenents1_3
   - first:
-      213: 5291327898690728900
-    second: clouds_4
+      213: 7732052344270632320
+    second: UIelemenents1_4
   - first:
-      213: -8294918184612582425
-    second: clouds_5
+      213: -984015955126126704
+    second: UIelemenents1_5
+  - first:
+      213: 5312868272335216386
+    second: UIelemenents1_6
+  - first:
+      213: -5607435292095720356
+    second: UIelemenents1_7
+  - first:
+      213: -1757954713380272080
+    second: UIelemenents1_8
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -52,7 +61,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -61,12 +70,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -90,7 +99,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -128,101 +137,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: clouds_0
+      name: UIelemenents1_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 19
-        width: 121
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e936312a421740370800000000000000
-      internalID: 8287873616420496286
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: clouds_1
-      rect:
-        serializedVersion: 2
-        x: 134
-        y: 58
-        width: 42
-        height: 18
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3e0578a7c630acd60800000000000000
-      internalID: 7911139459876737251
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: clouds_2
-      rect:
-        serializedVersion: 2
-        x: 243
-        y: 44
-        width: 54
-        height: 21
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 73037c73fefc580f0800000000000000
-      internalID: -1115256706364395465
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: clouds_3
-      rect:
-        serializedVersion: 2
-        x: 53
-        y: 0
-        width: 79
-        height: 33
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3b0c23c90237069f0800000000000000
-      internalID: -477254976604553037
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: clouds_4
-      rect:
-        serializedVersion: 2
-        x: 131
+        x: 8
         y: 15
-        width: 91
-        height: 42
+        width: 50
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -231,20 +152,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4c3339f60b29e6940800000000000000
-      internalID: 5291327898690728900
+      spriteID: 827446bf598119950800000000000000
+      internalID: 6453966773445478184
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: clouds_5
+      name: UIelemenents1_1
       rect:
         serializedVersion: 2
-        x: 219
-        y: 12
-        width: 86
-        height: 28
+        x: 69
+        y: 43
+        width: 25
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -253,8 +174,162 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7eb2d350cd782ec80800000000000000
-      internalID: -8294918184612582425
+      spriteID: 16adf249ab98850b0800000000000000
+      internalID: -5739686290640610719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIelemenents1_2
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0c01434c8ae46c00800000000000000
+      internalID: 893096514270858251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIelemenents1_3
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a8b15f672daab340800000000000000
+      internalID: 4880403531092310180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIelemenents1_4
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0853af414a4cd4b60800000000000000
+      internalID: 7732052344270632320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIelemenents1_5
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 15
+        width: 16
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 097f36dc3b21852f0800000000000000
+      internalID: -984015955126126704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIelemenents1_6
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20fdbfe7b891bb940800000000000000
+      internalID: 5312868272335216386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIelemenents1_7
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 15
+        width: 49
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5455a1bf436e22b0800000000000000
+      internalID: -5607435292095720356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UIelemenents1_8
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 0
+        width: 49
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 038ceb1908d7a97e0800000000000000
+      internalID: -1757954713380272080
       vertices: []
       indices: 
       edges: []
@@ -263,7 +338,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -273,12 +348,15 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      clouds_0: 8287873616420496286
-      clouds_1: 7911139459876737251
-      clouds_2: -1115256706364395465
-      clouds_3: -477254976604553037
-      clouds_4: 5291327898690728900
-      clouds_5: -8294918184612582425
+      UIelemenents1_0: 6453966773445478184
+      UIelemenents1_1: -5739686290640610719
+      UIelemenents1_2: 893096514270858251
+      UIelemenents1_3: 4880403531092310180
+      UIelemenents1_4: 7732052344270632320
+      UIelemenents1_5: -984015955126126704
+      UIelemenents1_6: 5312868272335216386
+      UIelemenents1_7: -5607435292095720356
+      UIelemenents1_8: -1757954713380272080
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -68,9 +68,9 @@ public class RocketController : MonoBehaviour
         okText = okGO.GetComponent<DisplayText>();
         missText = missGO.GetComponent<DisplayText>();
         targetDirection = Direction.Right;
-        leftLocation = new Vector3(-0.84f, 0.27f, -.3f);
-        centerLocation = new Vector3(0, 0.27f, -.3f);
-        rightLocation = new Vector3(0.84f, 0.27f, -.3f);
+        leftLocation = new Vector3(-5.72f, 1.72f, -.3f);
+        centerLocation = new Vector3(0, 1.72f, -.3f);
+        rightLocation = new Vector3(5.72f, 1.72f, -.3f);
         ringCenter = rightLocation;
         inTutorial = false;
         StartLevel();
@@ -202,8 +202,9 @@ public class RocketController : MonoBehaviour
 
     void SpawnFireworks()
     {
-        audioManager.PlayFireworks();
-        GameObject fireworksClone = Instantiate(fireworks, ringCenter, Quaternion.identity);
+        GameObject fireworksClone = Instantiate(fireworks, new Vector3(
+            0.122f, -3.643f, -5f), Quaternion.Euler(-90f, 0f,0f));
+        //audioManager.PlayFireworks();
     }
 
     public void SetPerfectZone(bool inPerfectZone)
