@@ -41,10 +41,6 @@ public class GameManager : MonoBehaviour
             RegisterResource(res);
         }
 
-        // TODO: testing only, remove for production
-        RecipeScriptableObject firework = new RecipeScriptableObject();
-        firework.ingredients.Add(resources[0]);
-        firework.ingredients.Add(resources[1]);
 }
 
     public void IncreaseScore(int value)
