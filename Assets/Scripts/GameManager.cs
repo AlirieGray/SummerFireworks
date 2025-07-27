@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public List<List<ResourceScriptableObject>> finishedFireworks = new List<List<ResourceScriptableObject>>();
     public int score;
 
+    public List<ResourceScriptableObject> gatheredResources = new List<ResourceScriptableObject>();
+
     // fireworks mini-game numbers
     public float fireworksTargetSpeed;
 
