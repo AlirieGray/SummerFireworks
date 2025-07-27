@@ -47,6 +47,11 @@ public class GameManager : MonoBehaviour
         {
             RegisterResource(res);
         }
+
+        // TODO: testing only
+        // remove for production
+        finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Starfruit"], resourceNames["Dragonscale"] });
+        finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Heart"], resourceNames["Blue"] });
     }
 
     public void IncreaseScore(int value)
@@ -62,6 +67,16 @@ public class GameManager : MonoBehaviour
     public void AddFirework(List<ResourceScriptableObject> firework)
     {
         finishedFireworks.Add(firework);
+    }
+
+    public List<List<ResourceScriptableObject>> GetFinishedFireworks()
+    {
+        return finishedFireworks;
+    }
+
+    public void ClearFireworks()
+    {
+        finishedFireworks.Clear();
     }
 
     public Color MixColor(Color color1, Color color2)

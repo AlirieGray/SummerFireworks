@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86173850eb5828047a3029c7bf3325e9, type: 3}
-  m_Name: Red
+  m_Name: Heart
   m_EditorClassIdentifier: 
   overrideSprite: {fileID: 5670342048071295301, guid: f00fded0e587ce847adcbe512843d793, type: 3}
   groundUpSprite: {fileID: -3248058062805400589, guid: fd3198b31aaf7fc47bd6321eda804bcb, type: 3}
   color: {r: 1, g: 0.07585368, b: 0, a: 1}
   shapePrefab: {fileID: 0}
-  shape: 0
+  shape: 2

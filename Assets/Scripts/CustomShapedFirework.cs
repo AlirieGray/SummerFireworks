@@ -1,16 +1,21 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 [ExecuteAlways]
 public class CustomShapedFirework : MonoBehaviour
 {
     ParticleSystem ps;
 
     public List<Transform> childObjects = new List<Transform>();
+    private float lifetime;
+    private bool stopEmitting;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void OnEnable()
     {
         ps = GetComponent<ParticleSystem>();
+        lifetime = ps.startLifetime;
+        StartCoroutine(Die());
     }
 
     public void UpdateChildObjects()
@@ -24,7 +29,9 @@ public class CustomShapedFirework : MonoBehaviour
 
     private void Update()
     {
-        EmitParticle();
+        if (!stopEmitting) {
+            EmitParticle();
+        }
     }
 
     void EmitParticle()
@@ -70,5 +77,11 @@ public class CustomShapedFirework : MonoBehaviour
         {
             Gizmos.DrawLine(childObjects[0].position, childObjects[transform.childCount - 1].position);
         }
+    }
+
+    IEnumerator Die()
+    {
+        yield return new WaitForSeconds(lifetime);
+        stopEmitting = true;
     }
 }

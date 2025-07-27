@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86173850eb5828047a3029c7bf3325e9, type: 3}
   m_Name: Yellow
   m_EditorClassIdentifier: 
-  overrideSprite: {fileID: 3687651450805901432, guid: f00fded0e587ce847adcbe512843d793, type: 3}
+  overrideSprite: {fileID: 5670342048071295301, guid: f00fded0e587ce847adcbe512843d793, type: 3}
   groundUpSprite: {fileID: -3698917706961264141, guid: fd3198b31aaf7fc47bd6321eda804bcb, type: 3}
   color: {r: 0.9963192, g: 1, b: 0, a: 1}
   shapePrefab: {fileID: 0}

@@ -14,7 +14,7 @@ public class LevelManager : MonoBehaviour
         // TODO: update with resource collection level
         levelOrder = new List<string>
         {
-            "MainMenu", "GatherResources", "Launch", "Placeholder", "GameOver"
+            "MainMenu", "MixResources", "Launch", "ResourceGathering", "GameOver"
         };
     }
 
@@ -30,13 +30,20 @@ public class LevelManager : MonoBehaviour
             } else
             {
                 currentLevel = 1;
+                AdjustDifficulty();
                 SceneManager.LoadScene("GatherResources");
             }
         } else 
         {
             currentLevel++;
+            
             SceneManager.LoadScene(levelOrder[currentLevel]);
         }
+    }
+
+    private void AdjustDifficulty()
+    {
+        // adjust ring shrinking rate in game manager
     }
 
     public void LoadMainMenu()

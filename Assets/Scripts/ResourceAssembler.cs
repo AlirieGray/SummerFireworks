@@ -223,7 +223,7 @@ public class ResourceAssembler : MonoBehaviour
 
     public void FinishGrind()
     {
-        if (pile.Count > 0 && resDict.ContainsKey(GameManager.manager.resourceNames["VolitileCrystals"]))
+        if (pile.Count > 0 && resDict.ContainsKey(GameManager.manager.resourceNames["VolatileCrystals"]))
             SpawnWires(Mathf.Min(Mathf.Max(3, pile.Count), 5));
         else
             AddResourcePestel.pestel.GetComponent<BoxCollider2D>().enabled = true;
