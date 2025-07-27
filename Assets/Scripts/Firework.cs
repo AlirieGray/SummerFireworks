@@ -14,6 +14,11 @@ public class Firework : MonoBehaviour
         StartCoroutine(PlayExplosion());
     }
 
+    public void SetColor(Color color)
+    {
+        ps.startColor = color;
+    }
+
     IEnumerator PlayExplosion()
     {
         yield return new WaitForSeconds(ps.startLifetime);

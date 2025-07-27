@@ -627,7 +627,10 @@ MonoBehaviour:
   currentTarget: {fileID: 1461044349}
   targetPrefab: {fileID: 1514927276392290007, guid: 81f237cced3b671498d9033e61440205, type: 3}
   ringPrefab: {fileID: 4756917815805635111, guid: 04e01a6cbe3a9a24480592c60ab02239, type: 3}
-  fireworks: {fileID: 1348310628113462117, guid: e98b7896abf24eb438a61cce12617e36, type: 3}
+  baseFireworks: {fileID: 0}
+  circleFireworks: {fileID: 1348310628113462117, guid: e98b7896abf24eb438a61cce12617e36, type: 3}
+  heartFireworks: {fileID: 475405217821561741, guid: bb24154f9386c89498050a70aa4c0435, type: 3}
+  starFireworks: {fileID: 539678732930456418, guid: ebf1932ea511b7e45aa207818a4fb373, type: 3}
   rocketDirection: 0
   perfectScoreValue: 1000
   okScoreValue: 500
@@ -2085,6 +2088,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resources: []
   craftedRecipe: []
+  score: 0
+  gatheredResources: []
   fireworksTargetSpeed: 0
 --- !u!4 &1950139780
 Transform:

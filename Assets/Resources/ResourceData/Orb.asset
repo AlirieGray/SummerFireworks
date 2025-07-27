@@ -16,4 +16,4 @@ MonoBehaviour:
   groundUpSprite: {fileID: -5099745367647658857, guid: fd3198b31aaf7fc47bd6321eda804bcb, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
   shapePrefab: {fileID: 0}
-  shape: 0
+  shape: 1

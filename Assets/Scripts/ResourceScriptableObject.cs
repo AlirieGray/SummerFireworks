@@ -11,9 +11,11 @@ public class ResourceScriptableObject : ScriptableObject
 
     public enum Shape
     {
+        None,
         Circle,
-        Square,
+        Heart,
         Star,
+        Starburst,
         Triangle
     }
 }

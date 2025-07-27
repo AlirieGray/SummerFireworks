@@ -2,6 +2,7 @@ using System.Collections;
 using System.Threading;
 using TMPro;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class RocketController : MonoBehaviour
 {
@@ -23,7 +24,10 @@ public class RocketController : MonoBehaviour
     public GameObject currentTarget;
     public GameObject targetPrefab;
     public GameObject ringPrefab;
-    public GameObject fireworks;
+    public GameObject baseFireworks;
+    public GameObject circleFireworks;
+    public GameObject heartFireworks;
+    public GameObject starFireworks;
     private Vector3 ringCenter;
     public Direction rocketDirection;
     private Direction targetDirection;
@@ -34,6 +38,8 @@ public class RocketController : MonoBehaviour
     private GameManager gameManager;
     private LevelManager levelManager;
     private bool inTutorial;
+    private int fireworksIndex;
+    private List<GameObject> allFireworks;
 
     // TODO this should come from mixing level via gameManager
     private int fireworksCreated;
@@ -45,6 +51,7 @@ public class RocketController : MonoBehaviour
 
     void Start()
     {
+        fireworksIndex = 0;
         audioManager = FindFirstObjectByType<AudioManager>();
         gameManager = FindFirstObjectByType<GameManager>();
         levelManager = FindFirstObjectByType<LevelManager>();
@@ -120,8 +127,23 @@ public class RocketController : MonoBehaviour
         }
         ringInOkZone = false;
         ringInPerfectZone = false;
-        
-        SpawnNewRingAndTarget();
+
+        if (fireworksIndex > gameManager.GetFinishedFireworks().Count - 1) {
+            EndLevel();
+        } else
+        {
+            SpawnNewRingAndTarget();
+        }
+    }
+
+    void EndLevel()
+    {
+        // show little display of everything!
+        // then go to resource gathering level
+        foreach (GameObject fireworks in allFireworks)
+        {
+
+        }
     }
 
     void HandleRotateRight()
@@ -202,9 +224,46 @@ public class RocketController : MonoBehaviour
 
     void SpawnFireworks()
     {
-        GameObject fireworksClone = Instantiate(fireworks, new Vector3(
+        // move currentFirework index
+        // if not at the end then get the next prefab
+        // set the color and move the index
+        // instantiate
+        List<ResourceScriptableObject> resources = gameManager.GetFinishedFireworks()[fireworksIndex];
+        List<GameObject> fireworksToSpawn = new List<GameObject>();
+        int spawnIndex;
+
+        foreach (ResourceScriptableObject resource in resources) {
+            // go through all the resource 
+            // if it's a shape, add a new prefab and increment spawnIndex
+            // if a color, mix colors and add to prefab
+            switch (resource.shape)
+            {
+                case ResourceScriptableObject.Shape.None:
+                    // set color
+                    break;
+                case ResourceScriptableObject.Shape.Starburst:
+                    fireworksToSpawn.Add(baseFireworks);
+                    break;
+                case ResourceScriptableObject.Shape.Circle:
+                    fireworksToSpawn.Add(circleFireworks);
+                    break;
+                case ResourceScriptableObject.Shape.Star:
+                    fireworksToSpawn.Add(starFireworks);
+                    break;
+                case ResourceScriptableObject.Shape.Heart:
+                    fireworksToSpawn.Add(heartFireworks);
+                    break;
+                default:
+                    break;
+            }
+        }
+        
+        // go through all fireworksToSpawn and fan out the locations, instantiate all
+        GameObject fireworksClone = Instantiate(circleFireworks, new Vector3(
             0.122f, -3.643f, -5f), Quaternion.Euler(-90f, 0f,0f));
         audioManager.PlayFireworks();
+        
+        fireworksIndex++;
     }
 
     public void SetPerfectZone(bool inPerfectZone)
