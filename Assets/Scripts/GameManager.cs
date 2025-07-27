@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     public List<RecipeScriptableObject> craftedRecipe = new List<RecipeScriptableObject> ();
     public List<List<ResourceScriptableObject>> finishedFireworks = new List<List<ResourceScriptableObject>>();
-    private int score;
+    public int score;
 
     // fireworks mini-game numbers
     public float fireworksTargetSpeed;
