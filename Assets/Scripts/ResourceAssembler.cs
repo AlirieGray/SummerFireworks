@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class ResourceAssembler : MonoBehaviour
@@ -30,8 +31,10 @@ public class ResourceAssembler : MonoBehaviour
     Dictionary<ResourceScriptableObject, ParticleSystem> grindFXDict = new Dictionary<ResourceScriptableObject, ParticleSystem>();
 
     public Material timerMaterial;
+    public float timerMin = 4;
     public float timerMax = 5;
     float timer;
+    float currentMax;
 
     bool isCrafting;
 
@@ -84,7 +87,7 @@ public class ResourceAssembler : MonoBehaviour
             if(timer > 0)
             {
                 timer = Mathf.MoveTowards(timer, 0, Time.fixedDeltaTime);
-                timerMaterial.SetFloat("_progress", (timer / timerMax));
+                timerMaterial.SetFloat("_progress", (timer / currentMax));
             }
             else if(timer == 0)
             {
@@ -122,7 +125,7 @@ public class ResourceAssembler : MonoBehaviour
     void CraftedFirework()
     {
         isCrafting = false;
-        timerMaterial.SetFloat("_progress", 0);
+        timerMaterial.SetFloat("_progress", -0.1f);
 
 
 
@@ -166,7 +169,7 @@ public class ResourceAssembler : MonoBehaviour
             Destroy(line.gameObject);
         }
         linePuzzles.Clear();
-        Invoke("HideLines", 1);
+        //Invoke("HideLines", 1);
     }
 
     //??
@@ -181,8 +184,33 @@ public class ResourceAssembler : MonoBehaviour
             if (!line.solved)
                 TryAddResource(blunder);
         }
-        
         CraftedFirework();
+        StartCoroutine(FailureAnimation());
+    }
+
+    IEnumerator FailureAnimation()
+    {
+        float t = 0;
+        while (t < 1)
+        {
+            foreach (LineRenderer rend in lrs)
+            {
+                //rend.startColor = (Color.red);
+                //rend.endColor = (Color.red);
+                rend.widthMultiplier =  1 - t;
+                for(int i = 0; i < rend.positionCount; i++)
+                {
+                    var randomDir = Random.Range(-Mathf.PI, Mathf.PI) * Mathf.Rad2Deg;
+
+                    Vector3 n = new Vector3(Mathf.Sin(randomDir) * Time.deltaTime * 5, Mathf.Cos(randomDir) * Time.deltaTime * 5, 0);
+                    rend.SetPosition(i, rend.GetPosition(i) + n);
+                }
+            }
+            t += Time.deltaTime;
+            yield return new WaitForSeconds(0);
+        }
+        HideLines();
+        yield return null;
     }
 
     void HideLines()
@@ -204,7 +232,8 @@ public class ResourceAssembler : MonoBehaviour
     void SpawnWires(int lines = 3)
     {
         isCrafting = true;
-        timer = timerMax;
+        timer = Mathf.Lerp(timerMin, timerMax, lines / 5);
+        currentMax = timer;
         float incrimentPerStep = 180.0f / lines;
 
         for(int i = 0; i < lines; i++)
@@ -264,7 +293,8 @@ public class ResourceAssembler : MonoBehaviour
             //pile[i].transform.localScale = Vector3.Lerp(pile[i].transform.localScale, Vector3.one * 1.5f, grindAmount[i]);
             var keys = new List<ResourceScriptableObject>(resDict.Keys);
             if (grindAmount[i] >= 1)
-                pile[i].GetComponent<SpriteRenderer>().sprite = keys[i].groundUpSprite;
+                if(i < pile.Count)
+                    pile[i].GetComponent<SpriteRenderer>().sprite = keys[i].groundUpSprite;
         }
         foreach(ResourceScriptableObject res in resDict.Keys)
         {
@@ -304,8 +334,8 @@ public class ResourceAssembler : MonoBehaviour
         Destroy(n.GetComponent<DraggableResource>());
         Destroy(n.GetComponent<BoxCollider2D>());
         var img = n.GetComponent<SpriteRenderer>();
-        
 
+        n.transform.GetChild(0).gameObject.SetActive(false);
         n.transform.position = transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f),0);
         n.transform.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(-180, 180)));
 

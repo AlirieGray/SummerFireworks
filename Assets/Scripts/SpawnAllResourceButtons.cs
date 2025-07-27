@@ -12,17 +12,33 @@ public class SpawnAllResourceButtons : MonoBehaviour
 
     public List<GameObject> spawnedPrefabs = new List<GameObject>();
 
+
+    private void Update()
+    {
+        var left = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
+        transform.position = new Vector3(Mathf.Max(left.x + (2), -8), transform.position.y, 0);
+        for (int i = 0; i < spawnedPrefabs.Count; i++)
+        {
+            spawnedPrefabs[i].transform.localPosition = startPosition + (new Vector3(cellSize.x * (Mathf.Repeat(i, width)), -cellSize.y * (Mathf.FloorToInt(i / 2))));
+        }
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        int skippedAmount = 0;
         for(int i =0; i < GameManager.manager.resources.Count; i++)
         {
             ResourceScriptableObject res = GameManager.manager.resources[i];
             if (res.name == "Blunder")
+            {
+                skippedAmount++;
                 continue;
+            }
             var n = Instantiate(drawerPrefab);
             n.name = res.name;
-            n.transform.position = startPosition + (new Vector3(cellSize.x * (Mathf.Repeat(i, width)), -cellSize.y * (Mathf.FloorToInt(i / 2))));
+            n.transform.SetParent(transform);
+            n.transform.localPosition = startPosition + (new Vector3(cellSize.x * (Mathf.Repeat(i - skippedAmount, width)), -cellSize.y * (Mathf.FloorToInt((i - skippedAmount) / 2))));
             spawnedPrefabs.Add(n);
 
             n.GetComponent<DraggableResource>().resource = res;
@@ -40,7 +56,8 @@ public class SpawnAllResourceButtons : MonoBehaviour
 
     public void OnDrawGizmos()
     {
-        Gizmos.DrawLine(startPosition - Vector3.right, startPosition + Vector3.right);
-        Gizmos.DrawLine(startPosition - Vector3.up, startPosition + Vector3.up);
+        var local = startPosition + transform.position;
+        Gizmos.DrawLine(local - Vector3.right, local + Vector3.right);
+        Gizmos.DrawLine(local - Vector3.up, local + Vector3.up);
     }
 }

@@ -62,6 +62,7 @@ public class DraggableLine : MonoBehaviour
                 line.SetPosition(2, Vector3.zero);
 
                 solved = true;
+                socket.GetComponent<SpriteRenderer>().enabled = false;
                 ResourceAssembler.instance.CheckCompletion();
             }
 
