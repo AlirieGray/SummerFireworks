@@ -119,67 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &12799512
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 123010127851825113, guid: bb24154f9386c89498050a70aa4c0435, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.015685081
-      objectReference: {fileID: 0}
-    - target: {fileID: 123010127851825113, guid: bb24154f9386c89498050a70aa4c0435, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -5.035156
-      objectReference: {fileID: 0}
-    - target: {fileID: 123010127851825113, guid: bb24154f9386c89498050a70aa4c0435, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.345314
-      objectReference: {fileID: 0}
-    - target: {fileID: 123010127851825113, guid: bb24154f9386c89498050a70aa4c0435, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 123010127851825113, guid: bb24154f9386c89498050a70aa4c0435, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 123010127851825113, guid: bb24154f9386c89498050a70aa4c0435, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 123010127851825113, guid: bb24154f9386c89498050a70aa4c0435, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 123010127851825113, guid: bb24154f9386c89498050a70aa4c0435, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 123010127851825113, guid: bb24154f9386c89498050a70aa4c0435, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 123010127851825113, guid: bb24154f9386c89498050a70aa4c0435, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 475405217821561741, guid: bb24154f9386c89498050a70aa4c0435, type: 3}
-      propertyPath: m_Name
-      value: Fireworks_Heart_Custom Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 2371068059630790568, guid: bb24154f9386c89498050a70aa4c0435, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 25
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: bb24154f9386c89498050a70aa4c0435, type: 3}
 --- !u!1 &15919400
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,7 +181,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.89411765, g: 0.6509804, b: 0.44705883, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -537,7 +476,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 475405217821561741, guid: bb24154f9386c89498050a70aa4c0435, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -614,4 +553,3 @@ SceneRoots:
   - {fileID: 8184514355773628155}
   - {fileID: 3576478326206596182}
   - {fileID: 15919402}
-  - {fileID: 12799512}

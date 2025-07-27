@@ -92,7 +92,8 @@ public class RocketController : MonoBehaviour
             inTutorial = true;
         }
         textHandler.Countdown();
-        StartCoroutine(Countdown());   
+        StartCoroutine(Countdown());
+        SetUpFireworks();
     }
 
     IEnumerator Countdown()
@@ -100,6 +101,11 @@ public class RocketController : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         currentTarget.SetActive(true);
         currentRing.gameObject.SetActive(true);
+    }
+
+    void SetUpFireworks()
+    {
+
     }
 
     void Launch()

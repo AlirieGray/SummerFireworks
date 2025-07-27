@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Placeholder.unity
     guid: 3470e8617491fdb44a5e3e634e038e65
   - enabled: 1
-    path: Assets/Scenes/GatherResources.unity
+    path: Assets/Scenes/MixResources.unity
     guid: 6f0cd33a3a873e046a36bbad0b635f5e
   - enabled: 1
     path: Assets/Scenes/Launch.unity
