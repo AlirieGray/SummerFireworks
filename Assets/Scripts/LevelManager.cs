@@ -14,7 +14,7 @@ public class LevelManager : MonoBehaviour
         // TODO: update with resource collection level
         levelOrder = new List<string>
         {
-            "MainMenu", "GatherResources", "Launch", "Placeholder", "GameOver"
+            "MainMenu", "GatherResources", "Launch", "ResourceGathering", "GameOver"
         };
     }
 
