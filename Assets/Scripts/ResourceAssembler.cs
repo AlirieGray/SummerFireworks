@@ -123,6 +123,9 @@ public class ResourceAssembler : MonoBehaviour
     {
         isCrafting = false;
         timerMaterial.SetFloat("_progress", 0);
+
+
+
         List<ResourceScriptableObject> usedIngredients = new List<ResourceScriptableObject>();
 
         foreach (ResourceScriptableObject res in resDict.Keys)
@@ -171,10 +174,12 @@ public class ResourceAssembler : MonoBehaviour
     {
         //make the lines freak out. maybe turn red?
         //add a Blunder resource
+        Debug.Log("taking too long!");
+        var blunder = Resources.Load<ResourceScriptableObject>("ResourceData/Blunder");
         foreach (DraggableLine line in linePuzzles)
         {
             if (!line.solved)
-                TryAddResource(Resources.Load<ResourceScriptableObject>("ResourceData/Blunder"));
+                TryAddResource(blunder);
         }
         
         CraftedFirework();
@@ -190,7 +195,7 @@ public class ResourceAssembler : MonoBehaviour
 
     public void FinishGrind()
     {
-        if (pile.Count > 0)
+        if (pile.Count > 0 && resDict.ContainsKey(GameManager.manager.resourceNames["VolitileCrystals"]))
             SpawnWires(Mathf.Min(Mathf.Max(3, pile.Count), 5));
         else
             AddResourcePestel.pestel.GetComponent<BoxCollider2D>().enabled = true;

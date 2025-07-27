@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     public static GameManager manager;
 
     public List<ResourceScriptableObject> resources = new List<ResourceScriptableObject>();
+
+    public Dictionary<string, ResourceScriptableObject> resourceNames = new Dictionary<string, ResourceScriptableObject>();
+
     public Dictionary<ResourceScriptableObject, int> resDict = new Dictionary<ResourceScriptableObject, int>();
 
     public List<RecipeScriptableObject> craftedRecipe = new List<RecipeScriptableObject> ();
@@ -20,6 +23,7 @@ public class GameManager : MonoBehaviour
     public void RegisterResource(ResourceScriptableObject res)
     {
         resources.Add(res);
+        resourceNames.Add(res.name, res);
     }
 
     void Awake()
