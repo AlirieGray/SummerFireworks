@@ -217,7 +217,9 @@ public class ResourceAssembler : MonoBehaviour
             var n = Instantiate(linePrefab);
             n.transform.position = position;
             n.SetActive(true);
+
             var l = n.GetComponent<DraggableLine>();
+            l.solved = false;
             l.resourceIconID = i;
             linePuzzles.Add(l);
 
