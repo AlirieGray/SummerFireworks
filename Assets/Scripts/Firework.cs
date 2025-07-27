@@ -7,16 +7,19 @@ public class Firework : MonoBehaviour
     // gets a color and a shape from the Resource object and applies it to the prefab
     public GameObject explosion;
     ParticleSystem ps;
+    private Color explosionColor;
 
     void OnEnable()
     {
         ps = GetComponent<ParticleSystem>();
         StartCoroutine(PlayExplosion());
+        explosionColor = new Color(1, 1, 1f);
     }
 
     public void SetColor(Color color)
     {
-        ps.startColor = color;
+        explosionColor = color;
+        explosion.GetComponent<ParticleSystem>().startColor = explosionColor;
     }
 
     IEnumerator PlayExplosion()

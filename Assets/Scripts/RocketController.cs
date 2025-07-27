@@ -52,6 +52,7 @@ public class RocketController : MonoBehaviour
     void Start()
     {
         fireworksIndex = 0;
+        allFireworks = new List<GameObject>();
         audioManager = FindFirstObjectByType<AudioManager>();
         gameManager = FindFirstObjectByType<GameManager>();
         levelManager = FindFirstObjectByType<LevelManager>();
@@ -104,36 +105,38 @@ public class RocketController : MonoBehaviour
     void Launch()
     {
         textHandler.ResetAll();
-        if (ringInPerfectZone && rocketDirection == targetDirection)
+        if (fireworksIndex < gameManager.GetFinishedFireworks().Count)
         {
-            perfectText.DisplayWithShrink();
-            gameManager.IncreaseScore(perfectScoreValue);
-            textHandler.UpdateScore(gameManager.GetScore());
+            if (ringInPerfectZone && rocketDirection == targetDirection)
+            {
+                perfectText.DisplayWithShrink();
+                gameManager.IncreaseScore(perfectScoreValue);
+                textHandler.UpdateScore(gameManager.GetScore());
 
-            // create dazzling particle effect
-            SpawnFireworks();
-        }
-        else if (ringInOkZone && rocketDirection == targetDirection) {
-            okText.DisplayWithShrink();
-            gameManager.IncreaseScore(okScoreValue);
-            textHandler.UpdateScore(gameManager.GetScore());
+                // create dazzling particle effect
+                SpawnFireworks();
+            }
+            else if (ringInOkZone && rocketDirection == targetDirection) {
+                okText.DisplayWithShrink();
+                gameManager.IncreaseScore(okScoreValue);
+                textHandler.UpdateScore(gameManager.GetScore());
 
-            // create nice particle effect
-            SpawnFireworks();
-        } else
-        {
-            missText.DisplayWithShake();
-            // create mediocre particle effect
-        }
-        ringInOkZone = false;
-        ringInPerfectZone = false;
+                // create nice particle effect
+                SpawnFireworks();
+            } else
+            {
+                missText.DisplayWithShake();
+                // create mediocre particle effect
+            }
+            ringInOkZone = false;
+            ringInPerfectZone = false;
 
-        if (fireworksIndex > gameManager.GetFinishedFireworks().Count - 1) {
-            EndLevel();
-        } else
-        {
             SpawnNewRingAndTarget();
+        } else
+        {
+            EndLevel();
         }
+
     }
 
     void EndLevel()
@@ -144,6 +147,8 @@ public class RocketController : MonoBehaviour
         {
 
         }
+
+        levelManager.LoadNextLevel();
     }
 
     void HandleRotateRight()
@@ -230,7 +235,7 @@ public class RocketController : MonoBehaviour
         // instantiate
         List<ResourceScriptableObject> resources = gameManager.GetFinishedFireworks()[fireworksIndex];
         List<GameObject> fireworksToSpawn = new List<GameObject>();
-        int spawnIndex;
+        int spawnIndex = 0;
 
         foreach (ResourceScriptableObject resource in resources) {
             // go through all the resource 
@@ -240,27 +245,55 @@ public class RocketController : MonoBehaviour
             {
                 case ResourceScriptableObject.Shape.None:
                     // set color
+                    // TODO: MIX COLORS
+                    if (fireworksToSpawn.Count == 0)
+                    {
+                        fireworksToSpawn.Add(baseFireworks);
+                        //fireworksToSpawn[spawnIndex].GetComponent<Firework>().SetColor(resource.color);
+                    }
+                    fireworksToSpawn[spawnIndex].GetComponent<Firework>().SetColor(resource.color);
                     break;
                 case ResourceScriptableObject.Shape.Starburst:
+                    if (fireworksToSpawn.Count > 0)
+                    {
+                        spawnIndex++;
+                    }
                     fireworksToSpawn.Add(baseFireworks);
                     break;
                 case ResourceScriptableObject.Shape.Circle:
+                    if (fireworksToSpawn.Count > 0)
+                    {
+                        spawnIndex++;
+                    }
                     fireworksToSpawn.Add(circleFireworks);
                     break;
                 case ResourceScriptableObject.Shape.Star:
+                    Debug.Log("got star!");
+                    if (fireworksToSpawn.Count > 0)
+                    {
+                        spawnIndex++;
+                    }
                     fireworksToSpawn.Add(starFireworks);
                     break;
                 case ResourceScriptableObject.Shape.Heart:
+                    if (fireworksToSpawn.Count > 0)
+                    {
+                        spawnIndex++;
+                    }
                     fireworksToSpawn.Add(heartFireworks);
                     break;
                 default:
                     break;
             }
         }
-        
+
         // go through all fireworksToSpawn and fan out the locations, instantiate all
-        GameObject fireworksClone = Instantiate(circleFireworks, new Vector3(
-            0.122f, -3.643f, -5f), Quaternion.Euler(-90f, 0f,0f));
+        foreach (GameObject firework in fireworksToSpawn) {
+            GameObject fireworksClone = Instantiate(firework, new Vector3(
+                0.122f, -3.643f, -.5f), Quaternion.Euler(-90f, 0f,0f));
+            allFireworks.Add(firework);
+        
+        }
         audioManager.PlayFireworks();
         
         fireworksIndex++;

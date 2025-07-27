@@ -48,8 +48,10 @@ public class GameManager : MonoBehaviour
             RegisterResource(res);
         }
 
-        // testing only
-        finishedFireworks.Add(new List<ResourceScriptableObject>() { resources[0] });
+        // TODO: testing only
+        // remove for production
+        finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Starfruit"], resourceNames["Dragonscale"] });
+        finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Heart"], resourceNames["Blue"] });
     }
 
     public void IncreaseScore(int value)
