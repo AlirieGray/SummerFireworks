@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class ResourceAssembler : MonoBehaviour
@@ -28,6 +29,14 @@ public class ResourceAssembler : MonoBehaviour
     public ParticleSystem ps;
     List<ParticleSystem> grindStonePS = new List<ParticleSystem>();
     Dictionary<ResourceScriptableObject, ParticleSystem> grindFXDict = new Dictionary<ResourceScriptableObject, ParticleSystem>();
+
+    public Material timerMaterial;
+    public float timerMin = 4;
+    public float timerMax = 5;
+    float timer;
+    float currentMax;
+
+    bool isCrafting;
 
     void Awake()
     {
@@ -71,6 +80,28 @@ public class ResourceAssembler : MonoBehaviour
         fullscreenFadeMat.SetFloat("_alpha", Mathf.MoveTowards(fullscreenFadeMat.GetFloat("_alpha"), 0, Time.deltaTime));
     }
 
+    private void FixedUpdate()
+    {
+        if (isCrafting)
+        {
+            if(timer > 0)
+            {
+                timer = Mathf.MoveTowards(timer, 0, Time.fixedDeltaTime);
+                timerMaterial.SetFloat("_progress", (timer / currentMax));
+            }
+            else if(timer == 0)
+            {
+                timerMaterial.SetFloat("_progress", -0.1f);
+                YourTakingTooLong();
+            }
+        }
+    }
+
+    private void OnDestroy()
+    {
+        timerMaterial.SetFloat("_progress", -0.1f);
+    }
+
     private void OnGUI()
     {
         var aspectRatio = Screen.width / Screen.height;
@@ -88,22 +119,35 @@ public class ResourceAssembler : MonoBehaviour
         }
         //check recipe here
 
+        CraftedFirework();
+    }
+
+    void CraftedFirework()
+    {
+        isCrafting = false;
+        timerMaterial.SetFloat("_progress", -0.1f);
+
+
+
         List<ResourceScriptableObject> usedIngredients = new List<ResourceScriptableObject>();
 
-        foreach(ResourceScriptableObject res in resDict.Keys)
+        foreach (ResourceScriptableObject res in resDict.Keys)
         {
-            for(int i = 0; i < resDict[res]; i++)
+            for (int i = 0; i < resDict[res]; i++)
             {
                 usedIngredients.Add(res);
             }
         }
+
+        AddResourcePestel.pestel.GetComponent<BoxCollider2D>().enabled = true;
+
         Debug.Log("finished a firework with " + usedIngredients.Count + " resources in it");
         DisplayCompletedFireworks.instance.AddNewFirework(usedIngredients);
 
         //clear
         resDict.Clear();
         grindAmount.Clear();
-        foreach(GameObject go in pile)
+        foreach (GameObject go in pile)
         {
             Destroy(go);
         }
@@ -111,7 +155,7 @@ public class ResourceAssembler : MonoBehaviour
 
         fullscreenFadeMat.SetFloat("_alpha", 1);
 
-        for(int i = 0; i < linePuzzles.Count; i++)
+        for (int i = 0; i < linePuzzles.Count; i++)
         {
             DraggableLine line = linePuzzles[i];
             lrs[i].gameObject.SetActive(true);
@@ -125,7 +169,48 @@ public class ResourceAssembler : MonoBehaviour
             Destroy(line.gameObject);
         }
         linePuzzles.Clear();
-        Invoke("HideLines", 1);
+        //Invoke("HideLines", 1);
+    }
+
+    //??
+    void YourTakingTooLong()
+    {
+        //make the lines freak out. maybe turn red?
+        //add a Blunder resource
+        Debug.Log("taking too long!");
+        var blunder = Resources.Load<ResourceScriptableObject>("ResourceData/Blunder");
+        foreach (DraggableLine line in linePuzzles)
+        {
+            if (!line.solved)
+                TryAddResource(blunder);
+        }
+        CraftedFirework();
+        StartCoroutine(FailureAnimation());
+    }
+
+    IEnumerator FailureAnimation()
+    {
+        float t = 0;
+        while (t < 1)
+        {
+            foreach (LineRenderer rend in lrs)
+            {
+                //rend.startColor = (Color.red);
+                //rend.endColor = (Color.red);
+                rend.widthMultiplier =  1 - t;
+                for(int i = 0; i < rend.positionCount; i++)
+                {
+                    var randomDir = Random.Range(-Mathf.PI, Mathf.PI) * Mathf.Rad2Deg;
+
+                    Vector3 n = new Vector3(Mathf.Sin(randomDir) * Time.deltaTime * 5, Mathf.Cos(randomDir) * Time.deltaTime * 5, 0);
+                    rend.SetPosition(i, rend.GetPosition(i) + n);
+                }
+            }
+            t += Time.deltaTime;
+            yield return new WaitForSeconds(0);
+        }
+        HideLines();
+        yield return null;
     }
 
     void HideLines()
@@ -136,18 +221,19 @@ public class ResourceAssembler : MonoBehaviour
         }
     }
 
-    private void OnMouseOver()
+    public void FinishGrind()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            //craft
-            if(pile.Count > 0)
-                SpawnWires(Mathf.Min(Mathf.Max(3, pile.Count), 5));
-        }
+        if (pile.Count > 0 && resDict.ContainsKey(GameManager.manager.resourceNames["VolitileCrystals"]))
+            SpawnWires(Mathf.Min(Mathf.Max(3, pile.Count), 5));
+        else
+            AddResourcePestel.pestel.GetComponent<BoxCollider2D>().enabled = true;
     }
 
     void SpawnWires(int lines = 3)
     {
+        isCrafting = true;
+        timer = Mathf.Lerp(timerMin, timerMax, lines / 5);
+        currentMax = timer;
         float incrimentPerStep = 180.0f / lines;
 
         for(int i = 0; i < lines; i++)
@@ -160,7 +246,9 @@ public class ResourceAssembler : MonoBehaviour
             var n = Instantiate(linePrefab);
             n.transform.position = position;
             n.SetActive(true);
+
             var l = n.GetComponent<DraggableLine>();
+            l.solved = false;
             l.resourceIconID = i;
             linePuzzles.Add(l);
 
@@ -200,10 +288,13 @@ public class ResourceAssembler : MonoBehaviour
         for(int i = 0; i < grindAmount.Count; i++)
         {
             var f = grindAmount[i];
-            grindAmount[i] = Mathf.MoveTowards(f, 1, Time.fixedDeltaTime * 0.1f);
-            pile[i].transform.localPosition = Vector3.Lerp(pile[i].transform.localPosition, Vector3.zero, grindAmount[i]);
-            pile[i].transform.localScale = Vector3.Lerp(pile[i].transform.localScale, Vector3.one * 1.5f, grindAmount[i]);
-
+            grindAmount[i] = Mathf.MoveTowards(f, 1, Time.fixedDeltaTime * Random.Range(1f, 2f));
+            //pile[i].transform.localPosition = Vector3.Lerp(pile[i].transform.localPosition, Vector3.zero, grindAmount[i]);
+            //pile[i].transform.localScale = Vector3.Lerp(pile[i].transform.localScale, Vector3.one * 1.5f, grindAmount[i]);
+            var keys = new List<ResourceScriptableObject>(resDict.Keys);
+            if (grindAmount[i] >= 1)
+                if(i < pile.Count)
+                    pile[i].GetComponent<SpriteRenderer>().sprite = keys[i].groundUpSprite;
         }
         foreach(ResourceScriptableObject res in resDict.Keys)
         {
@@ -243,8 +334,8 @@ public class ResourceAssembler : MonoBehaviour
         Destroy(n.GetComponent<DraggableResource>());
         Destroy(n.GetComponent<BoxCollider2D>());
         var img = n.GetComponent<SpriteRenderer>();
-        
 
+        n.transform.GetChild(0).gameObject.SetActive(false);
         n.transform.position = transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f),0);
         n.transform.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(-180, 180)));
 

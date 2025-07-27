@@ -21,8 +21,9 @@ public class DisplayCompletedFireworks : MonoBehaviour
     public void AddNewFirework(List<ResourceScriptableObject> newList)
     {
         fireworksDisplayed.Add(newList);
-        var n = Instantiate(prefab);
+        var n = Instantiate(prefab, new Vector3(transform.position.x, 3.5f, 0), Quaternion.identity);
         n.transform.SetParent(mostRecentObject);
+        
         n.transform.SetAsFirstSibling();
         if (mostRecentObject != transform)
         {

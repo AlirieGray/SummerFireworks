@@ -3,8 +3,10 @@ using UnityEngine;
 public class ResourceScriptableObject : ScriptableObject
 {
     public Sprite overrideSprite;
+    public Sprite groundUpSprite;
     public Color color;
 
+    public GameObject shapePrefab;
     public Shape shape;
 
     public enum Shape

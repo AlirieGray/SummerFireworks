@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: VolitileCrystals
   m_EditorClassIdentifier: 
   overrideSprite: {fileID: -7248506988745690217, guid: f00fded0e587ce847adcbe512843d793, type: 3}
-  color: {r: 0.9963192, g: 1, b: 0, a: 1}
+  groundUpSprite: {fileID: -3858140932570960970, guid: fd3198b31aaf7fc47bd6321eda804bcb, type: 3}
+  color: {r: 1, g: 1, b: 1, a: 1}
+  shapePrefab: {fileID: 0}
   shape: 0

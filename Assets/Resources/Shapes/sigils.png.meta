@@ -1,76 +1,28 @@
 fileFormatVersion: 2
-guid: fd3198b31aaf7fc47bd6321eda804bcb
+guid: 1996d9a59d8956c4999873c41c53a14b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3858140932570960970
-    second: resources_mortar_and_pestel_0
+      213: 1948623651283584673
+    second: sigils_0
   - first:
-      213: -3698917706961264141
-    second: resources_mortar_and_pestel_1
+      213: -7200969277081107461
+    second: sigils_1
   - first:
-      213: 9104774149232078733
-    second: resources_mortar_and_pestel_2
+      213: 215161982914159982
+    second: sigils_2
   - first:
-      213: 7560791920445871238
-    second: resources_mortar_and_pestel_3
+      213: 1395571570230715526
+    second: sigils_3
   - first:
-      213: 5481479947892316820
-    second: resources_mortar_and_pestel_4
+      213: 1595493281074779055
+    second: sigils_4
   - first:
-      213: -3248058062805400589
-    second: resources_mortar_and_pestel_5
+      213: -4366764842387535485
+    second: sigils_5
   - first:
-      213: -5099745367647658857
-    second: resources_mortar_and_pestel_6
-  - first:
-      213: 4219805481407353840
-    second: resources_mortar_and_pestel_7
-  - first:
-      213: -5811205687855173882
-    second: resources_mortar_and_pestel_8
-  - first:
-      213: -4663730781625961797
-    second: resources_mortar_and_pestel_9
-  - first:
-      213: 223891943253928757
-    second: resources_mortar_and_pestel_10
-  - first:
-      213: 1700332676863995893
-    second: resources_mortar_and_pestel_11
-  - first:
-      213: -5376532388635856930
-    second: resources_mortar_and_pestel_12
-  - first:
-      213: 8418992037789402578
-    second: resources_mortar_and_pestel_13
-  - first:
-      213: -6792812164569498503
-    second: resources_mortar_and_pestel_14
-  - first:
-      213: -8324810319321202664
-    second: resources_mortar_and_pestel_15
-  - first:
-      213: 168853466454571589
-    second: resources_mortar_and_pestel_16
-  - first:
-      213: -1655828565097328268
-    second: resources_mortar_and_pestel_17
-  - first:
-      213: -3016439496701625097
-    second: resources_mortar_and_pestel_18
-  - first:
-      213: 5828545659113499513
-    second: resources_mortar_and_pestel_19
-  - first:
-      213: 1010189314244858
-    second: resources_mortar_and_pestel_20
-  - first:
-      213: -7773452724431306512
-    second: resources_mortar_and_pestel_21
-  - first:
-      213: 5780862042851239070
-    second: resources_mortar_and_pestel_22
+      213: -6001989384513230795
+    second: sigils_6
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -166,13 +118,79 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: resources_mortar_and_pestel_0
+      name: sigils_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a6cea7f2e6ea0b10800000000000000
+      internalID: 1948623651283584673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sigils_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf344194894011c90800000000000000
+      internalID: -7200969277081107461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sigils_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6564c8fea86cf200800000000000000
+      internalID: 215161982914159982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sigils_3
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,20 +199,42 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6bba6bc5341257ac0800000000000000
-      internalID: -3858140932570960970
+      spriteID: 6846c36f2f01e5310800000000000000
+      internalID: 1395571570230715526
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: resources_mortar_and_pestel_1
+      name: sigils_4
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa31cf39fa4542610800000000000000
+      internalID: 1595493281074779055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sigils_5
       rect:
         serializedVersion: 2
         x: 32
         y: 0
-        width: 32
-        height: 32
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,118 +243,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3f1eb2771fdcaacc0800000000000000
-      internalID: -3698917706961264141
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: resources_mortar_and_pestel_2
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d8f232d79d7aa5e70800000000000000
-      internalID: 9104774149232078733
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: resources_mortar_and_pestel_3
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 684d1de51345de860800000000000000
-      internalID: 7560791920445871238
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: resources_mortar_and_pestel_4
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 49a5c8178f0221c40800000000000000
-      internalID: 5481479947892316820
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: resources_mortar_and_pestel_5
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3f304ac96649ce2d0800000000000000
-      internalID: -3248058062805400589
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: resources_mortar_and_pestel_6
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 79cda649b901a39b0800000000000000
-      internalID: -5099745367647658857
+      spriteID: 38983df03822663c0800000000000000
+      internalID: -4366764842387535485
       vertices: []
       indices: 
       edges: []
@@ -323,7 +253,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 2a664838b26f30841a577fad56daaf7b
+    spriteID: b75a986fc93ab3f45871f483f44f4db6
     internalID: 0
     vertices: []
     indices: 
@@ -333,13 +263,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      resources_mortar_and_pestel_0: -3858140932570960970
-      resources_mortar_and_pestel_1: -3698917706961264141
-      resources_mortar_and_pestel_2: 9104774149232078733
-      resources_mortar_and_pestel_3: 7560791920445871238
-      resources_mortar_and_pestel_4: 5481479947892316820
-      resources_mortar_and_pestel_5: -3248058062805400589
-      resources_mortar_and_pestel_6: -5099745367647658857
+      sigils_0: 1948623651283584673
+      sigils_1: -7200969277081107461
+      sigils_2: 215161982914159982
+      sigils_3: 1395571570230715526
+      sigils_4: 1595493281074779055
+      sigils_5: -4366764842387535485
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

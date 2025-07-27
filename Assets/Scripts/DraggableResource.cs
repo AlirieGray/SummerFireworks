@@ -20,6 +20,7 @@ public class DraggableResource : MonoBehaviour
         Destroy(n.GetComponent<DraggableResource>());
         Destroy(n.GetComponent<BoxCollider2D>());
         ghost = n.GetComponent<SpriteRenderer>();
+        ghost.transform.GetChild(0).gameObject.SetActive(false);
         ghost.color = new Color(ghost.color.r, ghost.color.g, ghost.color.b, ghost.color.a / 2.0f);
         ghost.sortingOrder = 99;
         ghost.gameObject.SetActive(false);

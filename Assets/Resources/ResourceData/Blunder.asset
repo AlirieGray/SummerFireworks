@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86173850eb5828047a3029c7bf3325e9, type: 3}
-  m_Name: Dragonscale
+  m_Name: Blunder
   m_EditorClassIdentifier: 
-  overrideSprite: {fileID: -7742461276724822292, guid: f00fded0e587ce847adcbe512843d793, type: 3}
-  groundUpSprite: {fileID: 9104774149232078733, guid: fd3198b31aaf7fc47bd6321eda804bcb, type: 3}
-  color: {r: 0.9963192, g: 0, b: 0, a: 1}
+  overrideSprite: {fileID: -6966025625861418725, guid: c333c097b6eda6e49a47b696fbc28982, type: 3}
+  groundUpSprite: {fileID: -3698917706961264141, guid: fd3198b31aaf7fc47bd6321eda804bcb, type: 3}
+  color: {r: 0, g: 0, b: 0, a: 1}
   shapePrefab: {fileID: 0}
   shape: 0

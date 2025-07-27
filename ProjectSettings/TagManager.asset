@@ -46,5 +46,11 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 3499570135
+    locked: 0
+  - name: Sprites
+    uniqueID: 1402919349
+    locked: 0
   m_RenderingLayers:
   - Default
