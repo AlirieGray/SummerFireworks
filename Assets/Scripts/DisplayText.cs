@@ -22,7 +22,7 @@ public class DisplayText : MonoBehaviour
 
     public void DisplayWithShake()
     {
-        textMP.color = new Color(1, 1, 1, 1);
+        textMP.color = new Color(1, 0, 0, 1);
         StartCoroutine(Shake());
     }
 

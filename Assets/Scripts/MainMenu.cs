@@ -10,6 +10,12 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
+        gameObject.SetActive(false);
+        levelManager.LoadNextLevel();
+    }
+
+    public void GetNextLevel()
+    {
         levelManager.LoadNextLevel();
     }
 

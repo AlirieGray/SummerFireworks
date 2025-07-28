@@ -75,10 +75,10 @@ public class RocketController : MonoBehaviour
         perfectText = perfectGO.GetComponent<DisplayText>();
         okText = okGO.GetComponent<DisplayText>();
         missText = missGO.GetComponent<DisplayText>();
-        targetDirection = Direction.Right;
-        leftLocation = new Vector3(-5.72f, 1.72f, -.3f);
-        centerLocation = new Vector3(0, 1.72f, -.3f);
-        rightLocation = new Vector3(5.72f, 1.72f, -.3f);
+        targetDirection = Direction.Center;
+        leftLocation = new Vector3(-5.72f, 0.05f, -.3f);
+        centerLocation = new Vector3(0, 0.05f, -.3f);
+        rightLocation = new Vector3(5.72f, 0.05f, -.3f);
         ringCenter = rightLocation;
         inTutorial = false;
         StartLevel();
@@ -93,7 +93,6 @@ public class RocketController : MonoBehaviour
         }
         textHandler.Countdown();
         StartCoroutine(Countdown());
-        SetUpFireworks();
     }
 
     IEnumerator Countdown()
@@ -101,11 +100,6 @@ public class RocketController : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         currentTarget.SetActive(true);
         currentRing.gameObject.SetActive(true);
-    }
-
-    void SetUpFireworks()
-    {
-
     }
 
     void Launch()
@@ -138,22 +132,21 @@ public class RocketController : MonoBehaviour
             ringInPerfectZone = false;
 
             SpawnNewRingAndTarget();
-        } else
-        {
-            EndLevel();
-        }
+        } 
 
     }
 
-    void EndLevel()
+    IEnumerator EndLevel()
     {
-        // show little display of everything!
-        // then go to resource gathering level
+        float delay = 0.3f;
+        yield return new WaitForSeconds(0.5f);
         foreach (GameObject fireworks in allFireworks)
         {
-
+            Instantiate(fireworks, new Vector3(0f, -3.643f, -.5f), Quaternion.Euler(-90f, 0f, 0f));
+            yield return new WaitForSeconds(delay);
         }
 
+        yield return new WaitForSeconds(1f);
         levelManager.LoadNextLevel();
     }
 
@@ -197,31 +190,56 @@ public class RocketController : MonoBehaviour
         DestroyRingAndTarget();
         int r = Random.Range(0, 2);
         GameObject ringGO;
+        Vector3 locationToSpawn;
         switch (r)
         {
             case 0:
-                targetDirection = Direction.Left;
-                currentTarget = Instantiate(targetPrefab, leftLocation, Quaternion.identity);
+                if (targetDirection == Direction.Left)
+                {
+                    targetDirection = Direction.Center;
+                    locationToSpawn = centerLocation;
+                } else
+                {
+                    targetDirection = Direction.Left;
+                    locationToSpawn = leftLocation;
+                }
+                currentTarget = Instantiate(targetPrefab, locationToSpawn, Quaternion.identity);
                 ringGO = Instantiate(ringPrefab, 
-                    new Vector3(leftLocation.x, leftLocation.y, -1f), Quaternion.identity);
+                    new Vector3(locationToSpawn.x, locationToSpawn.y, -.4f), Quaternion.identity);
                 
-                ringCenter = leftLocation;
+                ringCenter = locationToSpawn;
                 currentRing = ringGO.GetComponent<RingController>();
                 break;
             case 1:
-                targetDirection = Direction.Center;
-                currentTarget = Instantiate(targetPrefab, centerLocation, Quaternion.identity);
+                if (targetDirection == Direction.Center)
+                {
+                    targetDirection = Direction.Left;
+                    locationToSpawn = leftLocation;
+                } else
+                {
+                    targetDirection = Direction.Center;
+                    locationToSpawn = centerLocation;
+                }
+                    currentTarget = Instantiate(targetPrefab, locationToSpawn, Quaternion.identity);
                 ringGO = Instantiate(ringPrefab,
-                    new Vector3(centerLocation.x, centerLocation.y, -1f), Quaternion.identity);
-                ringCenter = centerLocation;
+                    new Vector3(locationToSpawn.x, locationToSpawn.y, -.4f), Quaternion.identity);
+                ringCenter = locationToSpawn;
                 currentRing = ringGO.GetComponent<RingController>();
                 break;
             case 2:
-                targetDirection = Direction.Right;
-                currentTarget = Instantiate(targetPrefab, rightLocation, Quaternion.identity);
+                if (targetDirection == Direction.Right)
+                {
+                    targetDirection = Direction.Left;
+                    locationToSpawn = leftLocation;
+                } else
+                {
+                    targetDirection = Direction.Right;
+                    locationToSpawn = rightLocation;
+                }
+                currentTarget = Instantiate(targetPrefab, locationToSpawn, Quaternion.identity);
                 ringGO = Instantiate(ringPrefab, 
-                    new Vector3(rightLocation.x, rightLocation.y, -1f), Quaternion.identity);
-                ringCenter = rightLocation;
+                    new Vector3(locationToSpawn.x, locationToSpawn.y, -.4f), Quaternion.identity);
+                ringCenter = locationToSpawn;
                 currentRing = ringGO.GetComponent<RingController>();
                 break;
         }
@@ -231,22 +249,21 @@ public class RocketController : MonoBehaviour
     {
         Destroy(currentRing.gameObject);
         Destroy(currentTarget.gameObject);
+
+        if (fireworksIndex >= gameManager.GetFinishedFireworks().Count)
+        {
+            StartCoroutine(EndLevel());
+        }
     }
 
     void SpawnFireworks()
     {
-        // move currentFirework index
-        // if not at the end then get the next prefab
-        // set the color and move the index
-        // instantiate
         List<ResourceScriptableObject> resources = gameManager.GetFinishedFireworks()[fireworksIndex];
+        fireworksIndex++;
         List<GameObject> fireworksToSpawn = new List<GameObject>();
         int spawnIndex = 0;
 
         foreach (ResourceScriptableObject resource in resources) {
-            // go through all the resource 
-            // if it's a shape, add a new prefab and increment spawnIndex
-            // if a color, mix colors and add to prefab
             switch (resource.shape)
             {
                 case ResourceScriptableObject.Shape.None:
@@ -274,7 +291,6 @@ public class RocketController : MonoBehaviour
                     fireworksToSpawn.Add(circleFireworks);
                     break;
                 case ResourceScriptableObject.Shape.Star:
-                    Debug.Log("got star!");
                     if (fireworksToSpawn.Count > 0)
                     {
                         spawnIndex++;
@@ -296,13 +312,11 @@ public class RocketController : MonoBehaviour
         // go through all fireworksToSpawn and fan out the locations, instantiate all
         foreach (GameObject firework in fireworksToSpawn) {
             GameObject fireworksClone = Instantiate(firework, new Vector3(
-                0.122f, -3.643f, -.5f), Quaternion.Euler(-90f, 0f,0f));
+                0f, -3.643f, -.5f), Quaternion.Euler(-90f, 0f,0f));
             allFireworks.Add(firework);
         
         }
         audioManager.PlayFireworks();
-        
-        fireworksIndex++;
     }
 
     public void SetPerfectZone(bool inPerfectZone)

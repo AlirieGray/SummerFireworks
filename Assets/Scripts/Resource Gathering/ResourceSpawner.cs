@@ -31,7 +31,7 @@ public class ResourceSpawner : MonoBehaviour
             SpawnResource(rolledResource);
         }
 
-        SpawnResource(GameManager.manager.resourceNames["VolitileCrystals"]);
+        SpawnResource(GameManager.manager.resourceNames["VolatileCrystals"]);
     }
 
     void SpawnResource(ResourceScriptableObject res)

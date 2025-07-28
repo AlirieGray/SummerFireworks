@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public List<ResourceScriptableObject> gatheredResources = new List<ResourceScriptableObject>();
 
     // fireworks mini-game numbers
-    public float fireworksTargetSpeed;
+    private float fireworksTargetSpeed;
 
     public void RegisterResource(ResourceScriptableObject res)
     {
@@ -50,13 +50,31 @@ public class GameManager : MonoBehaviour
 
         // TODO: testing only
         // remove for production
-        finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Starfruit"], resourceNames["Dragonscale"] });
+        finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Orb"], resourceNames["Dragonscale"], resourceNames["Yellow"] });
         finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Heart"], resourceNames["Blue"] });
+        finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Starfruit"], resourceNames["Yellow"] });
+        finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Orb"], resourceNames["Dragonscale"] });
+        finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Heart"], resourceNames["Blue"] });
+        finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Starfruit"], resourceNames["Yellow"] });
     }
 
     public void IncreaseScore(int value)
     {
         score += value;
+    }
+
+    public float GetFireworksSpeed()
+    {
+        if (fireworksTargetSpeed == 0)
+        {
+            fireworksTargetSpeed = 0.1f;
+        }
+        return fireworksTargetSpeed;
+    }
+
+    public void SetFireworksSpeed(float value)
+    {
+        fireworksTargetSpeed = value;
     }
 
     public int GetScore()
