@@ -259,6 +259,7 @@ public class RocketController : MonoBehaviour
     void SpawnFireworks()
     {
         List<ResourceScriptableObject> resources = gameManager.GetFinishedFireworks()[fireworksIndex];
+        fireworksIndex++;
         List<GameObject> fireworksToSpawn = new List<GameObject>();
         int spawnIndex = 0;
 
@@ -316,8 +317,6 @@ public class RocketController : MonoBehaviour
         
         }
         audioManager.PlayFireworks();
-        
-        fireworksIndex++;
     }
 
     public void SetPerfectZone(bool inPerfectZone)
