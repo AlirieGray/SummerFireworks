@@ -50,8 +50,9 @@ public class GameManager : MonoBehaviour
 
         // TODO: testing only
         // remove for production
-        finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Starfruit"], resourceNames["Dragonscale"] });
+        finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Orb"], resourceNames["Dragonscale"] });
         finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Heart"], resourceNames["Blue"] });
+        finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Starfruit"], resourceNames["Yellow"] });
     }
 
     public void IncreaseScore(int value)
