@@ -76,9 +76,9 @@ public class RocketController : MonoBehaviour
         okText = okGO.GetComponent<DisplayText>();
         missText = missGO.GetComponent<DisplayText>();
         targetDirection = Direction.Center;
-        leftLocation = new Vector3(-5.72f, 0.78f, -.3f);
-        centerLocation = new Vector3(0, 0.78f, -.3f);
-        rightLocation = new Vector3(5.72f, 0.78f, -.3f);
+        leftLocation = new Vector3(-5.72f, 0.05f, -.3f);
+        centerLocation = new Vector3(0, 0.05f, -.3f);
+        rightLocation = new Vector3(5.72f, 0.05f, -.3f);
         ringCenter = rightLocation;
         inTutorial = false;
         StartLevel();
@@ -206,7 +206,7 @@ public class RocketController : MonoBehaviour
                 }
                 currentTarget = Instantiate(targetPrefab, locationToSpawn, Quaternion.identity);
                 ringGO = Instantiate(ringPrefab, 
-                    new Vector3(locationToSpawn.x, locationToSpawn.y, -1f), Quaternion.identity);
+                    new Vector3(locationToSpawn.x, locationToSpawn.y, -.4f), Quaternion.identity);
                 
                 ringCenter = locationToSpawn;
                 currentRing = ringGO.GetComponent<RingController>();
@@ -223,7 +223,7 @@ public class RocketController : MonoBehaviour
                 }
                     currentTarget = Instantiate(targetPrefab, locationToSpawn, Quaternion.identity);
                 ringGO = Instantiate(ringPrefab,
-                    new Vector3(locationToSpawn.x, locationToSpawn.y, -1f), Quaternion.identity);
+                    new Vector3(locationToSpawn.x, locationToSpawn.y, -.4f), Quaternion.identity);
                 ringCenter = locationToSpawn;
                 currentRing = ringGO.GetComponent<RingController>();
                 break;
@@ -239,7 +239,7 @@ public class RocketController : MonoBehaviour
                 }
                 currentTarget = Instantiate(targetPrefab, locationToSpawn, Quaternion.identity);
                 ringGO = Instantiate(ringPrefab, 
-                    new Vector3(locationToSpawn.x, locationToSpawn.y, -1f), Quaternion.identity);
+                    new Vector3(locationToSpawn.x, locationToSpawn.y, -.4f), Quaternion.identity);
                 ringCenter = locationToSpawn;
                 currentRing = ringGO.GetComponent<RingController>();
                 break;
