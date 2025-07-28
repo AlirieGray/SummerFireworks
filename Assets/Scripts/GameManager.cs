@@ -67,9 +67,14 @@ public class GameManager : MonoBehaviour
     {
         if (fireworksTargetSpeed == 0)
         {
-            fireworksTargetSpeed = 0.03f;
+            fireworksTargetSpeed = 0.1f;
         }
         return fireworksTargetSpeed;
+    }
+
+    public void SetFireworksSpeed(float value)
+    {
+        fireworksTargetSpeed = value;
     }
 
     public int GetScore()

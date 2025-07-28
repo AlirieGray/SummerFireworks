@@ -57,9 +57,9 @@ public class RingController : MonoBehaviour
         while (scale.x > 0)
         {
             Physics2D.OverlapCollider(gameObject.GetComponent<Collider2D>(), overlapping);
-            gameObject.transform.localScale = new Vector3 (scale.x - speed, scale.y - speed, scale.z - speed);
+            gameObject.transform.localScale = new Vector3 (scale.x - 0.03f, scale.y -0.03f, scale.z -0.03f);
             scale = gameObject.transform.localScale;
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(speed);
         }
         rocket.SetPerfectZone(false);
         rocket.SetOkZone(false);

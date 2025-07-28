@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager manager;
+    private GameManager gameManager;
     private int cyclesPlayed;
     private List<string> levelOrder;
     private int currentLevel;
     void Start()
     {
+        gameManager = FindFirstObjectByType<GameManager>();
         if (manager == null)
         {
             manager = this;
@@ -25,7 +27,7 @@ public class LevelManager : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        // TODO: update with resource collection level
+
         levelOrder = new List<string>
         {
             "MainMenu", "MixResources", "Launch", "ResourceGathering", "GameOver"
@@ -40,13 +42,12 @@ public class LevelManager : MonoBehaviour
             
             if (cyclesPlayed == 6)
             {
-                currentLevel = 3;
-                SceneManager.LoadScene("GameOver");
+                StartCoroutine(FadeIn(levelOrder[4]));
             } else
             {
                 currentLevel = 1;
                 AdjustDifficulty();
-                SceneManager.LoadScene("GatherResources");
+                StartCoroutine(FadeIn(levelOrder[currentLevel]));
             }
         } else 
         {
@@ -59,6 +60,7 @@ public class LevelManager : MonoBehaviour
     private void AdjustDifficulty()
     {
         // adjust ring shrinking rate in game manager
+        gameManager.SetFireworksSpeed(gameManager.GetFireworksSpeed() - 0.05f);
     }
 
     public void LoadMainMenu()

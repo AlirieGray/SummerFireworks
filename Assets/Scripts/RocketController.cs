@@ -132,22 +132,21 @@ public class RocketController : MonoBehaviour
             ringInPerfectZone = false;
 
             SpawnNewRingAndTarget();
-        } else
-        {
-            EndLevel();
-        }
+        } 
 
     }
 
-    void EndLevel()
+    IEnumerator EndLevel()
     {
-        // show little display of everything!
-        // then go to resource gathering level
+        float delay = 0.3f;
+        yield return new WaitForSeconds(0.5f);
         foreach (GameObject fireworks in allFireworks)
         {
-
+            Instantiate(fireworks, new Vector3(0f, -3.643f, -.5f), Quaternion.Euler(-90f, 0f, 0f));
+            yield return new WaitForSeconds(delay);
         }
 
+        yield return new WaitForSeconds(1f);
         levelManager.LoadNextLevel();
     }
 
@@ -250,22 +249,20 @@ public class RocketController : MonoBehaviour
     {
         Destroy(currentRing.gameObject);
         Destroy(currentTarget.gameObject);
+
+        if (fireworksIndex >= gameManager.GetFinishedFireworks().Count)
+        {
+            StartCoroutine(EndLevel());
+        }
     }
 
     void SpawnFireworks()
     {
-        // move currentFirework index
-        // if not at the end then get the next prefab
-        // set the color and move the index
-        // instantiate
         List<ResourceScriptableObject> resources = gameManager.GetFinishedFireworks()[fireworksIndex];
         List<GameObject> fireworksToSpawn = new List<GameObject>();
         int spawnIndex = 0;
 
         foreach (ResourceScriptableObject resource in resources) {
-            // go through all the resource 
-            // if it's a shape, add a new prefab and increment spawnIndex
-            // if a color, mix colors and add to prefab
             switch (resource.shape)
             {
                 case ResourceScriptableObject.Shape.None:
@@ -293,7 +290,6 @@ public class RocketController : MonoBehaviour
                     fireworksToSpawn.Add(circleFireworks);
                     break;
                 case ResourceScriptableObject.Shape.Star:
-                    Debug.Log("got star!");
                     if (fireworksToSpawn.Count > 0)
                     {
                         spawnIndex++;
