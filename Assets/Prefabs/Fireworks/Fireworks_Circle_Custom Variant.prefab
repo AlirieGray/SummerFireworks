@@ -200,7 +200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22708742530936630, guid: ebf1932ea511b7e45aa207818a4fb373, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22708742530936630, guid: ebf1932ea511b7e45aa207818a4fb373, type: 3}
       propertyPath: m_LocalPosition.z
@@ -359,7 +359,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2755132018755002096, guid: c84d795c2fc766e42adfe8f20a978419, type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2755132018755002096, guid: c84d795c2fc766e42adfe8f20a978419, type: 3}
       propertyPath: InitialModule.startColor.maxColor.r

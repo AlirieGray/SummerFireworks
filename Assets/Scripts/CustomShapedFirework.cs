@@ -8,8 +8,11 @@ public class CustomShapedFirework : MonoBehaviour
 
     public List<Transform> childObjects = new List<Transform>();
     private float lifetime;
-    private bool stopEmitting;
 
+    public float speed = 0.1f;
+
+    public bool stopEmitting;
+    bool burst = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void OnEnable()
     {
@@ -29,6 +32,32 @@ public class CustomShapedFirework : MonoBehaviour
 
     private void Update()
     {
+#if UNITY_EDITOR
+        if(!Application.isPlaying)
+            return;
+#endif
+        if (transform.parent.GetComponent<ParticleSystem>())
+        {
+            var rocket = transform.parent.GetComponent<ParticleSystem>();
+            ParticleSystem.Particle[] particles = new ParticleSystem.Particle[1];
+            rocket.GetParticles(particles, 1, 0);
+            if (rocket.particleCount > 0)
+            {
+                transform.localPosition = new Vector3(particles[0].position.x, particles[0].position.y);
+                transform.localScale = particles[0].GetCurrentSize3D(ps);
+                transform.parent.localScale = Vector3.one * 0.2f;
+            }
+            else
+            {
+                if (!burst)
+                {
+                    burst = true;
+                    transform.localScale = Vector3.one;
+                    stopEmitting = false;
+                }
+            }
+        }
+
         if (!stopEmitting) {
             EmitParticle();
         }
@@ -56,8 +85,9 @@ public class CustomShapedFirework : MonoBehaviour
         var lerp = Random.Range(0, 1f);
         ParticleSystem.EmitParams particleParams = new ParticleSystem.EmitParams();
         particleParams.position = Vector3.Lerp(childObjects[pointID].position, childObjects[otherPointID].position, lerp);
-        particleParams.velocity = (particleParams.position - transform.position).normalized * 0.2f;
-
+        var dir = (particleParams.position - transform.position).normalized;
+        dir.z = 0;
+        particleParams.velocity = dir * speed;
         ps.Emit(particleParams, 1);
     }
 
@@ -83,5 +113,12 @@ public class CustomShapedFirework : MonoBehaviour
     {
         yield return new WaitForSeconds(lifetime);
         stopEmitting = true;
+
+
+        while(ps.particleCount > 0)
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+        Destroy(transform.parent.gameObject);
     }
 }
