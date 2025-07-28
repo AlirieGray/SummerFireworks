@@ -218,6 +218,7 @@ public class ResourceAssembler : MonoBehaviour
         for (int i = 0; i < lrs.Count; i++)
         {
             lrs[i].gameObject.SetActive(false);
+            lrs[i].widthMultiplier = 1;
         }
     }
 
