@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public List<ResourceScriptableObject> gatheredResources = new List<ResourceScriptableObject>();
 
     // fireworks mini-game numbers
-    public float fireworksTargetSpeed;
+    private float fireworksTargetSpeed;
 
     public void RegisterResource(ResourceScriptableObject res)
     {
@@ -61,6 +61,15 @@ public class GameManager : MonoBehaviour
     public void IncreaseScore(int value)
     {
         score += value;
+    }
+
+    public float GetFireworksSpeed()
+    {
+        if (fireworksTargetSpeed == 0)
+        {
+            fireworksTargetSpeed = 0.03f;
+        }
+        return fireworksTargetSpeed;
     }
 
     public int GetScore()

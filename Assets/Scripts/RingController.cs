@@ -8,12 +8,16 @@ public class RingController : MonoBehaviour
     private Vector3 scale;
     private List<Collider2D> overlapping;
     private bool missedPerfectZone;
+    private GameManager gameManager;
+    private float speed;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        gameManager = FindFirstObjectByType<GameManager>();
+        speed = gameManager.GetFireworksSpeed();
         overlapping = new List<Collider2D>();
         rocket = FindFirstObjectByType<RocketController>();
-        scale = gameObject.transform.localScale;
+        scale = gameObject.transform.localScale; 
         StartCoroutine(Shrink());
     }
 
@@ -34,13 +38,11 @@ public class RingController : MonoBehaviour
             
                 } else if (overlapping[i].gameObject.CompareTag("InnerTarget"))
                 {
-                    Debug.Log("in perfect zone");
                     rocket.SetPerfectZone(true);
                     rocket.SetOkZone(false);
                     break;
                 } else if (overlapping[i].gameObject.CompareTag("InnerInnerTarget"))
                 {
-                    Debug.Log("MISSED perfect zone");
                     rocket.SetPerfectZone(false);
                     rocket.SetOkZone(false);
                     missedPerfectZone = true;
@@ -55,7 +57,7 @@ public class RingController : MonoBehaviour
         while (scale.x > 0)
         {
             Physics2D.OverlapCollider(gameObject.GetComponent<Collider2D>(), overlapping);
-            gameObject.transform.localScale = new Vector3 (scale.x - 0.03f, scale.y - 0.03f, scale.z - 0.03f);
+            gameObject.transform.localScale = new Vector3 (scale.x - speed, scale.y - speed, scale.z - speed);
             scale = gameObject.transform.localScale;
             yield return new WaitForSeconds(0.1f);
         }

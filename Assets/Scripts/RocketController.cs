@@ -315,7 +315,7 @@ public class RocketController : MonoBehaviour
         // go through all fireworksToSpawn and fan out the locations, instantiate all
         foreach (GameObject firework in fireworksToSpawn) {
             GameObject fireworksClone = Instantiate(firework, new Vector3(
-                0.122f, -3.643f, -.5f), Quaternion.Euler(-90f, 0f,0f));
+                0f, -3.643f, -.5f), Quaternion.Euler(-90f, 0f,0f));
             allFireworks.Add(firework);
         
         }
