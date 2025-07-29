@@ -280,6 +280,7 @@ MonoBehaviour:
   resources: []
   craftedRecipe: []
   score: 0
+  gatheredResources: []
   fireworksTargetSpeed: 0
 --- !u!4 &806166664
 Transform:
