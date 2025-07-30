@@ -18,8 +18,6 @@ public class GameManager : MonoBehaviour
     public List<List<ResourceScriptableObject>> finishedFireworks = new List<List<ResourceScriptableObject>>();
     public int score;
 
-    public List<ResourceScriptableObject> gatheredResources = new List<ResourceScriptableObject>();
-
     // fireworks mini-game numbers
     private float fireworksTargetSpeed;
     public bool playedFireworksTutorial;
@@ -70,9 +68,6 @@ public class GameManager : MonoBehaviour
         finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Orb"], resourceNames["Dragonscale"] });
         finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Heart"], resourceNames["Blue"] });
         finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Starfruit"], resourceNames["Yellow"] });
-
-
-
     }
 
     private void Update()

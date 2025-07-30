@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86173850eb5828047a3029c7bf3325e9, type: 3}
-  m_Name: Starfruit
+  m_Name: Golden Shamrock
   m_EditorClassIdentifier: 
-  overrideSprite: {fileID: 9013548742856534495, guid: f00fded0e587ce847adcbe512843d793, type: 3}
-  groundUpSprite: {fileID: 5481479947892316820, guid: fd3198b31aaf7fc47bd6321eda804bcb, type: 3}
-  color: {r: 0.84618753, g: 1, b: 0.504717, a: 1}
-  shapePrefab: {fileID: 5458727059875755656, guid: 36a4a8c4542dd054c8555fdab4eae111, type: 3}
-  shape: 3
+  overrideSprite: {fileID: 3687651450805901432, guid: f00fded0e587ce847adcbe512843d793, type: 3}
+  groundUpSprite: {fileID: -3698917706961264141, guid: fd3198b31aaf7fc47bd6321eda804bcb, type: 3}
+  color: {r: 1, g: 0.7270566, b: 0.33490568, a: 1}
+  shapePrefab: {fileID: 0}
+  shape: 0
