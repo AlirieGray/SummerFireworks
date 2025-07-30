@@ -17,6 +17,16 @@ public class TextPopup : MonoBehaviour
         textField.text = textDisplayed;
         baseTimeAlive = timeAlive;
         textField.fontSize = fontSize * ((float)timeAlive / (float)baseTimeAlive);
+
+
+        var w = 2.65f;
+        var CameraTopLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0));
+        var CameraBotRight = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height));
+
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, CameraTopLeft.x + w, CameraBotRight.x - w),
+            Mathf.Clamp(transform.position.y, CameraTopLeft.y - w, CameraBotRight.y + w),
+            transform.position.z);
+
     }
 
     private void FixedUpdate()

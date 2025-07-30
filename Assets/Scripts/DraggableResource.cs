@@ -43,7 +43,7 @@ public class DraggableResource : MonoBehaviour
     {
         if (inStock)
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetKeyDown(KeyCode.Mouse0) && inStock)
             {
                 held = true;
                 ghost.gameObject.SetActive(true);

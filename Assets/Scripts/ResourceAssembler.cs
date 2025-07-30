@@ -82,7 +82,7 @@ public class ResourceAssembler : MonoBehaviour
             //add this to the shader of each material grindstone.
         }
         dragLines.Add(dragLine);
-        if (LevelManager.manager.GetCurrentLevel() == 0)
+        if (LevelManager.manager.GetCurrentLevel() <= 1)
         {
             for(int i = 0; i < 4; i++)
             {
@@ -99,7 +99,7 @@ public class ResourceAssembler : MonoBehaviour
     {
         fullscreenFadeMat.SetFloat("_alpha", Mathf.MoveTowards(fullscreenFadeMat.GetFloat("_alpha"), 0, Time.deltaTime));
 
-        if(!hasMadeAFirework && isCrafting && LevelManager.manager.GetCurrentLevel() == 0)
+        if(!hasMadeAFirework && isCrafting && LevelManager.manager.GetCurrentLevel() <= 1)
         {
             timer = timerMax;
             for(int i = 0; i < dragLines.Count; i++)
