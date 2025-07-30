@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b0f06084fef499540b801845f3c3b2c4
+guid: 03b31c780a4963d4e927ed2a112060df
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7779259843028362927
-    second: Cursor_Texture_0
+      213: 7661421218913987501
+    second: Target_tutorial_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -24,7 +24,7 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
     flipGreenChannel: 0
-  isReadable: 1
+  isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -57,7 +57,7 @@ TextureImporter:
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 7
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Cursor_Texture_0
+      name: Target_tutorial_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 16
+        width: 80
+        height: 80
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 15955d893648a0490800000000000000
-      internalID: -7779259843028362927
+      spriteID: dab2204b106d25a60800000000000000
+      internalID: 7661421218913987501
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Cursor_Texture_0: -7779259843028362927
+      Target_tutorial_0: 7661421218913987501
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
