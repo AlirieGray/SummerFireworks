@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
 
     // fireworks mini-game numbers
     private float fireworksTargetSpeed;
+    public bool playedFireworksTutorial;
 
     public void RegisterResource(ResourceScriptableObject res)
     {
@@ -63,6 +64,16 @@ public class GameManager : MonoBehaviour
         score += value;
     }
 
+    public int GetScore()
+    {
+        return score;
+    }
+
+    public void ResetScore()
+    {
+        score = 0;
+    }
+
     public float GetFireworksSpeed()
     {
         if (fireworksTargetSpeed == 0)
@@ -75,11 +86,6 @@ public class GameManager : MonoBehaviour
     public void SetFireworksSpeed(float value)
     {
         fireworksTargetSpeed = value;
-    }
-
-    public int GetScore()
-    {
-        return score;
     }
 
     public void AddFirework(List<ResourceScriptableObject> firework)

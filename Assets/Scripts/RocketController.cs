@@ -82,11 +82,12 @@ public class RocketController : MonoBehaviour
         rightLocation = new Vector3(5.72f, 0.05f, -.3f);
         ringCenter = rightLocation;
         inTutorial = false;
-        if (levelManager.GetCurrentCycle() == 0)
+        if (levelManager.GetCurrentCycle() == 0 && !gameManager.playedFireworksTutorial)
         {
             tutorial = FindFirstObjectByType<TutorialHandler>();
             if (tutorial != null)
             {
+                gameManager.playedFireworksTutorial = true;
                 tutorial.StartTutorial();
             }
             else

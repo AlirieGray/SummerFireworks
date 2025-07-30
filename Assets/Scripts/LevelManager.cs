@@ -63,6 +63,13 @@ public class LevelManager : MonoBehaviour
         gameManager.SetFireworksSpeed(gameManager.GetFireworksSpeed() - 0.05f);
     }
 
+    public void ResetGame()
+    {
+        currentLevel = 0;
+        cyclesPlayed = 0;
+        SceneManager.LoadScene(levelOrder[currentLevel]);
+    }
+
     public void LoadMainMenu()
     {
         currentLevel = 0;
