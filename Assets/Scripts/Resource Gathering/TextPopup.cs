@@ -16,6 +16,7 @@ public class TextPopup : MonoBehaviour
         textField = GetComponent<TextMeshPro>();
         textField.text = textDisplayed;
         baseTimeAlive = timeAlive;
+        textField.fontSize = fontSize * ((float)timeAlive / (float)baseTimeAlive);
     }
 
     private void FixedUpdate()
@@ -23,7 +24,7 @@ public class TextPopup : MonoBehaviour
         if (timeAlive <= 0)
             Destroy(gameObject);
 
-        transform.localScale = Vector3.one * (timeAlive / baseTimeAlive);
+        textField.fontSize = fontSize * ((float)timeAlive / (float)baseTimeAlive);
         timeAlive--;
     }
 }

@@ -10,15 +10,15 @@ public class LootableResource : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            GameManager.manager.gatheredResources.Add(resourceType);
+            GameManager.manager.resDict[resourceType]++;
 
             GameObject textObj = Instantiate(textPrefab, transform.position, Quaternion.identity);
             textObj.transform.parent = null;
 
             TextPopup textScript = textObj.GetComponent<TextPopup>();
-            textScript.textDisplayed = "Collected " + resourceType.name + " x1";
-            textScript.timeAlive = 1000;
-            textScript.fontSize = 1;
+            textScript.textDisplayed = "Collected <color=#" + ColorUtility.ToHtmlStringRGB(resourceType.color) + ">" + resourceType.name + "</color> x1";
+            textScript.timeAlive = 100;
+            textScript.fontSize = 3;
 
             Destroy(gameObject);
         }

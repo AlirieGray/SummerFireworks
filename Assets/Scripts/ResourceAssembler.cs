@@ -274,7 +274,7 @@ public class ResourceAssembler : MonoBehaviour
 
     public void FinishGrind()
     {
-        if (pile.Count > 0 && resDict.ContainsKey(GameManager.manager.resourceNames["VolatileCrystals"]))
+        if (pile.Count > 0 && resDict.ContainsKey(GameManager.manager.resourceNames["Volatile Crystals"]))
             SpawnWires(Mathf.Min(Mathf.Max(3, pile.Count), 5));
         else
         {
