@@ -89,7 +89,7 @@ public class MainMenu : MonoBehaviour
         {
             ps.GetComponent<CreditFirework>().Hide();
         }
-
+        LaunchRandomFirework.randomFireworkDisplay.stop = false;
         StartCoroutine(MoveBack());
         back.gameObject.SetActive(false);
         play.gameObject.SetActive(true);

@@ -160,7 +160,9 @@ MonoBehaviour:
   - {fileID: 8761795734296832626}
   - {fileID: 8923653191329055358}
   - {fileID: 8431236895446321509}
+  dontDestroy: 0
   speed: 0.1
+  emission: 100
   stopEmitting: 1
 --- !u!198 &2755132018755002096
 ParticleSystem:

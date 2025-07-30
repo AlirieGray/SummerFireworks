@@ -22,7 +22,7 @@ public class CustomShapedFirework : MonoBehaviour
     {
         ps = GetComponent<ParticleSystem>();
         lifetime = ps.startLifetime;
-        StartCoroutine(Die());
+        stopEmitting = true;
     }
 
     public void UpdateChildObjects()
@@ -48,16 +48,18 @@ public class CustomShapedFirework : MonoBehaviour
             if (rocket.particleCount > 0)
             {
                 transform.localPosition = new Vector3(particles[0].position.x, particles[0].position.y);
+                //stopEmitting = true;
                 //transform.localScale = particles[0].GetCurrentSize3D(ps);
                 //transform.parent.localScale = Vector3.one * 0.2f;
             }
-            else
+            else if(rocket.time > 0.1f)
             {
                 if (!burst)
                 {
                     burst = true;
-                    transform.localScale = Vector3.one;
+                    //transform.localScale = Vector3.one;
                     stopEmitting = false;
+                    StartCoroutine(Die());
                 }
             }
         }

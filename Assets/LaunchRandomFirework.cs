@@ -67,7 +67,9 @@ public class LaunchRandomFirework : MonoBehaviour
 
         List<ResourceScriptableObject> resources = CreateFirework();
         GameObject currentFirework = Instantiate(baseFireworks, null);
-        currentFirework.transform.localScale = Vector3.one * 0.2f;
+        var main = currentFirework.GetComponent<ParticleSystem>().main;
+            main.startLifetime = Random.Range(0.15f, 0.5f);
+        //currentFirework.transform.localScale = Vector3.one * 0.2f;
         List<GameObject> allShapes = new List<GameObject>();
 
         
@@ -80,7 +82,12 @@ public class LaunchRandomFirework : MonoBehaviour
             currentFirework.GetComponent<ParticleSystem>().subEmitters.AddSubEmitter(currentBurst.GetComponent<ParticleSystem>(), ParticleSystemSubEmitterType.Death, ParticleSystemSubEmitterProperties.InheritColor);
             allShapes.Add(currentFirework);
         }
-        
+        Color[] colors = { Color.cyan, Color.magenta, Color.yellow, 
+            GameManager.manager.MixColor(Color.cyan, Color.magenta),
+            GameManager.manager.MixColor(Color.cyan, Color.yellow),
+            GameManager.manager.MixColor(Color.magenta, Color.yellow)
+        };
+
         ResourceScriptableObject.Shape currentShape = ResourceScriptableObject.Shape.None;
         Color currentBlend = Color.white;
 
@@ -99,9 +106,8 @@ public class LaunchRandomFirework : MonoBehaviour
                 {
                     currentBlend = resource.color;
                 }
-                currentBlend = GameManager.manager.MixColor(currentBlend, resource.color);
                 var m = currentBurst.GetComponent<ParticleSystem>().main;
-                m.startColor = currentBlend;
+                m.startColor = colors[Random.Range(0, colors.Length)]; ;
             }
             /*switch (resource.shape)
             {
@@ -158,11 +164,11 @@ public class LaunchRandomFirework : MonoBehaviour
             em.SetBurst(0, emptyBurst);
         }
         currentFirework.transform.position = new Vector3(Random.Range(-5f, 5f), -3.643f, -.5f);
-        currentFirework.transform.localScale = Vector3.one * 0.2f;
+        //currentFirework.transform.localScale = Vector3.one * 0.2f;
         foreach (GameObject burst in allShapes)
         {
             burst.transform.SetParent(currentFirework.transform);
-            burst.transform.localScale = Vector3.one;
+            //burst.transform.localScale = Vector3.one;
             if(burst.GetComponent<CustomShapedFirework>()!=null)
                 burst.GetComponent<CustomShapedFirework>().stopEmitting = true;
             //
