@@ -40,6 +40,7 @@ public class RocketController : MonoBehaviour
     private bool inTutorial;
     private int fireworksIndex;
     private List<GameObject> allFireworks;
+    private TutorialHandler tutorial;
 
     // TODO this should come from mixing level via gameManager
     private int fireworksCreated;
@@ -81,16 +82,26 @@ public class RocketController : MonoBehaviour
         rightLocation = new Vector3(5.72f, 0.05f, -.3f);
         ringCenter = rightLocation;
         inTutorial = false;
-        StartLevel();
+        if (levelManager.GetCurrentCycle() == 0 && !gameManager.playedFireworksTutorial)
+        {
+            tutorial = FindFirstObjectByType<TutorialHandler>();
+            if (tutorial != null)
+            {
+                gameManager.playedFireworksTutorial = true;
+                tutorial.StartTutorial();
+            }
+            else
+            {
+                StartLevel();
+            }
+        } else
+        {
+            StartLevel();
+        }
     }
 
-    void StartLevel()
+    public void StartLevel()
     {
-        if (levelManager.GetCurrentCycle() == 0)
-        {
-            Debug.Log("tutorial!");
-            inTutorial = true;
-        }
         textHandler.Countdown();
         StartCoroutine(Countdown());
     }
@@ -142,11 +153,11 @@ public class RocketController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         foreach (GameObject fireworks in allFireworks)
         {
-            Instantiate(fireworks, new Vector3(0f, -3.643f, -.5f), Quaternion.Euler(0f, 0f, 0f));
+            Instantiate(fireworks, new Vector3(0f, -4.5f, -.5f), Quaternion.Euler(0f, 0f, 0f));
             yield return new WaitForSeconds(delay);
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2.5f);
         levelManager.LoadNextLevel();
     }
 
@@ -188,6 +199,10 @@ public class RocketController : MonoBehaviour
     {
         // set new center of ring to instantiate the fireworks location
         DestroyRingAndTarget();
+        if (fireworksIndex >= gameManager.GetFinishedFireworks().Count)
+        {
+            return;
+        }
         int r = Random.Range(0, 2);
         GameObject ringGO;
         Vector3 locationToSpawn;
@@ -312,7 +327,7 @@ public class RocketController : MonoBehaviour
         // go through all fireworksToSpawn and fan out the locations, instantiate all
         foreach (GameObject firework in fireworksToSpawn) {
             GameObject fireworksClone = Instantiate(firework, new Vector3(
-                0f, -3.643f, -.5f), Quaternion.Euler(0f, 0f,0f));
+                0f, -4.5f, -.5f), Quaternion.Euler(0f, 0f,0f));
             allFireworks.Add(firework);
         
         }

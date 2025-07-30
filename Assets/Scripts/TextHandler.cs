@@ -36,6 +36,7 @@ public class TextHandler : MonoBehaviour
 
     IEnumerator ShowCountdownNumbers()
     {
+        countdownText.text = "3...";
         yield return new WaitForSeconds(.5f);
         countdownText.text = "2...";
         yield return new WaitForSeconds(.5f);
