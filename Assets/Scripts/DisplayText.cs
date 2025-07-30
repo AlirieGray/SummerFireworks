@@ -49,12 +49,12 @@ public class DisplayText : MonoBehaviour
 
     IEnumerator Shrink()
     {
-        float font = 36;
+        float font = 56;
         while (font > 26)
         {
             textMP.fontSize = font;
-            font -= 1;
-            yield return new WaitForSeconds(0.05f);
+            font -= 2;
+            yield return new WaitForSeconds(0.02f);
         }
         StartCoroutine(FadeOut());
     }

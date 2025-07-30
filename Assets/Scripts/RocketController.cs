@@ -153,11 +153,11 @@ public class RocketController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         foreach (GameObject fireworks in allFireworks)
         {
-            Instantiate(fireworks, new Vector3(0f, -3.643f, -.5f), Quaternion.Euler(0f, 0f, 0f));
+            Instantiate(fireworks, new Vector3(0f, -4.5f, -.5f), Quaternion.Euler(0f, 0f, 0f));
             yield return new WaitForSeconds(delay);
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2.5f);
         levelManager.LoadNextLevel();
     }
 
@@ -199,6 +199,10 @@ public class RocketController : MonoBehaviour
     {
         // set new center of ring to instantiate the fireworks location
         DestroyRingAndTarget();
+        if (fireworksIndex >= gameManager.GetFinishedFireworks().Count)
+        {
+            return;
+        }
         int r = Random.Range(0, 2);
         GameObject ringGO;
         Vector3 locationToSpawn;
@@ -323,7 +327,7 @@ public class RocketController : MonoBehaviour
         // go through all fireworksToSpawn and fan out the locations, instantiate all
         foreach (GameObject firework in fireworksToSpawn) {
             GameObject fireworksClone = Instantiate(firework, new Vector3(
-                0f, -3.643f, -.5f), Quaternion.Euler(0f, 0f,0f));
+                0f, -4.5f, -.5f), Quaternion.Euler(0f, 0f,0f));
             allFireworks.Add(firework);
         
         }
