@@ -30,11 +30,16 @@ public class ResourceAssembler : MonoBehaviour
     List<ParticleSystem> grindStonePS = new List<ParticleSystem>();
     Dictionary<ResourceScriptableObject, ParticleSystem> grindFXDict = new Dictionary<ResourceScriptableObject, ParticleSystem>();
 
+    public LineRenderer dragLine;
+    List<LineRenderer> dragLines = new List<LineRenderer>();
+
     public Material timerMaterial;
     public float timerMin = 4;
     public float timerMax = 5;
     float timer;
     float currentMax;
+
+    bool hasMadeAFirework = false;
 
     bool isCrafting;
 
@@ -73,11 +78,50 @@ public class ResourceAssembler : MonoBehaviour
             mat.SetFloat("_offset", xoff);
             //add this to the shader of each material grindstone.
         }
+        dragLines.Add(dragLine);
+        if (LevelManager.manager.GetCurrentLevel() == 0)
+        {
+            for(int i = 0; i < 4; i++)
+            {
+                var n = Instantiate(dragLine.gameObject);
+                dragLines.Add(n.GetComponent<LineRenderer>());
+            }
+        }
+        var difficultyEasing = Mathf.Max(8 - LevelManager.manager.GetCurrentLevel(), 0);
+        timerMax += difficultyEasing;
+        timerMin += difficultyEasing;
     }
 
     void Update()
     {
         fullscreenFadeMat.SetFloat("_alpha", Mathf.MoveTowards(fullscreenFadeMat.GetFloat("_alpha"), 0, Time.deltaTime));
+
+        if(!hasMadeAFirework && isCrafting && LevelManager.manager.GetCurrentLevel() == 0)
+        {
+            timer = timerMax;
+            for(int i = 0; i < dragLines.Count; i++)
+            {
+                if(i < linePuzzles.Count)
+                {
+                    dragLines[i].SetPosition(0, linePuzzles[i].transform.position);
+                    dragLines[i].SetPosition(1, linePuzzles[i].socketPosition);
+                }
+                else
+                {
+                    dragLines[i].SetPosition(0, Vector3.zero);
+                    dragLines[i].SetPosition(1, Vector3.zero);
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < dragLines.Count; i++)
+            {
+                    dragLines[i].SetPosition(0, Vector3.zero);
+                    dragLines[i].SetPosition(1, Vector3.zero);
+            }
+        }
+
     }
 
     private void FixedUpdate()
@@ -125,6 +169,7 @@ public class ResourceAssembler : MonoBehaviour
     void CraftedFirework()
     {
         isCrafting = false;
+        hasMadeAFirework = true;
         timerMaterial.SetFloat("_progress", -0.1f);
 
 
@@ -286,13 +331,25 @@ public class ResourceAssembler : MonoBehaviour
     public void Grind()
     {
         //once every fixed update;
+        var keys = new List<ResourceScriptableObject>();
+        foreach (ResourceScriptableObject res in new List<ResourceScriptableObject>(resDict.Keys))
+        {
+            for(int i = 0; i < resDict[res]; i++)
+            {
+                keys.Add(res);
+            }
+        }
+
         for(int i = 0; i < grindAmount.Count; i++)
         {
             var f = grindAmount[i];
             grindAmount[i] = Mathf.MoveTowards(f, 1, Time.fixedDeltaTime * Random.Range(1f, 2f));
             //pile[i].transform.localPosition = Vector3.Lerp(pile[i].transform.localPosition, Vector3.zero, grindAmount[i]);
             //pile[i].transform.localScale = Vector3.Lerp(pile[i].transform.localScale, Vector3.one * 1.5f, grindAmount[i]);
-            var keys = new List<ResourceScriptableObject>(resDict.Keys);
+
+
+
+            Debug.Log("grindstone @ index " + i + "/" + keys.Count + " " + pile.Count);
             if (grindAmount[i] >= 1)
                 if(i < pile.Count)
                     pile[i].GetComponent<SpriteRenderer>().sprite = keys[i].groundUpSprite;

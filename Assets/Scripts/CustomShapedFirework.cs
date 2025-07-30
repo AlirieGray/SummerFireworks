@@ -9,8 +9,12 @@ public class CustomShapedFirework : MonoBehaviour
     public List<Transform> childObjects = new List<Transform>();
     private float lifetime;
 
+    public bool dontDestroy;
+
     public float speed = 0.1f;
 
+    public float emission = 1;
+    float em = 0;
     public bool stopEmitting;
     bool burst = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -44,8 +48,8 @@ public class CustomShapedFirework : MonoBehaviour
             if (rocket.particleCount > 0)
             {
                 transform.localPosition = new Vector3(particles[0].position.x, particles[0].position.y);
-                transform.localScale = particles[0].GetCurrentSize3D(ps);
-                transform.parent.localScale = Vector3.one * 0.2f;
+                //transform.localScale = particles[0].GetCurrentSize3D(ps);
+                //transform.parent.localScale = Vector3.one * 0.2f;
             }
             else
             {
@@ -57,9 +61,14 @@ public class CustomShapedFirework : MonoBehaviour
                 }
             }
         }
-
+        em += emission * Time.deltaTime;
         if (!stopEmitting) {
-            EmitParticle();
+            var loops = Mathf.FloorToInt(em);
+            for (int i = 0; i < loops; i++)
+            {
+                EmitParticle();
+                em -= 1;
+            }
         }
     }
 
@@ -111,14 +120,17 @@ public class CustomShapedFirework : MonoBehaviour
 
     IEnumerator Die()
     {
-        yield return new WaitForSeconds(lifetime);
-        stopEmitting = true;
-
-
-        while(ps.particleCount > 0)
+        if (!dontDestroy)
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(lifetime);
+            stopEmitting = true;
+
+
+            while(ps.particleCount > 0)
+            {
+                yield return new WaitForSeconds(0.1f);
+            }
+            Destroy(transform.parent.gameObject);
         }
-        Destroy(transform.parent.gameObject);
     }
 }
