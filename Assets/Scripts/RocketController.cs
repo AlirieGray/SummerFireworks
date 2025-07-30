@@ -40,6 +40,7 @@ public class RocketController : MonoBehaviour
     private bool inTutorial;
     private int fireworksIndex;
     private List<GameObject> allFireworks;
+    private TutorialHandler tutorial;
 
     // TODO this should come from mixing level via gameManager
     private int fireworksCreated;
@@ -81,16 +82,25 @@ public class RocketController : MonoBehaviour
         rightLocation = new Vector3(5.72f, 0.05f, -.3f);
         ringCenter = rightLocation;
         inTutorial = false;
-        StartLevel();
-    }
-
-    void StartLevel()
-    {
         if (levelManager.GetCurrentCycle() == 0)
         {
-            Debug.Log("tutorial!");
-            inTutorial = true;
+            tutorial = FindFirstObjectByType<TutorialHandler>();
+            if (tutorial != null)
+            {
+                tutorial.StartTutorial();
+            }
+            else
+            {
+                StartLevel();
+            }
+        } else
+        {
+            StartLevel();
         }
+    }
+
+    public void StartLevel()
+    {
         textHandler.Countdown();
         StartCoroutine(Countdown());
     }
