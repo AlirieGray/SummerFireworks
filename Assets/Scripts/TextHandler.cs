@@ -37,14 +37,14 @@ public class TextHandler : MonoBehaviour
     IEnumerator ShowCountdownNumbers()
     {
         countdownText.text = "3...";
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.7f);
         countdownText.text = "2...";
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.7f);
         countdownText.text = "1...";
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.7f);
         countdownText.text = "GO!!";
         float color = 1f;
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.8f);
 
         while (color > 0f)
         {

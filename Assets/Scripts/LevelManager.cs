@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager manager;
-    private GameManager gameManager;
     private int cyclesPlayed;
     private List<string> levelOrder;
     private int currentLevel;
     void Start()
     {
-        gameManager = FindFirstObjectByType<GameManager>();
         if (manager == null)
         {
             manager = this;
@@ -60,7 +58,7 @@ public class LevelManager : MonoBehaviour
     private void AdjustDifficulty()
     {
         // adjust ring shrinking rate in game manager
-        gameManager.SetFireworksSpeed(gameManager.GetFireworksSpeed() - 0.05f);
+        GameManager.manager.SetFireworksSpeed(GameManager.manager.GetFireworksSpeed() - 0.05f);
     }
 
     public void ResetGame()

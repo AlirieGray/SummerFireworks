@@ -22,8 +22,8 @@ public class GameManager : MonoBehaviour
     private float fireworksTargetSpeed;
     public bool playedFireworksTutorial;
 
-    public Texture2D clickCursor_0; 
     public Texture2D clickCursor_1; 
+    public Texture2D clickCursor_2; 
     public Texture2D defaultCursor; 
 
     public void RegisterResource(ResourceScriptableObject res)
@@ -62,18 +62,14 @@ public class GameManager : MonoBehaviour
 
         // TODO: testing only
         // remove for production
-        finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Orb"], resourceNames["Dragonscale"], resourceNames["Yellow"] });
-        finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Heart"], resourceNames["Blue"] });
-        finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Starfruit"], resourceNames["Yellow"] });
-        finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Orb"], resourceNames["Dragonscale"] });
-        finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Heart"], resourceNames["Blue"] });
-        finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Starfruit"], resourceNames["Yellow"] });
+        //finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Pondering Orb"], resourceNames["Dragonscale Stone"], resourceNames["Volatile Crystals"] });
+        //finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Butterfly Flower"], resourceNames["Golden Shamrocks"] });
     }
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(0)) {
-            Cursor.SetCursor(clickCursor_0, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(clickCursor_1, Vector2.zero, CursorMode.Auto);
         }
         if (Input.GetMouseButtonUp(0)) {
             Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);

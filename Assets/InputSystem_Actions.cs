@@ -1107,6 +1107,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DragMouse"",
+                    ""type"": ""Button"",
+                    ""id"": ""0cb8d41c-b5ff-4458-bf05-50015bad980b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -1162,6 +1171,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""RotateRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""75208812-7210-472d-8f25-45bf7462af53"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DragMouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1259,6 +1279,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Rocket_RotateLeft = m_Rocket.FindAction("RotateLeft", throwIfNotFound: true);
         m_Rocket_Launch = m_Rocket.FindAction("Launch", throwIfNotFound: true);
         m_Rocket_RotateRight = m_Rocket.FindAction("RotateRight", throwIfNotFound: true);
+        m_Rocket_DragMouse = m_Rocket.FindAction("DragMouse", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -1723,6 +1744,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Rocket_RotateLeft;
     private readonly InputAction m_Rocket_Launch;
     private readonly InputAction m_Rocket_RotateRight;
+    private readonly InputAction m_Rocket_DragMouse;
     /// <summary>
     /// Provides access to input actions defined in input action map "Rocket".
     /// </summary>
@@ -1746,6 +1768,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Rocket/RotateRight".
         /// </summary>
         public InputAction @RotateRight => m_Wrapper.m_Rocket_RotateRight;
+        /// <summary>
+        /// Provides access to the underlying input action "Rocket/DragMouse".
+        /// </summary>
+        public InputAction @DragMouse => m_Wrapper.m_Rocket_DragMouse;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1781,6 +1807,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @RotateRight.started += instance.OnRotateRight;
             @RotateRight.performed += instance.OnRotateRight;
             @RotateRight.canceled += instance.OnRotateRight;
+            @DragMouse.started += instance.OnDragMouse;
+            @DragMouse.performed += instance.OnDragMouse;
+            @DragMouse.canceled += instance.OnDragMouse;
         }
 
         /// <summary>
@@ -1801,6 +1830,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @RotateRight.started -= instance.OnRotateRight;
             @RotateRight.performed -= instance.OnRotateRight;
             @RotateRight.canceled -= instance.OnRotateRight;
+            @DragMouse.started -= instance.OnDragMouse;
+            @DragMouse.performed -= instance.OnDragMouse;
+            @DragMouse.canceled -= instance.OnDragMouse;
         }
 
         /// <summary>
@@ -2076,5 +2108,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnRotateRight(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "DragMouse" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDragMouse(InputAction.CallbackContext context);
     }
 }

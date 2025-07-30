@@ -5,6 +5,7 @@ using TMPro;
 public class ResourceAssembler : MonoBehaviour
 {
     public static ResourceAssembler instance;
+    private GameManager gameManager;
 
     public GameObject linePrefab;
 
@@ -155,6 +156,11 @@ public class ResourceAssembler : MonoBehaviour
         GUI.Box(new Rect(10, 10, 200, 24), "cursor @ :" + world.x + ", " + world.y);
     }
 
+    private void DisableItemsWithoutInventory()
+    {
+
+    }
+
     public void CheckCompletion()
     {
         //are we done?
@@ -190,6 +196,7 @@ public class ResourceAssembler : MonoBehaviour
 
         Debug.Log("finished a firework with " + usedIngredients.Count + " resources in it");
         DisplayCompletedFireworks.instance.AddNewFirework(usedIngredients);
+        GameManager.manager.AddFirework(usedIngredients);
 
         //clear
         resDict.Clear();
@@ -396,7 +403,7 @@ public class ResourceAssembler : MonoBehaviour
             resDict.Add(res, 1);
         }
         AddItToThePile(res);
-        whatToDo.text = "Keep adding ingredients, or click the <color=#00FFFF>pestel</color> if you're done";
+        whatToDo.text = "Keep adding ingredients, or click the <color=#00FFFF>pestle</color> if you're done";
     }
 
     void AddItToThePile(ResourceScriptableObject res)
