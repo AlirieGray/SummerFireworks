@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
-
+using TMPro;
 public class ResourceAssembler : MonoBehaviour
 {
     public static ResourceAssembler instance;
@@ -38,6 +38,8 @@ public class ResourceAssembler : MonoBehaviour
     public float timerMax = 5;
     float timer;
     float currentMax;
+
+    public TextMeshPro whatToDo;
 
     bool hasMadeAFirework = false;
 
@@ -227,8 +229,10 @@ public class ResourceAssembler : MonoBehaviour
         foreach (DraggableLine line in linePuzzles)
         {
             if (!line.solved)
-                TryAddResource(blunder);
+                AddResource(blunder);
         }
+        whatToDo.text = "Ya gotta be faster than that!";
+
         CraftedFirework();
         StartCoroutine(FailureAnimation());
     }
@@ -265,6 +269,7 @@ public class ResourceAssembler : MonoBehaviour
             lrs[i].gameObject.SetActive(false);
             lrs[i].widthMultiplier = 1;
         }
+        whatToDo.text = "Click and drag to add ingredients.";
     }
 
     public void FinishGrind()
@@ -272,11 +277,15 @@ public class ResourceAssembler : MonoBehaviour
         if (pile.Count > 0 && resDict.ContainsKey(GameManager.manager.resourceNames["VolatileCrystals"]))
             SpawnWires(Mathf.Min(Mathf.Max(3, pile.Count), 5));
         else
+        {
             AddResourcePestel.pestel.GetComponent<BoxCollider2D>().enabled = true;
+            whatToDo.text = "Add a volatile crystal to finish this firework.";
+        }
     }
 
     void SpawnWires(int lines = 3)
     {
+        whatToDo.text = "Match the symbols quickly to finish the firework.";
         isCrafting = true;
         timer = Mathf.Lerp(timerMin, timerMax, lines / 5);
         currentMax = timer;
@@ -360,13 +369,18 @@ public class ResourceAssembler : MonoBehaviour
         }
     }
 
-    public void TryAddResource(ResourceScriptableObject res)
+    public bool TryAddResource(ResourceScriptableObject res)
     {
         var screen = GameManager.manager.CursorWorldPosition();
         var mousePos2D = new Vector2(screen.x, screen.y);
         if(Vector2.Distance(mousePos2D, new Vector2(transform.position.x, transform.position.y) )<= range)
         {
             AddResource(res);
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
@@ -382,6 +396,7 @@ public class ResourceAssembler : MonoBehaviour
             resDict.Add(res, 1);
         }
         AddItToThePile(res);
+        whatToDo.text = "Keep adding ingredients, or click the <color=#00FFFF>pestel</color> if you're done";
     }
 
     void AddItToThePile(ResourceScriptableObject res)

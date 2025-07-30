@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using TMPro;
 public class DraggableResource : MonoBehaviour
 {
     public bool held;
@@ -24,6 +24,8 @@ public class DraggableResource : MonoBehaviour
         ghost.color = new Color(ghost.color.r, ghost.color.g, ghost.color.b, ghost.color.a / 2.0f);
         ghost.sortingOrder = 99;
         ghost.gameObject.SetActive(false);
+
+        UpdateText();
     }
 
     // Update is called once per frame
@@ -41,11 +43,20 @@ public class DraggableResource : MonoBehaviour
         {
             held = true;
             ghost.gameObject.SetActive(true);
-            
+            GameManager.manager.resDict[resource] -= 1;
+
+            UpdateText();
+
             ghost.transform.position = GameManager.manager.CursorWorldPosition();
             //for specifics get an offset from center based on where you clicked
             //but thats for later
         }
+    }
+
+    void UpdateText()
+    {
+        if(resource!=null)
+            transform.GetChild(0).GetComponent<TextMeshPro>().text = GameManager.manager.resDict[resource].ToString();
     }
 
     private void OnMouseUp()
@@ -53,7 +64,12 @@ public class DraggableResource : MonoBehaviour
         if (held)
         {
             //kill ghost if not at mortar
-            ResourceAssembler.instance.TryAddResource(resource);
+            var wasSuccessful = ResourceAssembler.instance.TryAddResource(resource);
+            if (!wasSuccessful)
+            {
+                GameManager.manager.resDict[resource] += 1;
+                UpdateText();
+            }
             ghost.gameObject.SetActive(false);
         }
     }

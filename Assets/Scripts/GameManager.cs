@@ -48,6 +48,14 @@ public class GameManager : MonoBehaviour
             RegisterResource(res);
         }
 
+        foreach(ResourceScriptableObject res in resources)
+        {
+            if (res.name != "Blunder")
+            {
+                resDict.Add(res, 0);
+            }
+        }
+
         // TODO: testing only
         // remove for production
         finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Orb"], resourceNames["Dragonscale"], resourceNames["Yellow"] });
