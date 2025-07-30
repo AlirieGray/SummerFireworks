@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager manager;
 
     public List<ResourceScriptableObject> resources = new List<ResourceScriptableObject>();
+    private InputSystem_Actions inputActions;
 
     public Dictionary<string, ResourceScriptableObject> resourceNames = new Dictionary<string, ResourceScriptableObject>();
 
@@ -22,6 +23,10 @@ public class GameManager : MonoBehaviour
     // fireworks mini-game numbers
     private float fireworksTargetSpeed;
     public bool playedFireworksTutorial;
+
+    public Texture2D clickCursor_0; 
+    public Texture2D clickCursor_1; 
+    public Texture2D defaultCursor; 
 
     public void RegisterResource(ResourceScriptableObject res)
     {
@@ -65,6 +70,19 @@ public class GameManager : MonoBehaviour
         finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Orb"], resourceNames["Dragonscale"] });
         finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Heart"], resourceNames["Blue"] });
         finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Starfruit"], resourceNames["Yellow"] });
+
+
+
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0)) {
+            Cursor.SetCursor(clickCursor_0, Vector2.zero, CursorMode.Auto);
+        }
+        if (Input.GetMouseButtonUp(0)) {
+            Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
+        }
     }
 
     public void IncreaseScore(int value)
