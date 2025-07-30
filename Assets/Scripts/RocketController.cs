@@ -41,6 +41,8 @@ public class RocketController : MonoBehaviour
     private int fireworksIndex;
     private List<GameObject> allFireworks;
     private TutorialHandler tutorial;
+    private bool checkForDrag;
+    private Vector3 startPos;
 
     // TODO this should come from mixing level via gameManager
     private int fireworksCreated;
@@ -52,6 +54,7 @@ public class RocketController : MonoBehaviour
 
     void Start()
     {
+        checkForDrag = false;
         fireworksIndex = 0;
         allFireworks = new List<GameObject>();
         audioManager = FindFirstObjectByType<AudioManager>();
@@ -71,6 +74,17 @@ public class RocketController : MonoBehaviour
         {
             HandleRotateLeft();
         };
+        inputActions.Rocket.DragMouse.started += context =>
+        {
+            checkForDrag = true;
+            startPos = GameManager.manager.CursorWorldPosition();
+        };
+        inputActions.Rocket.DragMouse.canceled += context =>
+        {
+            Debug.Log("cancel???");
+            checkForDrag = false;
+            Launch();
+        };
 
         rocketDirection = Direction.Center;
         perfectText = perfectGO.GetComponent<DisplayText>();
@@ -84,6 +98,7 @@ public class RocketController : MonoBehaviour
         inTutorial = false;
         if (levelManager.GetCurrentCycle() == 0 && !gameManager.playedFireworksTutorial)
         {
+            inTutorial = true;
             tutorial = FindFirstObjectByType<TutorialHandler>();
             if (tutorial != null)
             {
@@ -100,6 +115,26 @@ public class RocketController : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (checkForDrag) {
+            
+            var xDiff = GameManager.manager.CursorWorldPosition().x - startPos.x;
+            if (xDiff >= .5f)
+            {
+                HandleRotateRight();
+            } else if (xDiff <= -.5)
+            {
+                HandleRotateLeft();
+            } else
+            {
+                HandleRotateCenter();
+            }
+        }       
+    }
+
+
+
     public void StartLevel()
     {
         textHandler.Countdown();
@@ -111,10 +146,15 @@ public class RocketController : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         currentTarget.SetActive(true);
         currentRing.gameObject.SetActive(true);
+        inTutorial = false;
     }
 
     void Launch()
     {
+        if (inTutorial)
+        {
+            return;
+        }
         textHandler.ResetAll();
         if (fireworksIndex < gameManager.GetFinishedFireworks().Count)
         {
@@ -176,6 +216,12 @@ public class RocketController : MonoBehaviour
             case Direction.Right:
                 break;
         }
+    }
+
+    void HandleRotateCenter()
+    {
+            gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+            rocketDirection = Direction.Center;
     }
 
     void HandleRotateLeft()
@@ -287,9 +333,9 @@ public class RocketController : MonoBehaviour
                     if (fireworksToSpawn.Count == 0)
                     {
                         fireworksToSpawn.Add(baseFireworks);
-                        //fireworksToSpawn[spawnIndex].GetComponent<Firework>().SetColor(resource.color);
                     }
-                    fireworksToSpawn[spawnIndex].GetComponent<Firework>().SetColor(resource.color);
+                    var m = fireworksToSpawn[spawnIndex].GetComponent<ParticleSystem>().main;
+                    m.startColor = resource.color;
                     break;
                 case ResourceScriptableObject.Shape.Starburst:
                     if (fireworksToSpawn.Count > 0)

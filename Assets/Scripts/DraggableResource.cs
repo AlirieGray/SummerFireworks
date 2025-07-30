@@ -11,10 +11,12 @@ public class DraggableResource : MonoBehaviour
     public ResourceScriptableObject resource;
 
     bool isBroke = false;
+    private bool inStock;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        inStock = true;
         //Ghost
         GameObject n = Instantiate(gameObject);
         Destroy(n.GetComponent<DraggableResource>());
@@ -39,24 +41,40 @@ public class DraggableResource : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (inStock)
         {
-            held = true;
-            ghost.gameObject.SetActive(true);
-            GameManager.manager.resDict[resource] -= 1;
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                held = true;
+                ghost.gameObject.SetActive(true);
+                GameManager.manager.resDict[resource] -= 1;
 
-            UpdateText();
+                UpdateText();
 
-            ghost.transform.position = GameManager.manager.CursorWorldPosition();
-            //for specifics get an offset from center based on where you clicked
-            //but thats for later
+                ghost.transform.position = GameManager.manager.CursorWorldPosition();
+                //for specifics get an offset from center based on where you clicked
+                //but thats for later
+            }
+
         }
+    }
+
+    void OutOfStock()
+    {
+        inStock = false;
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(.5f,.5f,.5f);
     }
 
     void UpdateText()
     {
-        if(resource!=null)
+        if (resource!=null)
+        {
             transform.GetChild(0).GetComponent<TextMeshPro>().text = GameManager.manager.resDict[resource].ToString();
+            if (GameManager.manager.resDict[resource] <= 0)
+            {
+                OutOfStock();
+            }
+        }
     }
 
     private void OnMouseUp()

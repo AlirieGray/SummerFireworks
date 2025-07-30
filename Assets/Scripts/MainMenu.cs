@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
-    private LevelManager levelManager;
 
     public ParticleSystem[] credits = new ParticleSystem[7];
 
@@ -15,7 +14,6 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
-        levelManager = FindFirstObjectByType<LevelManager>();
 
         back.gameObject.SetActive(false);
     }
@@ -23,7 +21,7 @@ public class MainMenu : MonoBehaviour
     public void Play()
     {
         gameObject.SetActive(false);
-        levelManager.LoadNextLevel();
+        LevelManager.manager.LoadNextLevel();
     }
 
     public void Quit()
@@ -100,7 +98,7 @@ public class MainMenu : MonoBehaviour
 
     public void GetNextLevel()
     {
-        levelManager.LoadNextLevel();
+        LevelManager.manager.LoadNextLevel();
     }
 
 }

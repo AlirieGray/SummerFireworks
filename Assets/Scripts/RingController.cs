@@ -8,13 +8,11 @@ public class RingController : MonoBehaviour
     private Vector3 scale;
     private List<Collider2D> overlapping;
     private bool missedPerfectZone;
-    private GameManager gameManager;
     private float speed;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        gameManager = FindFirstObjectByType<GameManager>();
-        speed = gameManager.GetFireworksSpeed();
+        speed = GameManager.manager.GetFireworksSpeed();
         overlapping = new List<Collider2D>();
         rocket = FindFirstObjectByType<RocketController>();
         scale = gameObject.transform.localScale; 

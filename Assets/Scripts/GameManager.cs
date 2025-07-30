@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager manager;
 
     public List<ResourceScriptableObject> resources = new List<ResourceScriptableObject>();
+    private InputSystem_Actions inputActions;
 
     public Dictionary<string, ResourceScriptableObject> resourceNames = new Dictionary<string, ResourceScriptableObject>();
 
@@ -20,6 +21,10 @@ public class GameManager : MonoBehaviour
     // fireworks mini-game numbers
     private float fireworksTargetSpeed;
     public bool playedFireworksTutorial;
+
+    public Texture2D clickCursor_1; 
+    public Texture2D clickCursor_2; 
+    public Texture2D defaultCursor; 
 
     public void RegisterResource(ResourceScriptableObject res)
     {
@@ -49,7 +54,10 @@ public class GameManager : MonoBehaviour
 
         foreach(ResourceScriptableObject res in resources)
         {
-            if (res.name != "Blunder")
+            if (res.name != "Blunder" && res.name != "Butterfly Flower" && res.name != "Dragonscale Stone")
+            {
+                resDict.Add(res, 3);
+            } else if (res.name == "Butterfly Flower" || res.name == "Dragonscale Stone")
             {
                 resDict.Add(res, 0);
             }
@@ -57,12 +65,18 @@ public class GameManager : MonoBehaviour
 
         // TODO: testing only
         // remove for production
-        //finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Orb"], resourceNames["Dragonscale"], resourceNames["Yellow"] });
-        //finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Heart"], resourceNames["Blue"] });
-        //finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Starfruit"], resourceNames["Yellow"] });
-        //finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Orb"], resourceNames["Dragonscale"] });
-        //finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Heart"], resourceNames["Blue"] });
-        //finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Starfruit"], resourceNames["Yellow"] });
+        //finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Pondering Orb"], resourceNames["Dragonscale Stone"], resourceNames["Volatile Crystals"] });
+        //finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Butterfly Flower"], resourceNames["Golden Shamrocks"] });
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0)) {
+            Cursor.SetCursor(clickCursor_1, new Vector2(0,10), CursorMode.Auto);
+        }
+        if (Input.GetMouseButtonUp(0)) {
+            Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
+        }
     }
 
     public void IncreaseScore(int value)
@@ -75,14 +89,27 @@ public class GameManager : MonoBehaviour
         return score;
     }
 
-    public void ResetScore()
+    public void ResetGame()
     {
         score = 0;
+        fireworksTargetSpeed = 0.1f;
+        resDict = new Dictionary<ResourceScriptableObject, int>();
+        foreach (ResourceScriptableObject res in resources)
+        {
+            if (res.name != "Blunder" && res.name != "Butterfly Flower" && res.name != "Dragonscale Stone")
+            {
+                resDict.Add(res, 3);
+            }
+            else if (res.name == "Butterfly Flower" && res.name == "Dragonscale Stone")
+            {
+                resDict.Add(res, 0);
+            }
+        }
     }
 
     public float GetResourceGatheringTime()
     {
-        return 60f;
+        return 30f;
     }
 
     public float GetFireworksSpeed()

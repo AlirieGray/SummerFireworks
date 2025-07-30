@@ -7,16 +7,24 @@ public class AudioManager : MonoBehaviour
     public AudioSource musicSource;
     public AudioSource FXSource;
     public AudioClip fireworks1;
+    public AudioClip mainTheme;
 
     void Start()
     {
         DontDestroyOnLoad(gameObject);
+        PlayTheme();
     }
 
     public void PlayFireworks()
     {
         FXSource.clip = fireworks1;
         StartCoroutine(CountdownFireworks());
+    }
+
+    public void PlayTheme()
+    {
+        musicSource.clip = mainTheme;
+        musicSource.Play();
     }
 
     IEnumerator CountdownFireworks()

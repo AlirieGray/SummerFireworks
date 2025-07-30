@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    private GameManager gameManager;
-    private LevelManager levelManager;
     public TextMeshProUGUI timerText;
     void Start()
     {
-        gameManager = FindFirstObjectByType<GameManager>();
-        StartCoroutine(Countdown(gameManager.GetResourceGatheringTime()));
+        StartCoroutine(Countdown(GameManager.manager.GetResourceGatheringTime()));
     }
 
     IEnumerator Countdown(float timeSeconds)
@@ -27,6 +24,6 @@ public class Timer : MonoBehaviour
             timeSeconds -= 1f;
             yield return new WaitForSeconds(1f);
         }
-        levelManager.LoadNextLevel();
+        LevelManager.manager.LoadNextLevel();
     }
 }
