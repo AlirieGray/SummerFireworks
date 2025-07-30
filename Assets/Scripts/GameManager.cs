@@ -54,7 +54,10 @@ public class GameManager : MonoBehaviour
 
         foreach(ResourceScriptableObject res in resources)
         {
-            if (res.name != "Blunder")
+            if (res.name != "Blunder" && res.name != "Butterfly Flower" && res.name != "Dragonscale Stone")
+            {
+                resDict.Add(res, 3);
+            } else if (res.name == "Butterfly Flower" || res.name == "Dragonscale Stone")
             {
                 resDict.Add(res, 0);
             }
@@ -69,7 +72,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if (Input.GetMouseButtonDown(0)) {
-            Cursor.SetCursor(clickCursor_1, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(clickCursor_1, new Vector2(0,10), CursorMode.Auto);
         }
         if (Input.GetMouseButtonUp(0)) {
             Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
@@ -86,14 +89,27 @@ public class GameManager : MonoBehaviour
         return score;
     }
 
-    public void ResetScore()
+    public void ResetGame()
     {
         score = 0;
+        fireworksTargetSpeed = 0.1f;
+        resDict = new Dictionary<ResourceScriptableObject, int>();
+        foreach (ResourceScriptableObject res in resources)
+        {
+            if (res.name != "Blunder" && res.name != "Butterfly Flower" && res.name != "Dragonscale Stone")
+            {
+                resDict.Add(res, 3);
+            }
+            else if (res.name == "Butterfly Flower" && res.name == "Dragonscale Stone")
+            {
+                resDict.Add(res, 0);
+            }
+        }
     }
 
     public float GetResourceGatheringTime()
     {
-        return 60f;
+        return 30f;
     }
 
     public float GetFireworksSpeed()

@@ -38,7 +38,7 @@ public class LevelManager : MonoBehaviour
         if (currentLevel == 3) { 
             cyclesPlayed++;
             
-            if (cyclesPlayed == 6)
+            if (cyclesPlayed == 2) // three levels
             {
                 StartCoroutine(FadeIn(levelOrder[4]));
             } else
@@ -64,6 +64,13 @@ public class LevelManager : MonoBehaviour
     public void ResetGame()
     {
         currentLevel = 0;
+        cyclesPlayed = 0;
+        SceneManager.LoadScene(levelOrder[currentLevel]);
+    }
+
+    public void PlayAgain()
+    {
+        currentLevel = 1;
         cyclesPlayed = 0;
         SceneManager.LoadScene(levelOrder[currentLevel]);
     }

@@ -11,9 +11,15 @@ public class GameOverHandler : MonoBehaviour
         scoreText.text = GameManager.manager.GetScore().ToString();
     }
 
-    void BackToMainMenu()
+    public void BackToMainMenu()
     {
+        GameManager.manager.ResetGame();
         levelManager.ResetGame();
-        GameManager.manager.ResetScore();
+    }
+
+    public void PlayAgain()
+    {
+        GameManager.manager.ResetGame();
+        levelManager.PlayAgain();
     }
 }
