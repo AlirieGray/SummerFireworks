@@ -153,7 +153,7 @@ public class ResourceAssembler : MonoBehaviour
     {
         var aspectRatio = Screen.width / Screen.height;
         var world = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x / (aspectRatio), Input.mousePosition.y / 1));
-        GUI.Box(new Rect(10, 10, 200, 24), "cursor @ :" + world.x + ", " + world.y);
+        //GUI.Box(new Rect(10, 10, 200, 24), "cursor @ :" + world.x + ", " + world.y);
     }
 
     private void DisableItemsWithoutInventory()

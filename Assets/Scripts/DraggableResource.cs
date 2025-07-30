@@ -39,11 +39,11 @@ public class DraggableResource : MonoBehaviour
         }
     }
 
-    private void OnMouseOver()
+    private void OnMouseDown()
     {
         if (inStock)
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0) && inStock)
+            if (GameManager.manager.resDict[resource] >= 1)
             {
                 held = true;
                 ghost.gameObject.SetActive(true);
@@ -82,11 +82,22 @@ public class DraggableResource : MonoBehaviour
         if (held)
         {
             //kill ghost if not at mortar
+            held = false;
             var wasSuccessful = ResourceAssembler.instance.TryAddResource(resource);
             if (!wasSuccessful)
             {
                 GameManager.manager.resDict[resource] += 1;
                 UpdateText();
+                if (!inStock)
+                {
+                    inStock = true;
+                    gameObject.GetComponent<SpriteRenderer>().color = new Color(1,1, 1f);
+                }
+            }
+            else
+            {
+                if (GameManager.manager.resDict[resource] == 0)
+                    OutOfStock();
             }
             ghost.gameObject.SetActive(false);
         }
