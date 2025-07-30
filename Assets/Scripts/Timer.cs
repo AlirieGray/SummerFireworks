@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    private LevelManager levelManager;
     public TextMeshProUGUI timerText;
     void Start()
     {
@@ -25,6 +24,6 @@ public class Timer : MonoBehaviour
             timeSeconds -= 1f;
             yield return new WaitForSeconds(1f);
         }
-        levelManager.LoadNextLevel();
+        LevelManager.manager.LoadNextLevel();
     }
 }
