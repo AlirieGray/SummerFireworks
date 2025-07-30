@@ -69,6 +69,11 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene(levelOrder[currentLevel]);
     }
 
+    public int GetCurrentLevel()
+    {
+        return currentLevel;
+    }
+
     public int GetCurrentCycle()
     {
         return cyclesPlayed;

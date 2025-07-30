@@ -12,9 +12,13 @@ public class LaunchRandomFirework : MonoBehaviour
     public GameObject starFireworks;
     public GameObject shapeless;
 
+    public static LaunchRandomFirework randomFireworkDisplay;
+    public bool stop = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        randomFireworkDisplay = this;
         StartCoroutine(Loop());
     }
 
@@ -22,8 +26,9 @@ public class LaunchRandomFirework : MonoBehaviour
     {
         while (true)
         {
-            SpawnFireworks();
-            yield return new WaitForSecondsRealtime(Random.Range(0.33f, 2));
+            if(!stop)
+                SpawnFireworks();
+            yield return new WaitForSecondsRealtime(Random.Range(0.13f, 0.66f));
         }
         
     }

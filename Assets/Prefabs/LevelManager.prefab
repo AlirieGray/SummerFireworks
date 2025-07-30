@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccd62fc9afee3654c82e064f480f2ed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blackout: {fileID: 0}
+  blackout: {fileID: 1082233101946514436}
 --- !u!223 &2230100766159197711
 Canvas:
   m_ObjectHideFlags: 0
