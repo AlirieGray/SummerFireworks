@@ -74,6 +74,11 @@ public class GameManager : MonoBehaviour
         score = 0;
     }
 
+    public float GetResourceGatheringTime()
+    {
+        return 60f;
+    }
+
     public float GetFireworksSpeed()
     {
         if (fireworksTargetSpeed == 0)
