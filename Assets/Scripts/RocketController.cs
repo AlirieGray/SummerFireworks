@@ -333,9 +333,9 @@ public class RocketController : MonoBehaviour
                     if (fireworksToSpawn.Count == 0)
                     {
                         fireworksToSpawn.Add(baseFireworks);
-                        //fireworksToSpawn[spawnIndex].GetComponent<Firework>().SetColor(resource.color);
                     }
-                    fireworksToSpawn[spawnIndex].GetComponent<Firework>().SetColor(resource.color);
+                    var m = fireworksToSpawn[spawnIndex].GetComponent<ParticleSystem>().main;
+                    m.startColor = resource.color;
                     break;
                 case ResourceScriptableObject.Shape.Starburst:
                     if (fireworksToSpawn.Count > 0)
