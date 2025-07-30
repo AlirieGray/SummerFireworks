@@ -23,7 +23,7 @@ public class TextPopup : MonoBehaviour
         if (timeAlive <= 0)
             Destroy(gameObject);
 
-        textField.fontSize = fontSize * (timeAlive / baseTimeAlive);
+        transform.localScale = Vector3.one * (timeAlive / baseTimeAlive);
         timeAlive--;
     }
 }

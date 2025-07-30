@@ -52,15 +52,11 @@ public class ResourceSpawner : MonoBehaviour
 
         lootScript.resourceType = res;
         lootScript.textPrefab = textPrefab;
-        TextPopup textScript = lootScript.textPrefab.GetComponent<TextPopup>();
-
-        textScript.textDisplayed = "Collected " + res.name + " x1";
-        textScript.timeAlive = 100;
-        textScript.fontSize = 1;
 
         bc.isTrigger = true;
         bc.size = Vector2.one;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        rb.bodyType = RigidbodyType2D.Static;
 
         resource.transform.position = new Vector2(Random.Range(-screenSize.x, screenSize.x), Random.Range(-screenSize.y, screenSize.y));
     }

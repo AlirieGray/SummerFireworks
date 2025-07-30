@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Cursor : MonoBehaviour
+public class Mouse : MonoBehaviour
 {
     void Update()
     {
