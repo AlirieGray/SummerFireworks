@@ -151,6 +151,8 @@ public class Monster : MonoBehaviour
     {
         if (!eating)
         {
+            if (anim.GetCurrentAnimatorClipInfo(0)[0].clip.name != "MonsterWalk")
+                anim.SetTrigger("StartWalk");
         StopAllCoroutines();
         direction = (closestResource.transform.position - transform.position).normalized;
         rb.linearVelocity = direction * chaseSpeed;
