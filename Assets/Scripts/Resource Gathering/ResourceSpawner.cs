@@ -38,6 +38,9 @@ public class ResourceSpawner : MonoBehaviour
         }
 
         SpawnResource(GameManager.manager.resourceNames["Volatile Crystals"]);
+
+        // clear fireworks
+        GameManager.manager.finishedFireworks = new List<List<ResourceScriptableObject>>();
     }
 
     public void DecrementResourceCount()
@@ -74,6 +77,6 @@ public class ResourceSpawner : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         rb.bodyType = RigidbodyType2D.Static;
 
-        resource.transform.position = new Vector2(Random.Range(-screenSize.x, screenSize.x), Random.Range(-screenSize.y, screenSize.y));
+        resource.transform.position = new Vector2(Random.Range(-screenSize.x + .05f, screenSize.x -.5f), Random.Range(-screenSize.y + .5f, screenSize.y -.5f));
     }
 }
