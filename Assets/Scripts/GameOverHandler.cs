@@ -4,8 +4,7 @@ using UnityEngine;
 public class GameOverHandler : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
-    private LevelManager levelManager;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         scoreText.text = GameManager.manager.GetScore().ToString();
@@ -14,12 +13,12 @@ public class GameOverHandler : MonoBehaviour
     public void BackToMainMenu()
     {
         GameManager.manager.ResetGame();
-        levelManager.ResetGame();
+        LevelManager.manager.ResetGame();
     }
 
     public void PlayAgain()
     {
         GameManager.manager.ResetGame();
-        levelManager.PlayAgain();
+        LevelManager.manager.PlayAgain();
     }
 }
