@@ -38,7 +38,7 @@ public class LevelManager : MonoBehaviour
         if (currentLevel == 3) { 
             cyclesPlayed++;
             
-            if (cyclesPlayed == 2) // three levels
+            if (cyclesPlayed == 3) // three levels
             {
                 StartCoroutine(FadeIn(levelOrder[4]));
             } else

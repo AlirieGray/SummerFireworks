@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
         }
 
         gatheringTime = 30f;
+        score = 0;
 
         // TODO: testing only
         // remove for production
