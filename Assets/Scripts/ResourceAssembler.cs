@@ -46,6 +46,8 @@ public class ResourceAssembler : MonoBehaviour
 
     bool isCrafting;
 
+    public UnityEngine.UI.Button DoneButton;
+
     void Awake()
     {
         instance = this;
@@ -60,6 +62,8 @@ public class ResourceAssembler : MonoBehaviour
             n.transform.position += Vector3.left * 10;
             lrs.Add(n.GetComponent<LineRenderer>());
         }
+
+        DoneButton.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -180,7 +184,7 @@ public class ResourceAssembler : MonoBehaviour
         hasMadeAFirework = true;
         timerMaterial.SetFloat("_progress", -0.1f);
 
-
+        DoneButton.gameObject.SetActive(true);
 
         List<ResourceScriptableObject> usedIngredients = new List<ResourceScriptableObject>();
 
