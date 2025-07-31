@@ -9,6 +9,7 @@ TagManager:
   - InnerInnerTarget
   - Nice
   - Perfect
+  - LootableResource
   layers:
   - Default
   - TransparentFX

@@ -65,6 +65,7 @@ public class ResourceSpawner : MonoBehaviour
         Rigidbody2D rb = resource.AddComponent<Rigidbody2D>();
 
         resource.name = res.name;
+        resource.tag = "LootableResource";
 
         resourceSpriteRenderer.sprite = res.overrideSprite;
         resourceSpriteRenderer.sortingLayerName = "Sprites";
