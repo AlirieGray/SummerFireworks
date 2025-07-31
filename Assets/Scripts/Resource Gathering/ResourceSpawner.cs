@@ -7,9 +7,13 @@ public class ResourceSpawner : MonoBehaviour
     public int extraSpawns = 3;
 
     public GameObject textPrefab;
+    public int remainingResources;
+    public GameObject niceText;
+    public Timer timer;
 
     private void Start()
     {
+        remainingResources = 0;
         screenSize = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height));
 
         foreach(List<ResourceScriptableObject> resList in GameManager.manager.finishedFireworks)
@@ -36,8 +40,20 @@ public class ResourceSpawner : MonoBehaviour
         SpawnResource(GameManager.manager.resourceNames["Volatile Crystals"]);
     }
 
+    public void DecrementResourceCount()
+    {
+        remainingResources -= 1;
+        if (remainingResources < 1)
+        {
+            timer.Stop();
+            niceText.SetActive(true);
+            niceText.GetComponent<DisplayText>().DisplayWithShrink();
+        }
+    }
+
     void SpawnResource(ResourceScriptableObject res)
     {
+        remainingResources++;
         GameObject resource = new GameObject();
 
         LootableResource lootScript = resource.AddComponent<LootableResource>();

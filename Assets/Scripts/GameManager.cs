@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     private float fireworksTargetSpeed;
     public bool playedFireworksTutorial;
 
+    private float gatheringTime;
+
     public Texture2D clickCursor_1; 
     public Texture2D clickCursor_2; 
     public Texture2D defaultCursor; 
@@ -63,6 +65,8 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        gatheringTime = 30f;
+
         // TODO: testing only
         // remove for production
         //finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Pondering Orb"], resourceNames["Dragonscale Stone"], resourceNames["Volatile Crystals"] });
@@ -93,6 +97,7 @@ public class GameManager : MonoBehaviour
     {
         score = 0;
         fireworksTargetSpeed = 0.1f;
+        gatheringTime = 30f;
         resDict = new Dictionary<ResourceScriptableObject, int>();
         foreach (ResourceScriptableObject res in resources)
         {
@@ -109,7 +114,12 @@ public class GameManager : MonoBehaviour
 
     public float GetResourceGatheringTime()
     {
-        return 30f;
+        return gatheringTime;
+    }
+
+    public void SetResourceGatheringTime(float time)
+    {
+        gatheringTime = time;
     }
 
     public float GetFireworksSpeed()
