@@ -4,14 +4,30 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager manager;
     public AudioSource musicSource;
     public AudioSource FXSource;
     public AudioClip fireworks1;
     public AudioClip mainTheme;
 
+    void Awake()
+    {
+        if (manager == null)
+        {
+            manager = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            if (manager != this)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
         PlayTheme();
     }
 

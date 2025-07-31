@@ -5,6 +5,12 @@ public class LootableResource : MonoBehaviour
 
     public ResourceScriptableObject resourceType;
     public GameObject textPrefab;
+    private ResourceSpawner resourceSpawner;
+
+    private void Start()
+    {
+        resourceSpawner = FindFirstObjectByType<ResourceSpawner>();
+    }
 
     private void OnMouseOver()
     {
@@ -19,6 +25,8 @@ public class LootableResource : MonoBehaviour
             textScript.textDisplayed = "Collected <color=#" + ColorUtility.ToHtmlStringRGB(resourceType.color) + ">" + resourceType.name + "</color> x1";
             textScript.timeAlive = 100;
             textScript.fontSize = 3;
+
+            resourceSpawner.DecrementResourceCount();
 
             Destroy(gameObject);
         }

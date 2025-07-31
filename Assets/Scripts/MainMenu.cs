@@ -10,7 +10,7 @@ public class MainMenu : MonoBehaviour
     public Button creditsButton;
     public Button back;
     public Button quit;
-
+    public GameObject settingsPopup;
 
     void Start()
     {
@@ -27,6 +27,11 @@ public class MainMenu : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public void OpenSettingsMenu()
+    {
+        settingsPopup.SetActive(true);
     }
     Coroutine creditsAnim;
     public void Credits()

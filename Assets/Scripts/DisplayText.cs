@@ -16,6 +16,10 @@ public class DisplayText : MonoBehaviour
 
     public void DisplayWithShrink()
     {
+        if (textMP == null)
+        {
+            textMP = gameObject.GetComponent<TextMeshProUGUI>();
+        }
         textMP.color = new Color(1, 1, 1, 1);
         StartCoroutine(Shrink());
     }

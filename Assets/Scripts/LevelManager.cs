@@ -59,6 +59,7 @@ public class LevelManager : MonoBehaviour
     {
         // adjust ring shrinking rate in game manager
         GameManager.manager.SetFireworksSpeed(GameManager.manager.GetFireworksSpeed() - 0.05f);
+        GameManager.manager.SetResourceGatheringTime(GameManager.manager.GetResourceGatheringTime() - 5f);
     }
 
     public void ResetGame()
