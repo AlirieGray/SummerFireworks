@@ -38,6 +38,9 @@ public class ResourceSpawner : MonoBehaviour
         }
 
         SpawnResource(GameManager.manager.resourceNames["Volatile Crystals"]);
+
+        // clear fireworks
+        GameManager.manager.finishedFireworks = new List<List<ResourceScriptableObject>>();
     }
 
     public void DecrementResourceCount()
