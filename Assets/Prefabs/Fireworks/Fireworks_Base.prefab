@@ -4130,7 +4130,7 @@ ParticleSystem:
     widthOverTrail:
       serializedVersion: 2
       minMaxState: 1
-      scalar: 0.4
+      scalar: 1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4840,7 +4840,7 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: e9b78708fa2e6c44fbf51526cf571144, type: 2}
-  - {fileID: 0}
+  - {fileID: -876546973899608171, guid: 7b9a324d4d1a20d49902929a1a6a1abc, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4869,7 +4869,7 @@ ParticleSystemRenderer:
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2
-  m_SortingFudge: 0
+  m_SortingFudge: 1
   m_NormalDirection: 1
   m_ShadowBias: 0
   m_RenderAlignment: 0
@@ -4901,6 +4901,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1557074312969258801}
     m_Modifications:
+    - target: {fileID: 3095611824487280198, guid: 138fe0d981d3e3c449fcb544f7c7f8f0, type: 3}
+      propertyPath: ShapeModule.m_Rotation.x
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 3727870113808342470, guid: 138fe0d981d3e3c449fcb544f7c7f8f0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
