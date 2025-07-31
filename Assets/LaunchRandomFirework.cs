@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using static UnityEngine.ParticleSystem;
+using Mono.Cecil;
 
 public class LaunchRandomFirework : MonoBehaviour
 {
@@ -81,10 +82,11 @@ public class LaunchRandomFirework : MonoBehaviour
             currentFirework.GetComponent<ParticleSystem>().subEmitters.AddSubEmitter(currentBurst.GetComponent<ParticleSystem>(), ParticleSystemSubEmitterType.Death, ParticleSystemSubEmitterProperties.InheritColor);
             allShapes.Add(currentFirework);
         }
-        Color[] colors = { Color.cyan, Color.magenta, Color.yellow, 
-            GameManager.manager.MixColor(Color.cyan, Color.magenta),
-            GameManager.manager.MixColor(Color.cyan, Color.yellow),
-            GameManager.manager.MixColor(Color.magenta, Color.yellow)
+        Color[] colors = { Color.cyan, Color.magenta, Color.yellow,
+            Color.red, Color.green, Color.blue 
+            //GameManager.manager.MixColor(Color.cyan, Color.magenta),
+            //GameManager.manager.MixColor(Color.cyan, Color.yellow),
+            //GameManager.manager.MixColor(Color.magenta, Color.yellow)
         };
 
         ResourceScriptableObject.Shape currentShape = ResourceScriptableObject.Shape.None;
@@ -97,60 +99,22 @@ public class LaunchRandomFirework : MonoBehaviour
                 currentBlend = Color.white;
                 currentShape = resource.shape;
                 currentBurst = Instantiate(resource.shapePrefab);
+
+                var m = currentBurst.GetComponent<ParticleSystem>().main;
+                m.startColor = colors[Random.Range(0, colors.Length)];
+
                 allShapes.Add(currentBurst);
             }
-            else
-            {
-                if(currentBlend == Color.white)
-                {
-                    currentBlend = resource.color;
-                }
-                var m = currentBurst.GetComponent<ParticleSystem>().main;
-                m.startColor = colors[Random.Range(0, colors.Length)]; ;
-            }
-            /*switch (resource.shape)
-            {
-                case ResourceScriptableObject.Shape.None:
-                    // set color
-                    // TODO: MIX COLORS
-                    if (fireworksToSpawn.Count == 0)
-                    {
-                        fireworksToSpawn.Add(baseFireworks);
-                        //fireworksToSpawn[spawnIndex].GetComponent<Firework>().SetColor(resource.color);
-                    }
-                    fireworksToSpawn[spawnIndex].GetComponent<Firework>().SetColor(resource.color);
-                    break;
-                case ResourceScriptableObject.Shape.Starburst:
-                    if (fireworksToSpawn.Count > 0)
-                    {
-                        spawnIndex++;
-                    }
-                    fireworksToSpawn.Add(baseFireworks);
-                    break;
-                case ResourceScriptableObject.Shape.Circle:
-                    if (fireworksToSpawn.Count > 0)
-                    {
-                        spawnIndex++;
-                    }
-                    fireworksToSpawn.Add(circleFireworks);
-                    break;
-                case ResourceScriptableObject.Shape.Star:
-                    if (fireworksToSpawn.Count > 0)
-                    {
-                        spawnIndex++;
-                    }
-                    fireworksToSpawn.Add(starFireworks);
-                    break;
-                case ResourceScriptableObject.Shape.Heart:
-                    if (fireworksToSpawn.Count > 0)
-                    {
-                        spawnIndex++;
-                    }
-                    fireworksToSpawn.Add(heartFireworks);
-                    break;
-                default:
-                    break;
-            }*/
+        }
+
+        if(allShapes.Count == 0)
+        {
+            currentBurst = Instantiate(shapeless);
+
+            var m = currentBurst.GetComponent<ParticleSystem>().main;
+            m.startColor = colors[Random.Range(0, colors.Length)];
+
+            allShapes.Add(currentBurst);
         }
 
         // go through all fireworksToSpawn and fan out the locations, instantiate all
@@ -177,6 +141,6 @@ public class LaunchRandomFirework : MonoBehaviour
             /*GameObject fireworksClone = Instantiate(firework, new Vector3(
                 0f, -3.643f, -.5f), Quaternion.Euler(-90f, 0f, 0f));*/
         }
-        //audioManager.PlayFireworks();
+        AudioManager.manager.PlayFireworks();
     }
 }

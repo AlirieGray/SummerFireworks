@@ -15,5 +15,5 @@ MonoBehaviour:
   overrideSprite: {fileID: 3687651450805901432, guid: f00fded0e587ce847adcbe512843d793, type: 3}
   groundUpSprite: {fileID: -3698917706961264141, guid: fd3198b31aaf7fc47bd6321eda804bcb, type: 3}
   color: {r: 1, g: 0.7270566, b: 0.33490568, a: 1}
-  shapePrefab: {fileID: 0}
+  shapePrefab: {fileID: 5458727059875755656, guid: d7c1b99d6cb1b7a4fa6cb7efb27ef9e2, type: 3}
   shape: 0

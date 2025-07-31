@@ -248,10 +248,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4035015531367628973, guid: ebf1932ea511b7e45aa207818a4fb373, type: 3}
       propertyPath: SubModule.enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4035015531367628973, guid: ebf1932ea511b7e45aa207818a4fb373, type: 3}
+      propertyPath: SubModule.subEmitters.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4035015531367628973, guid: ebf1932ea511b7e45aa207818a4fb373, type: 3}
       propertyPath: SubModule.subEmitters.Array.data[0].emitter
+      value: 
+      objectReference: {fileID: 618032134281106527}
+    - target: {fileID: 4035015531367628973, guid: ebf1932ea511b7e45aa207818a4fb373, type: 3}
+      propertyPath: SubModule.subEmitters.Array.data[1].emitter
+      value: 
+      objectReference: {fileID: 1652013006554767287}
+    - target: {fileID: 4035015531367628973, guid: ebf1932ea511b7e45aa207818a4fb373, type: 3}
+      propertyPath: SubModule.subEmitters.Array.data[2].emitter
       value: 
       objectReference: {fileID: 8589167088146514772}
     m_RemovedComponents: []
@@ -267,6 +279,16 @@ PrefabInstance:
 --- !u!4 &123010127851825113 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 22708742530936630, guid: ebf1932ea511b7e45aa207818a4fb373, type: 3}
+  m_PrefabInstance: {fileID: 136700580372941039}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &618032134281106527 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 681759363876134064, guid: ebf1932ea511b7e45aa207818a4fb373, type: 3}
+  m_PrefabInstance: {fileID: 136700580372941039}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1652013006554767287 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1659727541276874584, guid: ebf1932ea511b7e45aa207818a4fb373, type: 3}
   m_PrefabInstance: {fileID: 136700580372941039}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5840860908510862756

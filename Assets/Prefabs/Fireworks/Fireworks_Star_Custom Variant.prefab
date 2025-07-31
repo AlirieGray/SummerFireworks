@@ -54,7 +54,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2464659298860083370, guid: e98b7896abf24eb438a61cce12617e36, type: 3}
       propertyPath: SubModule.enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2464659298860083370, guid: e98b7896abf24eb438a61cce12617e36, type: 3}
+      propertyPath: SubModule.subEmitters.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2464659298860083370, guid: e98b7896abf24eb438a61cce12617e36, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
@@ -71,7 +75,11 @@ PrefabInstance:
     - target: {fileID: 2464659298860083370, guid: e98b7896abf24eb438a61cce12617e36, type: 3}
       propertyPath: SubModule.subEmitters.Array.data[0].emitter
       value: 
-      objectReference: {fileID: 6374801746880575286}
+      objectReference: {fileID: 681759363876134064}
+    - target: {fileID: 2464659298860083370, guid: e98b7896abf24eb438a61cce12617e36, type: 3}
+      propertyPath: SubModule.subEmitters.Array.data[1].emitter
+      value: 
+      objectReference: {fileID: 1659727541276874584}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 7054310132932553566, guid: e98b7896abf24eb438a61cce12617e36, type: 3}
@@ -107,6 +115,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 7040951799346374940}
+--- !u!198 &681759363876134064 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2070920436246590647, guid: e98b7896abf24eb438a61cce12617e36, type: 3}
+  m_PrefabInstance: {fileID: 1570484880757827591}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1659727541276874584 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 199269758385569631, guid: e98b7896abf24eb438a61cce12617e36, type: 3}
+  m_PrefabInstance: {fileID: 1570484880757827591}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9100624279458376134
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -259,11 +277,6 @@ PrefabInstance:
 --- !u!4 &1126665484926276554 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8208181795469933068, guid: c84d795c2fc766e42adfe8f20a978419, type: 3}
-  m_PrefabInstance: {fileID: 9100624279458376134}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &6374801746880575286 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 2755132018755002096, guid: c84d795c2fc766e42adfe8f20a978419, type: 3}
   m_PrefabInstance: {fileID: 9100624279458376134}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &7040951799346374940 stripped

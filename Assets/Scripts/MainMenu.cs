@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour
     public Button creditsButton;
     public Button back;
     public Button quit;
+    public Button settings;
     public GameObject settingsPopup;
 
     void Start()
@@ -40,6 +41,7 @@ public class MainMenu : MonoBehaviour
         play.gameObject.SetActive(false);
         creditsButton.gameObject.SetActive(false);
         quit.gameObject.SetActive(false);
+        settings.gameObject.SetActive(false);
 
         LaunchRandomFirework.randomFireworkDisplay.stop = true;
         StopAllCoroutines();
@@ -97,8 +99,8 @@ public class MainMenu : MonoBehaviour
         back.gameObject.SetActive(false);
         play.gameObject.SetActive(true);
         creditsButton.gameObject.SetActive(true);
-        quit.gameObject.SetActive(true);
-
+        //quit.gameObject.SetActive(true);
+        settings.gameObject.SetActive(true);
     }
 
     public void GetNextLevel()

@@ -48,4 +48,10 @@ public class AudioManager : MonoBehaviour
         yield return new WaitForSeconds(0.7f);
         FXSource.Play();
     }
+
+    public void PlayFireworkNow()
+    {
+        FXSource.clip = fireworks1;
+        FXSource.Play();
+    }
 }

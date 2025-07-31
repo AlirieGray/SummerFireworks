@@ -71,6 +71,9 @@ public class CreditFirework : MonoBehaviour
         //start emitting
         Debug.Log("display credit for " + gameObject.name);
         custom.stopEmitting = false;
+
+        AudioManager.manager.PlayFireworkNow();
+
         float t = 0;
         while(t < 1)
         {
