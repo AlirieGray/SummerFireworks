@@ -58,7 +58,7 @@ public class ResourceSpawner : MonoBehaviour
     {
         remainingResources++;
         GameObject resource = new GameObject();
-
+        resource.layer = 9;
         LootableResource lootScript = resource.AddComponent<LootableResource>();
         SpriteRenderer resourceSpriteRenderer = resource.AddComponent<SpriteRenderer>();
         BoxCollider2D bc = resource.AddComponent<BoxCollider2D>();

@@ -32,8 +32,8 @@ public class Monster : MonoBehaviour
     public Vector2 direction;
 
     GameObject[] resources;
-    GameObject closestResource = null;
-
+    public GameObject closestResource = null;
+    Animator anim;
     [System.Serializable] public class SpriteAnimation
     {
         public string animationName;
@@ -54,11 +54,11 @@ public class Monster : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
-
+        anim = GetComponent<Animator>();
         StartCoroutine(StartIdle());
     }
 
-    public void Update()
+    public void FixedUpdate()
     {
         if (rb.linearVelocity.x < 0)
             sr.flipX = true;
@@ -92,19 +92,39 @@ public class Monster : MonoBehaviour
         if(closestResourceDistance < sightRange)
         {
             MonsterState = monsterStates.Chasing;
+            
             ChaseAI();
         }
 
-        if(closestResourceDistance < eatRange)
+        if(closestResourceDistance < eatRange && !eating)
         {
             MonsterState = monsterStates.Eating;
+            rb.linearVelocity = Vector2.zero;
             if (!eating)
+            {
+                StopAllCoroutines();
                 StartCoroutine(Eat());
+            }
         }
     }
     public IEnumerator StartWander()
     {
-        direction = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
+        var screenBorder = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height));
+        if (transform.position.x > screenBorder.x ||
+            transform.position.x < -screenBorder.x ||
+            transform.position.y > screenBorder.y ||
+            transform.position.y < -screenBorder.y
+            )
+        {
+            //wander back into view
+            var target = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width/2f, Screen.height/2f));
+            direction = (target - transform.position).normalized;
+        }
+        else
+        {
+            direction = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized;
+        }
+
         MonsterState = monsterStates.Wandering;
 
         yield return new WaitForSeconds(wanderTime + Random.Range(-wanderTimeRandom, wanderTimeRandom));
@@ -113,32 +133,40 @@ public class Monster : MonoBehaviour
 
     void WanderAI()
     {
-        rb.linearVelocity = direction * wanderSpeed;
+        if(!eating)
+            rb.linearVelocity = direction * wanderSpeed;
     }
 
     public IEnumerator StartIdle()
     {
         direction = Vector2.zero;
         MonsterState = monsterStates.Idle;
-
+        anim.SetTrigger("StartIdle");
         yield return new WaitForSeconds(idleTime + Random.Range(-idleTimeRandom, idleTimeRandom));
         StartCoroutine(StartWander());
+        anim.SetTrigger("StartWalk");
     }
 
     public void ChaseAI()
     {
+        if (!eating)
+        {
         StopAllCoroutines();
-        direction = Vector2.MoveTowards(transform.position, closestResource.transform.position, 1.0f);
+        direction = (closestResource.transform.position - transform.position).normalized;
         rb.linearVelocity = direction * chaseSpeed;
+        }
     }
 
     public IEnumerator Eat()
     {
-        StopAllCoroutines();
+        //StopAllCoroutines();
+
         eating = true;
 
-        yield return new WaitForSeconds(eatTime);
+        anim.SetTrigger("StartEat");
 
+        yield return new WaitForSeconds(eatTime);
+        Debug.Log("finished eating");
         Destroy(closestResource);
         eating = false;
         StartCoroutine(StartIdle());
