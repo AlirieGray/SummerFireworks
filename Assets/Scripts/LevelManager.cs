@@ -33,6 +33,7 @@ public class LevelManager : MonoBehaviour
         blackout.anchoredPosition = Vector2.left * Screen.width;
     }
 
+
     public void LoadNextLevel()
     {
         if (currentLevel == 3) { 
@@ -97,10 +98,13 @@ public class LevelManager : MonoBehaviour
     private void Update()
     {
         blackout.sizeDelta = Mathf.Max(Screen.width, Screen.height) * Vector2.one;
+        if(!fadein)
+            blackout.anchoredPosition = Vector2.left * Screen.width;
     }
-
+    bool fadein = false;
     IEnumerator FadeIn(string levelName)
     {
+        fadein = true;
         float rotation = Random.Range(-180f, 180f);
         var screenMax = Mathf.Max(Screen.width, Screen.height);
         blackout.anchoredPosition = new Vector2(Mathf.Sin(rotation) * screenMax, Mathf.Cos(rotation) * screenMax) * 1.4142f;
@@ -142,7 +146,7 @@ public class LevelManager : MonoBehaviour
             t += Time.deltaTime;
             yield return new WaitForSeconds(0);
         }
-
+        fadein = false;
         yield return null;
     }
 }
