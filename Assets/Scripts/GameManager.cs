@@ -66,11 +66,8 @@ public class GameManager : MonoBehaviour
         }
 
         gatheringTime = 30f;
+        score = 0;
 
-        // TODO: testing only
-        // remove for production
-        //finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Pondering Orb"], resourceNames["Dragonscale Stone"], resourceNames["Volatile Crystals"] });
-        //finishedFireworks.Add(new List<ResourceScriptableObject>() { resourceNames["Butterfly Flower"], resourceNames["Golden Shamrocks"] });
     }
 
     private void Update()
