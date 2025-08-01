@@ -54,6 +54,7 @@ public class AddResourcePestel : MonoBehaviour
     {
         held = true;
         GetComponent<BoxCollider2D>().enabled = false;
+        AudioManager.manager.PlayGrind();
         StartCoroutine(AnimateGrind());
     }
 

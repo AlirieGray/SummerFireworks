@@ -160,11 +160,6 @@ public class ResourceAssembler : MonoBehaviour
         //GUI.Box(new Rect(10, 10, 200, 24), "cursor @ :" + world.x + ", " + world.y);
     }
 
-    private void DisableItemsWithoutInventory()
-    {
-
-    }
-
     public void CheckCompletion()
     {
         //are we done?

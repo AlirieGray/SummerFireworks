@@ -12,6 +12,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip collectResource;
     public AudioClip nicePling;
     public AudioClip chomp;
+    public AudioClip grind;
 
     void Awake()
     {
@@ -32,6 +33,12 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         PlayTheme();
+    }
+
+    public void PlayGrind()
+    {
+        FXSource.clip = grind;
+        FXSource.Play();
     }
 
     public void PlayFireworks()
