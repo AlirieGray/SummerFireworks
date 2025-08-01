@@ -198,6 +198,8 @@ public class ResourceAssembler : MonoBehaviour
         GameManager.manager.AddFirework(usedIngredients);
         AudioManager.manager.PlayNicePling();
 
+        whatToDo.text = "Drag ingredients, or press Done to continue";
+
         //clear
         resDict.Clear();
         grindAmount.Clear();

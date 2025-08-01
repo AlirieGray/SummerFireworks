@@ -4,6 +4,7 @@ public class ResourceScriptableObject : ScriptableObject
 {
     public Sprite overrideSprite;
     public Sprite groundUpSprite;
+    public Sprite floorSprite;
     public Color color;
 
     public GameObject shapePrefab;

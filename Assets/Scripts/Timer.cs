@@ -37,7 +37,10 @@ public class Timer : MonoBehaviour
 
             } else
             {
-                timerText.text = "0: " + timerTime.ToString();
+                string str = timerTime.ToString();
+                if (timerTime < 10)
+                    str = "0" + str;
+                timerText.text = "0: " + str;
             }
             timerTime -= 1f;
             yield return new WaitForSeconds(1f);

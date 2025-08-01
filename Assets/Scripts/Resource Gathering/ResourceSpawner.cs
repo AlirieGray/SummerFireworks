@@ -79,5 +79,13 @@ public class ResourceSpawner : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Static;
 
         resource.transform.position = new Vector2(Random.Range(-screenSize.x + .05f, screenSize.x -.5f), Random.Range(-screenSize.y + .5f, screenSize.y -.5f));
+
+        var back = new GameObject();
+        var sr = back.AddComponent<SpriteRenderer>();
+        sr.sprite = res.floorSprite;
+        sr.sortingLayerName = "Background";
+        sr.sortingOrder = 99;
+        back.transform.position = resource.transform.position;
+        back.layer = 9;
     }
 }

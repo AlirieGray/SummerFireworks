@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Pondering Orb
   m_EditorClassIdentifier: 
   overrideSprite: {fileID: -2326459205579473762, guid: f00fded0e587ce847adcbe512843d793, type: 3}
-  groundUpSprite: {fileID: -5099745367647658857, guid: fd3198b31aaf7fc47bd6321eda804bcb, type: 3}
+  groundUpSprite: {fileID: 21300000, guid: 4d7b22d8c0c2aad4887b603f60702a35, type: 3}
+  floorSprite: {fileID: 21300000, guid: 37c6a5aebe860f447af6a00c9c17d8fe, type: 3}
   color: {r: 0.43587855, g: 0.28627455, b: 1, a: 1}
   shapePrefab: {fileID: 5458727059875755656, guid: ebb1c627c90731f458af31044dca0762, type: 3}
   shape: 1

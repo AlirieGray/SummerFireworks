@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Starfruit
   m_EditorClassIdentifier: 
   overrideSprite: {fileID: 9013548742856534495, guid: f00fded0e587ce847adcbe512843d793, type: 3}
-  groundUpSprite: {fileID: 5481479947892316820, guid: fd3198b31aaf7fc47bd6321eda804bcb, type: 3}
+  groundUpSprite: {fileID: 21300000, guid: 920d8850035419f40b25ad81285286e4, type: 3}
+  floorSprite: {fileID: 21300000, guid: 5c97a05effc8c6d49af49a226755533f, type: 3}
   color: {r: 0.84618753, g: 1, b: 0.504717, a: 1}
   shapePrefab: {fileID: 5458727059875755656, guid: 36a4a8c4542dd054c8555fdab4eae111, type: 3}
   shape: 3
