@@ -57,7 +57,6 @@ public class RocketController : MonoBehaviour
         checkForDrag = false;
         fireworksIndex = 0;
         allFireworks = new List<GameObject>();
-        audioManager = FindFirstObjectByType<AudioManager>();
         gameManager = FindFirstObjectByType<GameManager>();
         levelManager = FindFirstObjectByType<LevelManager>();
         inputActions = new InputSystem_Actions();
@@ -81,7 +80,6 @@ public class RocketController : MonoBehaviour
         };
         inputActions.Rocket.DragMouse.canceled += context =>
         {
-            Debug.Log("cancel???");
             checkForDrag = false;
             Launch();
         };
@@ -377,7 +375,7 @@ public class RocketController : MonoBehaviour
             allFireworks.Add(firework);
         
         }
-        audioManager.PlayFireworks();
+        AudioManager.manager.PlayFireworkNow();
     }
 
     public void SetPerfectZone(bool inPerfectZone)

@@ -11,7 +11,7 @@ public class RenderTextureCameraUpdate : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        monster = GameObject.Find("Monster").transform;
+        monster = FindFirstObjectByType<Monster>().gameObject.transform;
         screenSize = new Vector2(Screen.width, Screen.height);
     }
 

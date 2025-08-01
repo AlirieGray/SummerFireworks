@@ -30,6 +30,7 @@ public class Monster : MonoBehaviour
     public monsterStates MonsterState = monsterStates.Idle;
 
     public Vector2 direction;
+    private ResourceSpawner resourceSpawner;
 
     GameObject[] resources;
     public GameObject closestResource = null;
@@ -52,6 +53,7 @@ public class Monster : MonoBehaviour
 
     private void Start()
     {
+        resourceSpawner = FindFirstObjectByType<ResourceSpawner>();
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -166,6 +168,8 @@ public class Monster : MonoBehaviour
         eating = true;
 
         anim.SetTrigger("StartEat");
+        AudioManager.manager.PlayMonsterChomp();
+        resourceSpawner.DecrementResourceCount();
 
         yield return new WaitForSeconds(eatTime);
         Debug.Log("finished eating");

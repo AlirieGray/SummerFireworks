@@ -160,11 +160,6 @@ public class ResourceAssembler : MonoBehaviour
         //GUI.Box(new Rect(10, 10, 200, 24), "cursor @ :" + world.x + ", " + world.y);
     }
 
-    private void DisableItemsWithoutInventory()
-    {
-
-    }
-
     public void CheckCompletion()
     {
         //are we done?
@@ -201,6 +196,7 @@ public class ResourceAssembler : MonoBehaviour
         Debug.Log("finished a firework with " + usedIngredients.Count + " resources in it");
         DisplayCompletedFireworks.instance.AddNewFirework(usedIngredients);
         GameManager.manager.AddFirework(usedIngredients);
+        AudioManager.manager.PlayNicePling();
 
         //clear
         resDict.Clear();
