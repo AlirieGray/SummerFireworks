@@ -9,6 +9,9 @@ public class AudioManager : MonoBehaviour
     public AudioSource FXSource;
     public AudioClip fireworks1;
     public AudioClip mainTheme;
+    public AudioClip collectResource;
+    public AudioClip nicePling;
+    public AudioClip chomp;
 
     void Awake()
     {
@@ -33,25 +36,41 @@ public class AudioManager : MonoBehaviour
 
     public void PlayFireworks()
     {
-        FXSource.clip = fireworks1;
         StartCoroutine(CountdownFireworks());
     }
 
+    IEnumerator CountdownFireworks()
+    {
+        yield return new WaitForSeconds(0.7f);
+        FXSource.PlayOneShot(fireworks1);
+    }
     public void PlayTheme()
     {
         musicSource.clip = mainTheme;
         musicSource.Play();
     }
 
-    IEnumerator CountdownFireworks()
-    {
-        yield return new WaitForSeconds(0.7f);
-        FXSource.Play();
-    }
-
     public void PlayFireworkNow()
     {
         FXSource.clip = fireworks1;
+        FXSource.Play();
+    }
+
+    public void PlayMonsterChomp()
+    {
+        FXSource.clip = chomp;
+        FXSource.Play();
+    }
+
+    public void PlayCollectResource()
+    {
+        FXSource.clip = collectResource;
+        FXSource.Play();
+    }
+
+    public void PlayNicePling()
+    {
+        FXSource.clip = nicePling;
         FXSource.Play();
     }
 }

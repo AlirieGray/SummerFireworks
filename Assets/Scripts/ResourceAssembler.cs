@@ -201,6 +201,7 @@ public class ResourceAssembler : MonoBehaviour
         Debug.Log("finished a firework with " + usedIngredients.Count + " resources in it");
         DisplayCompletedFireworks.instance.AddNewFirework(usedIngredients);
         GameManager.manager.AddFirework(usedIngredients);
+        AudioManager.manager.PlayNicePling();
 
         //clear
         resDict.Clear();

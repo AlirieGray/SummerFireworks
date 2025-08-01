@@ -6862,11 +6862,24 @@ PrefabInstance:
       value: AudioManager
       objectReference: {fileID: 0}
     - target: {fileID: 8260872126832862894, guid: 3ed4a45e07054994a8a920a38a1bec23, type: 3}
+      propertyPath: chomp
+      value: 
+      objectReference: {fileID: 8300000, guid: c7f4a1a712e9ab848829d5b6166f9eef, type: 3}
+    - target: {fileID: 8260872126832862894, guid: 3ed4a45e07054994a8a920a38a1bec23, type: 3}
       propertyPath: mainTheme
       value: 
       objectReference: {fileID: 8300000, guid: 8059f26946314a9438ed324494ad79df, type: 3}
+    - target: {fileID: 8260872126832862894, guid: 3ed4a45e07054994a8a920a38a1bec23, type: 3}
+      propertyPath: nicePling
+      value: 
+      objectReference: {fileID: 8300000, guid: f78d1522d06d4924c96f890ac2c088ac, type: 3}
+    - target: {fileID: 8260872126832862894, guid: 3ed4a45e07054994a8a920a38a1bec23, type: 3}
+      propertyPath: collectResource
+      value: 
+      objectReference: {fileID: 8300000, guid: 586bda1d5e4f6814c8c5e98a2fe98fe2, type: 3}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2383428449792574694, guid: 3ed4a45e07054994a8a920a38a1bec23, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ed4a45e07054994a8a920a38a1bec23, type: 3}

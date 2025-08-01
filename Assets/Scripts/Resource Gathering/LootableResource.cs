@@ -26,6 +26,7 @@ public class LootableResource : MonoBehaviour
             textScript.timeAlive = 100;
             textScript.fontSize = 3;
 
+            AudioManager.manager.PlayCollectResource();
             resourceSpawner.DecrementResourceCount();
 
             Destroy(gameObject);
