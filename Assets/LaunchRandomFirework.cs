@@ -1,8 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using static UnityEngine.ParticleSystem;
-using Mono.Cecil;
 
 public class LaunchRandomFirework : MonoBehaviour
 {
